@@ -1,0 +1,567 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SMK NURUL JADID - Ekstrakurikuler</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    backgroundImage: {
+                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .extra-card {
+            transition: all 0.3s ease;
+        }
+        
+        .extra-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .extra-image {
+            transition: transform 0.7s ease;
+        }
+        
+        .extra-card:hover .extra-image {
+            transform: scale(1.05);
+        }
+        
+        .category-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .extra-card:hover .category-badge {
+            transform: translateY(-2px);
+        }
+        
+        .level-indicator {
+            transition: all 0.3s ease;
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .info-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .info-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .schedule-day {
+            transition: all 0.3s ease;
+        }
+        
+        .schedule-day.active {
+            background: linear-gradient(135deg, #0047AB, #003380);
+            color: white;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Hero Section Ekstrakurikuler -->
+    <header class="relative w-full overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-16 lg:py-24">
+        <div class="absolute inset-0 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-1/3 h-1/2 bg-white/10 rounded-bl-full blur-3xl"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 animate-fade-in-up text-white">
+                    <div class="flex flex-wrap gap-3">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 w-fit backdrop-blur-sm">
+                            <span class="block size-2 rounded-full bg-white animate-pulse"></span>
+                            <span class="text-xs font-bold text-white uppercase tracking-wide">Pengembangan Diri</span>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/30 border border-accent/50 w-fit backdrop-blur-sm">
+                            <span class="material-symbols-outlined text-sm">star</span>
+                            <span class="text-xs font-bold text-white uppercase tracking-wide">{{ count_ektra|default:0 }} Program</span>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight">
+                        Ekstrakurikuler <span class="text-accent relative inline-block">
+                            & Kegiatan
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-white opacity-40"
+                                preserveAspectRatio="none" viewBox="0 0 100 10">
+                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                            </svg>
+                        </span>
+                    </h1>
+                    <p class="text-lg opacity-90 max-w-lg leading-relaxed">
+                        Wadah pengembangan minat, bakat, dan karakter siswa di luar kegiatan akademik untuk menciptakan generasi unggul dan berkarakter.
+                    </p>
+                    
+                    <!-- Quick Info Stats -->
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <div class="flex items-center gap-2 text-white/90">
+                            <span class="material-symbols-outlined text-accent">groups</span>
+                            <span class="text-sm">90% Siswa Aktif</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/90">
+                            <span class="material-symbols-outlined text-accent">emoji_events</span>
+                            <span class="text-sm">42+ Prestasi</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/90">
+                            <span class="material-symbols-outlined text-accent">schedule</span>
+                            <span class="text-sm">Seminggu 2x Pertemuan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 mt-4">
+                        <a href="#ekskul-pilihan"
+                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-primary text-base font-bold shadow-lg hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <span>Jelajahi Ekskul</span>
+                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                        </a>
+                        <a href="#jadwal"
+                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-accent text-white text-base font-bold hover:bg-cyan-600 hover:shadow-xl transition-all duration-300">
+                            <span class="material-symbols-outlined text-sm">calendar_month</span>
+                            <span>Lihat Jadwal</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative lg:h-[400px] w-full group">
+                    <div
+                        class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] z-20 border-8 border-white">
+                        <div class="w-full h-full bg-cover bg-center extra-image"
+                            style="background-image: url('{% if ektra_utama.image %}{{ ektra_utama.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}');">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-8">
+                            <div class="text-white">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-accent/30 text-white text-[10px] font-bold uppercase tracking-wider border border-accent/50">{{ ektra_utama.category.name }}</span>
+                                    <span class="px-2 py-0.5 rounded bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider">{{ ektra_utama.type_ektra }}</span>
+                                </div>
+                                <p class="font-bold text-xl">{{ ektra_utama.title }}</p>
+                                <p class="text-sm opacity-90">{{ ektra_utama.content|striptags|truncatewords:15 }}</p>
+                                <div class="flex items-center gap-4 mt-3 text-sm">
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">schedule</span>
+                                        {{ ektra_utama.hari }} | {{ ektra_utama.jadwal }}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">person</span>
+                                        {{ ektra_utama.pembina }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Filter Kategori -->
+    <section class="py-8 bg-gray-50 border-y border-gray-100">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#0A192F]">Filter & Cari:</h3>
+                    </div>
+                    <form method="get" action="{% url 'extracurricular' %}" class="relative w-full md:w-72">
+                        <input type="text" name="search" value="{{ request.GET.search }}" 
+                               placeholder="Cari ekskul..." 
+                               class="w-full h-11 pl-11 pr-4 rounded-full border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                        {% if request.GET.kategori %}
+                            <input type="hidden" name="kategori" value="{{ request.GET.kategori }}">
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{% url 'extracurricular' %}" class="px-4 py-2 {% if not request.GET.kategori %}bg-primary text-white{% else %}bg-gray-100 text-gray-700{% endif %} rounded-full text-sm font-bold hover:bg-primary-dark hover:text-white transition-colors info-badge">
+                        Semua Ekskul
+                    </a>
+                    {% for kategori in kategori_list %}
+                    <a href="?kategori={{ kategori.slug }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="px-4 py-2 {% if request.GET.kategori == kategori.slug %}bg-primary text-white{% else %}bg-gray-100 text-gray-700{% endif %} rounded-full text-sm font-medium hover:bg-gray-200 transition-colors info-badge">
+                        <span class="material-symbols-outlined text-sm mr-1">{{ kategori.icon|default:"category" }}</span>
+                        {{ kategori.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ekstrakurikuler Wajib -->
+    <section id="ekskul-pilihan" class="py-20 bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-black text-[#0A192F] mb-4">Ekstrakurikuler Wajib</h2>
+                    <p class="text-gray-600">Program wajib yang harus diikuti semua siswa untuk pengembangan karakter dan kemampuan dasar</p>
+                </div>
+                <div class="flex items-center gap-2 text-primary">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="text-sm font-bold">Semua siswa wajib memilih minimal 1 program</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for ektra in ektra_list %}
+                {% if ektra.type_ektra == 'Wajib' %}
+                <div class="extra-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 group hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center extra-image"
+                            style="background-image: url('{% if ektra.image %}{{ ektra.image.url }}{% else %}https://via.placeholder.com/400x300{% endif %}');">
+                        </div>
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge px-3 py-1 bg-primary text-white text-xs font-bold rounded-full shadow-md">
+                                {{ ektra.category.name }}
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="level-indicator px-3 py-1 bg-white/90 text-primary text-xs font-bold rounded-full flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">verified</span>
+                                {{ ektra.type_ektra }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="size-12 rounded-lg bg-blue-50 text-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined">groups</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-[#0A192F]">{{ ektra.title }}</h3>
+                                    <p class="text-sm text-gray-500">Pembina: {{ ektra.pembina }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-3">
+                            {{ ektra.content|striptags|truncatewords:30 }}
+                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span class="material-symbols-outlined text-sm text-primary">schedule</span>
+                                <span class="font-medium">{{ ektra.hari }}</span>
+                                <span class="text-gray-400">•</span>
+                                <span>{{ ektra.jadwal }}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                                <span>{{ ektra.lokasi|default:"Lab Sekolah" }}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm">
+                                <span class="px-2 py-1 bg-gray-100 rounded text-gray-600 font-medium">
+                                    Kuota: {{ ektra.kuota|default:"30" }} siswa
+                                </span>
+                            </div>
+                            <a href="{% url 'extracurricular_detail' ektra.slug %}" class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
+                                Detail & Daftar
+                                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="col-span-3 text-center py-12">
+                    <span class="material-symbols-outlined text-4xl text-gray-300 mb-4">search_off</span>
+                    <p class="text-gray-500">Tidak ada ekstrakurikuler wajib tersedia</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Ekstrakurikuler Pilihan -->
+    <section class="py-20 bg-background-light">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-black text-[#0A192F] mb-4">Ekstrakurikuler Pilihan</h2>
+                <p class="text-gray-600">Pilih sesuai minat dan bakat untuk pengembangan diri yang lebih spesifik</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for ektra in ektra_list %}
+                {% if ektra.type_ektra == 'Pilihan' %}
+                <div class="extra-card bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="size-14 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">groups</span>
+                        </div>
+                        <span class="px-2 py-1 bg-accent/10 text-accent text-xs font-bold rounded">
+                            {{ ektra.category.name }}
+                        </span>
+                    </div>
+                    <h4 class="text-lg font-bold text-[#0A192F] mb-2">{{ ektra.title }}</h4>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ ektra.content|striptags|truncatewords:20 }}</p>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <span class="material-symbols-outlined text-sm">person</span>
+                            <span>{{ ektra.pembina }}</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            <span>{{ ektra.hari }}</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'extracurricular_detail' ektra.slug %}" class="w-full flex items-center justify-center gap-2 text-sm font-bold text-primary hover:text-primary-dark border border-primary rounded-lg py-2 hover:bg-primary/5 transition-colors">
+                        <span>Lihat Detail</span>
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    </a>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="col-span-4 text-center py-12">
+                    <span class="material-symbols-outlined text-4xl text-gray-300 mb-4">sports_esports</span>
+                    <p class="text-gray-500">Tidak ada ekstrakurikuler pilihan tersedia</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Jadwal Kegiatan -->
+    <section id="jadwal" class="py-20 bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-black text-[#0A192F] mb-4">Jadwal Kegiatan</h2>
+                <p class="text-gray-600">Jadwal rutin ekstrakurikuler semester ganjil 2024/2025</p>
+            </div>
+
+            <!-- Filter Hari -->
+            <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                {% for day in days %}
+                <button class="schedule-day px-6 py-2 rounded-full bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-colors {% if day == 'Senin' %}active{% endif %}">
+                    {{ day }}
+                </button>
+                {% endfor %}
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-200">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Hari</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Waktu</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Ekstrakurikuler</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Kategori</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Tipe</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Lokasi</th>
+                            <th class="py-4 px-6 text-left text-sm font-bold text-[#0A192F]">Pembina</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        {% for ektra in ektra_list %}
+                        <tr class="hover:bg-gray-50 transition-colors {% if forloop.counter|divisibleby:2 %}bg-gray-50/50{% endif %}">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-[#0A192F]">{{ ektra.hari }}</span>
+                                    {% if ektra.type_ektra == 'Wajib' %}
+                                    <span class="px-2 py-0.5 bg-primary/10 text-primary text-xs font-bold rounded">Wajib</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm text-primary">schedule</span>
+                                    <span class="font-medium">{{ ektra.jadwal }}</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-sm">groups</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">{{ ektra.title }}</span>
+                                        <p class="text-xs text-gray-500">{{ ektra.content|striptags|truncatewords:5 }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="text-sm">{{ ektra.category.name }}</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="text-sm font-medium {% if ektra.type_ektra == 'Wajib' %}text-primary{% else %}text-gray-600{% endif %}">
+                                    {{ ektra.type_ektra }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="text-sm">{{ ektra.lokasi|default:"Lab Sekolah" }}</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-2">
+                                    <div class="size-6 rounded-full bg-gray-100 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-xs">person</span>
+                                    </div>
+                                    <span class="text-sm">{{ ektra.pembina }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-2 text-gray-600">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="text-sm">Untuk jadwal lengkap dan perubahan terbaru, silakan hubungi pembina masing-masing ekskul</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="pendaftaran" class="py-20 bg-gradient-to-r from-primary to-primary-dark">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="text-center text-white max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black mb-6">Daftar Sekarang!</h2>
+                <p class="text-lg opacity-90 mb-8">
+                    Bergabunglah dengan ekstrakurikuler pilihan Anda. Waktu terbatas, kuota terbatas!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-primary text-base font-bold shadow-lg hover:bg-gray-50 hover:shadow-xl transition-all duration-300">
+                        <span class="material-symbols-outlined">how_to_reg</span>
+                        <span>Formulir Pendaftaran Online</span>
+                    </a>
+                    <a href="#"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-transparent border-2 border-white text-white text-base font-bold hover:bg-white/10 transition-all duration-300">
+                        <span class="material-symbols-outlined">contact_support</span>
+                        <span>Konsultasi dengan Pembina</span>
+                    </a>
+                </div>
+                <div class="mt-8 text-sm opacity-80">
+                    <p>Pendaftaran dibuka: 1 - 15 September 2024 | Pengumuman: 20 September 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'layouts/footer.html' %}
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+        <a class="flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
+            href="#pendaftaran">
+            <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Daftar Ekskul</span>
+            <span class="material-symbols-outlined text-2xl">how_to_reg</span>
+        </a>
+        <a class="flex items-center gap-2 px-4 py-3 bg-accent text-white rounded-full shadow-lg shadow-accent/40 hover:bg-cyan-600 hover:scale-105 transition-all duration-300 group"
+            href="#jadwal">
+            <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Lihat Jadwal</span>
+            <span class="material-symbols-outlined text-2xl">calendar_month</span>
+        </a>
+    </div>
+
+    <script>
+        // Filter hari pada jadwal
+        document.addEventListener('DOMContentLoaded', function() {
+            const dayButtons = document.querySelectorAll('.schedule-day');
+            const scheduleRows = document.querySelectorAll('tbody tr');
+            
+            dayButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    dayButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const selectedDay = this.textContent.trim();
+                    
+                    // Show/hide schedule rows based on selected day
+                    scheduleRows.forEach(row => {
+                        const dayCell = row.querySelector('td:first-child span.font-bold');
+                        if (dayCell) {
+                            const rowDay = dayCell.textContent.trim();
+                            if (selectedDay === 'Semua' || rowDay === selectedDay) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

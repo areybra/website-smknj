@@ -1,0 +1,88 @@
+<footer class="bg-background-dark text-white pt-16 pb-8 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+                        {% load static %}
+                        <img src="{% static 'images/logo/logo.png' %}" alt="Logo SMK Nurul Jadid" class="w-10 h-10 object-contain transition-transform group-hover:scale-110">
+                        <div>   
+                            <h3 class="text-xl font-bold leading-none">SMK </h3>
+                            <span class="text-xs text-accent font-semibold tracking-widest uppercase">Nurul Jadid</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Pendidikan vokasi modern yang berorientasi pada masa depan, integritas, dan inovasi teknologi.
+                    </p>
+                    <div class="flex gap-3 pt-2">
+                        <a class="size-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-gray-400 hover:text-white"
+                            href="#"><span class="material-symbols-outlined text-sm">public</span></a>
+                        <a class="size-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-gray-400 hover:text-white"
+                            href="#"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
+                        <a class="size-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-gray-400 hover:text-white"
+                            href="#"><span class="material-symbols-outlined text-sm">smart_display</span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white border-l-4 border-primary pl-3">Jelajahi</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a class="hover:text-accent transition-colors flex items-center gap-2" href="{% url 'profile' %}"><span
+                                    class="material-symbols-outlined text-xs">chevron_right</span>Profil Sekolah</a>
+                        </li>
+                        <li><a class="hover:text-accent transition-colors flex items-center gap-2" href="#"><span
+                                    class="material-symbols-outlined text-xs">chevron_right</span>Kompetensi
+                                Keahlian</a></li>
+                        <li><a class="hover:text-accent transition-colors flex items-center gap-2" href="#"><span
+                                    class="material-symbols-outlined text-xs">chevron_right</span>Info PPDB 2024</a>
+                        </li>
+                        <li><a class="hover:text-accent transition-colors flex items-center gap-2" href="#"><span
+                                    class="material-symbols-outlined text-xs">chevron_right</span>Bursa Kerja Khusus</a>
+                        </li>
+                        <li><a class="hover:text-accent transition-colors flex items-center gap-2" href="#"><span
+                                    class="material-symbols-outlined text-xs">chevron_right</span>Kemitraan</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white border-l-4 border-primary pl-3">Kontak Kami</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent mt-0.5">location_on</span>
+                            <span>Jl KH. Zaini Mun'im</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-accent">call</span>
+                            <span>+62 812-5907-5405 </span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-accent">mail</span>
+                            <span>smknurja.paiton@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white border-l-4 border-primary pl-3">Lokasi</h4>
+                    <div
+                        class="w-full h-32 rounded-lg overflow-hidden bg-gray-800 relative border border-gray-700 group">
+                        <div class="w-full h-full bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity cursor-pointer"
+                            data-alt="Map showing school location" data-location="Surabaya, Indonesia"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIFijUrtNptqOrbz64GJXUt895fcXGFW8gVShazou1yakWUUiH2sG5LQVR4F-BUSJOHqPDwtAUhpN8zwFZdhD4JlR_k1PA3U0H9c5W8tOZX9SyTKiewdr6AykOWc5Tm3Jva4XAHEu_JSj-Ut6GDX-qYHwggMaWHLbD_Uv0l6hfPxM72Oh1wZWkvM6iFb0UN-nYCkWZ8vCiTcZpU_2t2mG1DvjA--UfZozQBNJyl61y00DjOLIprasXz8S7RtXPb3iStIOFi_ufm9Y');">
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span
+                                class="material-symbols-outlined text-accent text-3xl drop-shadow-lg animate-bounce">location_on</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+                <p>© 2026 SMK Nurul Jadid. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                    <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>

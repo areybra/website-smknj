@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SMK NURUL JADID - Guru & Staff</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    backgroundImage: {
+                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .staff-card {
+            transition: all 0.3s ease;
+        }
+        
+        .staff-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .staff-card:hover .profile-image {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Hero Section Guru & Staff -->
+    <header class="relative w-full overflow-hidden bg-white py-16 lg:py-24">
+        <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-to-bl from-primary/10 to-accent/10 rounded-bl-full blur-3xl"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 animate-fade-in-up">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
+                        <span class="block size-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-xs font-bold text-primary uppercase tracking-wide">Tim Pengajar Profesional</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
+                        Guru & <span class="text-primary relative inline-block">
+                            Tenaga Kependidikan
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                                preserveAspectRatio="none" viewBox="0 0 100 10">
+                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                            </svg>
+                        </span>
+                    </h1>
+                    <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                        Didukung oleh tim pengajar yang kompeten, berpengalaman, dan berdedikasi tinggi dalam mencetak generasi muda yang siap bersaing di era digital.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <a href="#tim-pengajar"
+                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <span>Lihat Tim Pengajar</span>
+                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative lg:h-[500px] w-full group">
+                    <div
+                        class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] z-20 border-8 border-white">
+                        <div class="w-full h-full bg-cover bg-center"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2WwkiG1c5Kl5tfPvcGJAWEV9K-J3APH9K7zRxzEEz7F9lp8HYR7zS-Zxd4vmQIbBHYdNWm3efcLddTyl0U5iqCDSDIuXDreh7oflpRTmDkXgmOZK1JyUVmDXOX16Fh8liS9Z-DER15_hDV5WLrI4WaEXfwhcjYyF6vmGJG18kuZSCQG9ueMmHAEYLhRGWdz4bMj-uxRne8kXlwSfsrabCRS37hfrc3yVW_afYwm7k2IpVVHVtqTta-mliIcvTdlUEDXoW59beWgs');">
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-primary/20 rounded-3xl -z-10 blur-xl opacity-60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Statistik Guru & Staff -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">92</div>
+                    <p class="font-bold text-[#0A192F]">Guru & Instruktur</p>
+                    <p class="text-sm text-gray-500 mt-1">Profesional</p>
+                </div>
+                <div class="bg-gradient-to-br from-accent/5 to-white p-6 rounded-2xl border border-accent/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">85%</div>
+                    <p class="font-bold text-[#0A192F]">Bersertifikasi</p>
+                    <p class="text-sm text-gray-500 mt-1">Kompetensi Keahlian</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500/5 to-white p-6 rounded-2xl border border-blue-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">15+</div>
+                    <p class="font-bold text-[#0A192F]">Tahun Pengalaman</p>
+                    <p class="text-sm text-gray-500 mt-1">Rata-rata</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500/5 to-white p-6 rounded-2xl border border-green-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-green-600 mb-2 group-hover:scale-110 transition-transform">78</div>
+                    <p class="font-bold text-[#0A192F]">Tenaga Kependidikan</p>
+                    <p class="text-sm text-gray-500 mt-1">Administrasi & Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kepemimpinan Sekolah -->
+    <section class="py-20 bg-background-light relative">
+        <div class="absolute inset-0 bg-triangle-pattern opacity-5 pointer-events-none"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kepemimpinan</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Struktur Kepemimpinan Sekolah</h2>
+                <p class="text-gray-600">
+                    Tim kepemimpinan yang solid dan visioner dalam memajukan pendidikan vokasi di Indonesia.
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <!-- Kepala Sekolah -->
+                <div class="mb-16 text-center">
+                    <div class="relative mb-6">
+                        <div class="size-48 rounded-full border-4 border-white shadow-2xl overflow-hidden mx-auto">
+                            <div class="w-full h-full bg-cover bg-center profile-image"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmS1KM1gNvtDRQSOtoUglx7OUb5EmEuMoaLpSJ5a_23gsBGz9Mw8ONKg704uTOvOKEBAAeoiKf-KeKEjlY4IbJ16bQ59dBbQiJfAOZPXMbQ5OtUgx94EkIF_srynjTddnk35glU1UMaXn9DOZOyG_cY2F_pjY-kdWuKf72uZRtV0CwfKkN_X78WLcWEIKuQbd-em5LUmYVuUNFoRRHsAiBLAniNatTDGPP95o6ASxF5wb77EOgdiEHtzYL-9nm-1rDe5EZwbIT3aE');">
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 size-14 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg">
+                            <span class="material-symbols-outlined text-2xl">verified</span>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-[#0A192F] mb-2">Dr. Ir. Budi Santoso, M.T.</h3>
+                    <p class="text-primary font-bold text-lg mb-4">Kepala Sekolah</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Memimpin transformasi pendidikan vokasi dengan visi yang jelas dan komitmen terhadap pengembangan siswa. 
+                        Memiliki pengalaman 25 tahun dalam dunia pendidikan dan industri teknologi.
+                    </p>
+                    <div class="flex flex-wrap gap-3 justify-center mt-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">Ph.D Electrical Engineering</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">Sertifikasi Industri</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">25 Tahun Pengalaman</span>
+                    </div>
+                </div>
+
+                <!-- Wakil Kepala Sekolah -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Drs. Ahmad Wijaya, M.Pd.</h4>
+                            <p class="text-primary font-semibold mb-2">Wakasek Kurikulum</p>
+                            <p class="text-sm text-gray-500 mb-3">Pengembangan kurikulum & akademik</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Sertifikasi</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">18 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Siti Rahayu, S.Pd., M.M.</h4>
+                            <p class="text-primary font-semibold mb-2">Wakasek Kesiswaan</p>
+                            <p class="text-sm text-gray-500 mb-3">Pengembangan karakter siswa</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Psikologi</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">15 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Ir. Hendra Gunawan, M.T.</h4>
+                            <p class="text-primary font-semibold mb-2">Wakasek Sarpras</p>
+                            <p class="text-sm text-gray-500 mb-3">Fasilitas & infrastruktur</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Teknik</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">20 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Dewi Anggraeni, S.E., M.M.</h4>
+                            <p class="text-primary font-semibold mb-2">Wakasek Humas</p>
+                            <p class="text-sm text-gray-500 mb-3">Kerjasama & hubungan masyarakat</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">Komunikasi</span>
+                                <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">12 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tim Pengajar -->
+    <section id="tim-pengajar" class="py-20 bg-white relative">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Tim Pengajar</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Guru Produktif & Instruktur</h2>
+                <p class="text-gray-600">
+                    Para pengajar yang berkompeten di bidangnya masing-masing, siap membimbing siswa mencapai prestasi terbaik.
+                </p>
+            </div>
+
+            <!-- Filter Kategori -->
+            <div class="flex flex-wrap gap-3 justify-center mb-12">
+                <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-primary-dark transition-colors">
+                    Semua
+                </button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                    Teknik Komputer & Jaringan
+                </button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                    Multimedia
+                </button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                    Mekatronika
+                </button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                    Guru Normatif & Adaptif
+                </button>
+            </div>
+
+            <!-- Daftar Guru -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Guru TKJ -->
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Rina Wijayanti, S.Kom., M.Kom.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif TKJ</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Jaringan Komputer & Keamanan Siber</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">CCNA</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">MTCNA</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Linux</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 10 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Arif Rahman, S.Ds., M.Ds.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Multimedia</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Desain Grafis & Animasi 3D</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Adobe Expert</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">UI/UX</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">3D Modeling</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 8 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Bambang Sutrisno, S.T., M.Eng.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Mekatronika</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Otomasi Industri & Robotika</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">PLC Expert</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Robotika</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">IoT</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 12 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Drs. Agus Setiawan, M.Pd.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Bahasa Inggris</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: English for Specific Purposes</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">TOEFL 650</span>
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">Business English</span>
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">TOEIC</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 15 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Maya Sari, S.Pd., M.Pd.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Matematika</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Matematika Teknik</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Master Pendidikan</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Olimpiade</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">15 Tahun</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 15 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Joko Prasetyo, S.Pd., M.T.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif TKJ</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Cloud Computing & DevOps</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">AWS</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Docker</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Kubernetes</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 7 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Sari Dewi, S.Sn., M.Ds.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Multimedia</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Video Production & Editing</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Premiere Pro</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">After Effects</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Cinematography</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 9 Tahun</p>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Hendra Kurniawan, S.T., M.Eng.</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Mekatronika</p>
+                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Industrial Automation</p>
+                        <div class="flex flex-wrap gap-2 justify-center mb-4">
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Siemens PLC</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">SCADA</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">HMI</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Pengalaman: 11 Tahun</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tenaga Kependidikan -->
+    <section class="py-20 bg-background-light relative">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Staff Pendukung</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Tenaga Kependidikan</h2>
+                <p class="text-gray-600">
+                    Tim profesional yang mendukung kelancaran operasional sekolah dan kenyamanan lingkungan belajar.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Dian Pertiwi, S.Kom.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Kepala Tata Usaha</p>
+                            <p class="text-sm text-gray-600">Mengelola administrasi sekolah dan keuangan dengan sistem terintegrasi.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Sistem Informasi</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">10 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Bayu Santoso, A.Md.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Laboran Teknik</p>
+                            <p class="text-sm text-gray-600">Bertanggung jawab atas perawatan dan pemeliharaan alat laboratorium.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Teknik Elektro</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">8 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Siti Fatimah, S.Pd.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Pustakawan</p>
+                            <p class="text-sm text-gray-600">Mengelola perpustakaan digital dan program literasi sekolah.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Ilmu Perpustakaan</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">6 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Agus Salim</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Kepala Keamanan</p>
+                            <p class="text-sm text-gray-600">Mengawasi keamanan kampus 24/7 dengan sistem CCTV terintegrasi.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Security Certified</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">12 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Mira Handayani</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Kepala Kebersihan</p>
+                            <p class="text-sm text-gray-600">Memastikan lingkungan sekolah selalu bersih dan sehat.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Higiene</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">9 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Rudi Hartono, S.Kom.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">IT Support</p>
+                            <p class="text-sm text-gray-600">Mendukung infrastktur IT dan troubleshooting perangkat teknologi.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Networking</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">7 Tahun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prestasi & Pengembangan Diri -->
+    <section class="py-20 bg-white relative">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Pengembangan Profesional</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Prestasi & Pengembangan Diri</h2>
+                <p class="text-gray-600">
+                    Komitmen kami untuk terus mengembangkan kompetensi guru melalui berbagai program pelatihan dan sertifikasi.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-primary/5 to-white rounded-2xl p-6 border border-primary/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Sertifikasi Industri</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">85% guru produktif telah memiliki sertifikasi dari vendor teknologi ternama seperti Cisco, Microsoft, Adobe, dan Siemens.</p>
+                    <div class="text-sm text-primary font-medium">Updated: Agustus 2024</div>
+                </div>
+
+                <div class="bg-gradient-to-br from-accent/5 to-white rounded-2xl p-6 border border-accent/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+                            <span class="material-symbols-outlined text-2xl">school</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Pelatihan Berkala</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Program pelatihan rutin setiap semester untuk update kurikulum dan metode pembelajaran berbasis teknologi.</p>
+                    <div class="text-sm text-accent font-medium">4x per tahun</div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-500/5 to-white rounded-2xl p-6 border border-blue-500/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-600">
+                            <span class="material-symbols-outlined text-2xl">public</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Kerjasama Internasional</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Program pertukaran guru dengan institusi pendidikan di Jepang, Korea, dan Singapura untuk sharing best practices.</p>
+                    <div class="text-sm text-blue-600 font-medium">3 negara mitra</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary to-primary-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center text-white max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-black mb-6">Ingin Bergabung dengan Tim Kami?</h2>
+                <p class="text-lg opacity-90 mb-8">
+                    Kami selalu membuka peluang bagi profesional pendidikan yang berkomitmen untuk mengembangkan generasi muda Indonesia.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-primary text-base font-bold shadow-lg hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <span>Lowongan Kerja</span>
+                        <span class="material-symbols-outlined text-sm">work</span>
+                    </a>
+                    <a href="profile.html"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-transparent border-2 border-white text-white text-base font-bold hover:bg-white/10 transition-all duration-300">
+                        <span>Kembali ke Profil</span>
+                        <span class="material-symbols-outlined text-sm">arrow_back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+    {% include 'layouts/footer.html' %}
+
+    <a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
+        href="#">
+        <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Hubungi
+            Kami</span>
+        <span class="material-symbols-outlined text-2xl">phone</span>
+    </a>
+
+</body>
+
+</html>

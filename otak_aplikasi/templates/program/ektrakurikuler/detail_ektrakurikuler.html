@@ -1,0 +1,432 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{{ ektra.title }} - SMK Nurul Jadid</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px" },
+                    backgroundImage: {
+                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #F0F4F8 0%, #FFFFFF 100%);
+            border-left: 4px solid #0047AB;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .info-card {
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 71, 171, 0.1);
+        }
+        .badge-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .tab-btn.active {
+            border-bottom-color: #0047AB;
+            color: #0047AB;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-100 py-4">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <nav class="flex items-center gap-2 text-sm">
+                <a href="{% url 'home' %}" class="text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">home</span>
+                    Beranda
+                </a>
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <a href="{% url 'extracurricular' %}" class="text-gray-500 hover:text-primary transition-colors">Ekstrakurikuler</a>
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <span class="text-primary font-medium">{{ ektra.title }}</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Content Area -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Header with Stats -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">category</span>
+                                    {{ ektra.category.name }}
+                                </span>
+                                <span class="px-3 py-1.5 {% if ektra.type_ektra == 'Wajib' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %} text-sm font-bold rounded-full">
+                                    {{ ektra.type_ektra }}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500 text-sm">
+                                <span class="material-symbols-outlined text-sm">visibility</span>
+                                <span>{{ ektra.view_count }} dilihat</span>
+                            </div>
+                        </div>
+                        
+                        <h1 class="text-3xl md:text-4xl font-black text-[#0A192F] leading-tight mb-6">
+                            {{ ektra.title }}
+                        </h1>
+                        
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            {{ ektra.excerpt|default:ektra.content|striptags|truncatewords:30 }}
+                        </p>
+
+                        <!-- Featured Image -->
+                        <div class="relative rounded-xl overflow-hidden mb-8">
+                            <img src="{% if ektra.image %}{{ ektra.image.url }}{% else %}https://via.placeholder.com/1200x600{% endif %}" 
+                                 alt="{{ ektra.title }}" 
+                                 class="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <!-- Quick Info Grid -->
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                            <div class="info-card bg-gray-50 p-4 rounded-xl text-center">
+                                <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-1">Pembina</p>
+                                <p class="font-bold text-[#0A192F]">{{ ektra.pembina }}</p>
+                            </div>
+                            
+                            <div class="info-card bg-gray-50 p-4 rounded-xl text-center">
+                                <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-1">Jadwal</p>
+                                <p class="font-bold text-[#0A192F]">{{ ektra.hari }}</p>
+                                <p class="text-sm text-gray-600">{{ ektra.jadwal }}</p>
+                            </div>
+                            
+                            <div class="info-card bg-gray-50 p-4 rounded-xl text-center">
+                                <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mb-1">Lokasi</p>
+                                <p class="font-bold text-[#0A192F]">{{ ektra.lokasi|default:"Lab Sekolah" }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Tabs -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <!-- Tab Navigation -->
+                        <div class="border-b border-gray-200">
+                            <nav class="flex overflow-x-auto">
+                                <button class="tab-btn px-6 py-4 font-bold text-gray-600 hover:text-primary border-b-2 border-transparent hover:border-primary transition-all whitespace-nowrap active" data-tab="deskripsi">
+                                    <span class="material-symbols-outlined align-middle mr-2">description</span>
+                                    Deskripsi Kegiatan
+                                </button>
+                            </nav>
+                        </div>
+
+                        <!-- Tab Content -->
+                        <div class="p-8">
+                            <!-- Deskripsi Tab -->
+                            <div id="deskripsi-tab" class="tab-content active">
+                                <div class="article-content">
+                                    {{ ektra.content|safe }}
+                                </div>
+                                
+                                {% if ektra.video %}
+                                <div class="mt-8 pt-8 border-t border-gray-200">
+                                    <h3 class="text-2xl font-bold text-[#0A192F] mb-6 flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-primary">videocam</span>
+                                        Dokumentasi Kegiatan
+                                    </h3>
+                                    <div class="aspect-video rounded-xl overflow-hidden bg-black shadow-xl">
+                                        <video controls class="w-full h-full" poster="{% if ektra.image %}{{ ektra.image.url }}{% endif %}">
+                                            <source src="{{ ektra.video.url }}" type="video/mp4">
+                                            Browser Anda tidak mendukung tag video.
+                                        </video>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-3 text-center">Video dokumentasi kegiatan {{ ektra.title }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    {% if ektra.gallery.all %}
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                        <h3 class="text-2xl font-bold text-[#0A192F] mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">photo_library</span>
+                            Galeri Kegiatan
+                        </h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {% for foto in ektra.gallery.all|slice:":8" %}
+                            <a href="{{ foto.image.url }}" class="group relative rounded-lg overflow-hidden aspect-square">
+                                <img src="{{ foto.image.url }}" alt="Gallery {{ forloop.counter }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Navigation Between Items -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {% if ektra_sebelumnya %}
+                        <a href="{% url 'extracurricular_detail' ektra_sebelumnya.slug %}" class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all hover:border-primary">
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">arrow_back</span>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1 font-medium">Ekskul Sebelumnya</p>
+                                    <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors">{{ ektra_sebelumnya.title }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% else %}
+                        <div class="hidden md:block"></div>
+                        {% endif %}
+
+                        {% if ektra_selanjutnya %}
+                        <a href="{% url 'extracurricular_detail' ektra_selanjutnya.slug %}" class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all hover:border-primary {% if not ektra_sebelumnya %}md:col-span-2{% endif %}">
+                            <div class="flex items-center {% if ektra_sebelumnya %}justify-end{% else %}justify-center{% endif %} gap-4">
+                                {% if not ektra_sebelumnya %}
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1 font-medium text-center">Ekskul Selanjutnya</p>
+                                    <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors text-center">{{ ektra_selanjutnya.title }}</p>
+                                </div>
+                                {% else %}
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500 mb-1 font-medium">Ekskul Selanjutnya</p>
+                                    <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors">{{ ektra_selanjutnya.title }}</p>
+                                </div>
+                                {% endif %}
+                                <div class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Sidebar Area -->
+                <aside class="space-y-8">
+                    <!-- Quick Action Card -->
+                    <div class="bg-gradient-to-br from-primary to-primary-dark p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 size-40 bg-white/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-black text-white mb-3">Bergabung Sekarang!</h3>
+                            <p class="text-white/90 mb-6 text-sm leading-relaxed">
+                                Kuota terbatas! Daftar sekarang untuk bergabung dengan ekskul prestasi ini.
+                            </p>
+                            <div class="space-y-3">
+                                <a href="{% url 'extracurricular' %}#pendaftaran" class="w-full flex items-center justify-center gap-2 h-12 bg-white text-primary font-bold rounded-xl hover:bg-gray-50 transform hover:-translate-y-1 transition-all shadow-lg">
+                                    <span class="material-symbols-outlined">how_to_reg</span>
+                                    Daftar Online
+                                </a>
+                                <a href="#" class="w-full flex items-center justify-center gap-2 h-12 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all">
+                                    <span class="material-symbols-outlined">contact_support</span>
+                                    Konsultasi
+                                </a>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-white/20">
+                                <div class="flex items-center justify-between text-white/80 text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Items -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-[#0A192F] mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">link</span>
+                            Ekskul Terkait
+                        </h3>
+                        <div class="space-y-4">
+                            {% for terkait in ektra_terkait %}
+                            <a href="{% url 'extracurricular_detail' terkait.slug %}" class="group flex gap-4 p-3 rounded-xl hover:bg-gray-50 transition-all">
+                                <div class="size-16 rounded-lg overflow-hidden shrink-0">
+                                    <img src="{% if terkait.image %}{{ terkait.image.url }}{% else %}https://via.placeholder.com/150{% endif %}" 
+                                         alt="{{ terkait.title }}" 
+                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <span class="text-xs font-bold text-primary uppercase tracking-wider">{{ terkait.category.name }}</span>
+                                    <h4 class="font-bold text-[#0A192F] text-sm group-hover:text-primary transition-colors line-clamp-2 leading-snug mt-1">
+                                        {{ terkait.title }}
+                                    </h4>
+                                    <div class="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs">person</span>
+                                            {{ terkait.pembina|truncatechars:15 }}
+                                        </span>
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs">schedule</span>
+                                            {{ terkait.hari }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% empty %}
+                            <p class="text-gray-500 text-sm text-center py-4">Tidak ada ekskul terkait</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-[#0A192F] mb-6">Statistik Ekskul</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Siswa Aktif</span>
+                                <span class="font-bold text-[#0A192F]">{{ ektra.siswa|default:"25" }}</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Prestasi 2024</span>
+                                <span class="font-bold text-[#0A192F]">{{ ektra.prestasi|default:"3" }}</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Tahun Berdiri</span>
+                                <span class="font-bold text-[#0A192F]">{{ ektra.tahun|default:"2018" }}</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Rating</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-yellow-500">star</span>
+                                    <span class="font-bold text-[#0A192F]">4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    {% include 'layouts/footer.html' %}
+
+    <script>
+        // Tab System
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.remove('border-primary');
+                        btn.classList.add('border-transparent');
+                    });
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-primary');
+                    
+                    // Show corresponding content
+                    const tabContent = document.getElementById(`${tabId}-tab`);
+                    if (tabContent) {
+                        tabContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

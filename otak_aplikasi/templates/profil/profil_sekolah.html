@@ -1,0 +1,592 @@
+    <!DOCTYPE html>
+    <html class="light" lang="id">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>SMK NURUL JADID - Profil Sekolah</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#0047AB", "primary-dark": "#003380",
+                            "accent": "#00B4D8", "background-light": "#F0F4F8",
+                            "background-dark": "#0A192F", "surface": "#ffffff",
+                        },
+                        fontFamily: {
+                            "display": ["Inter", "sans-serif"],
+                            "body": ["Inter", "sans-serif"],
+                        },
+                        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                        backgroundImage: {
+                            'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                            'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        },
+                        animation: {
+                            'float': 'float 6s ease-in-out infinite',
+                            'fade-in-up': 'fadeInUp 0.8s ease-out',
+                            'fade-in': 'fadeIn 0.6s ease-out'
+                        },
+                        keyframes: {
+                            float: {
+                                '0%, 100%': { transform: 'translateY(0)' },
+                                '50%': { transform: 'translateY(-20px)' },
+                            },
+                            fadeInUp: {
+                                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' },
+                            },
+                            fadeIn: {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' },
+                            }
+                        }
+                    },
+                },
+            }
+        </script>
+        <style>
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #0047AB;
+                border-radius: 4px;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .animate-fade-in-up {
+                animation: fadeInUp 0.8s ease-out;
+            }
+        </style>
+    </head>
+
+    <body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+        <!-- Navigation (Sama dengan index.html) -->
+        
+        {% include 'layouts/navbar.html' %}
+
+        <!-- Hero Section Profil -->
+        <header class="relative w-full overflow-hidden bg-white py-16 lg:py-24">
+            <div class="absolute inset-0 bg-triangle-pattern opacity-60 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-1/3 h-1/2 bg-blue-50 rounded-bl-full blur-3xl opacity-50"></div>
+            <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="flex flex-col gap-6 animate-fade-in-up">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
+                            <span class="block size-2 rounded-full bg-primary animate-pulse"></span>
+                            <span class="text-xs font-bold text-primary uppercase tracking-wide">Profil Sekolah</span>
+                        </div>
+                        <h1 class="text-4xl md:text-5xl lg:text-5xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
+                            Mengenal Lebih Dekat <span class="text-primary relative inline-block">
+                                {{ data_sekolah.school_name }}
+                                <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                                    preserveAspectRatio="none" viewBox="0 0 100 10">
+                                    <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                                </svg>
+                            </span> 
+                        </h1>
+                        <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                            Sebagai lembaga pendidikan vokasi terdepan, kami berkomitmen untuk menghasilkan lulusan yang 
+                            kompeten, berkarakter, dan siap menghadapi tantangan industri global.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mt-2">
+                            <a href="#sejarah"
+                                class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <span>Telusuri Sejarah</span>
+                                <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                            </a>
+                            <button
+                                class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
+                                <span class="material-symbols-outlined text-primary">download</span>
+                                <span>Profil Lengkap (PDF)</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative lg:h-[500px] w-full group perspective-1000">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-2 group-hover:scale-[1.02] z-20 border-8 border-white">
+                            <div class="w-full h-full bg-cover bg-center"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmS1KM1gNvtDRQSOtoUglx7OUb5EmEuMoaLpSJ5a_23gsBGz9Mw8ONKg704uTOvOKEBAAeoiKf-KeKEjlY4IbJ16bQ59dBbQiJfAOZPXMbQ5OtUgx94EkIF_srynjTddnk35glU1UMaXn9DOZOyG_cY2F_pjY-kdWuKf72uZRtV0CwfKkN_X78WLcWEIKuQbd-em5LUmYVuUNFoRRHsAiBLAniNatTDGPP95o6ASxF5wb77EOgdiEHtzYL-9nm-1rDe5EZwbIT3aE');">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-tr from-primary/90 via-primary/60 to-transparent flex items-end p-8">
+                                    <div class="text-white">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span
+                                                class="px-2 py-0.5 rounded bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider">Lokasi
+                                                Strategis</span>
+                                        </div>
+                                        <p class="font-bold text-2xl">Kawasan PP. Nurul Jadid</p>
+                                        <p class="text-sm opacity-90">Berada di jantung pusat pesantren dan pendidikan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-primary/20 rounded-3xl -z-10 blur-xl opacity-60">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sejarah Singkat -->
+        <section id="sejarah" class="py-20 bg-background-light relative">
+            <div class="absolute inset-0 bg-geo-pattern opacity-5 pointer-events-none"></div>
+            <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Perjalanan Kami</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Sejarah & Perkembangan</h2>
+                    <p class="text-gray-600">
+                        Dari awal berdiri hingga menjadi salah satu SMK unggulan di Jawa Timur, berikut perjalanan panjang 
+                        yang telah kami lalui bersama.
+                    </p>
+                </div>
+                
+                <div class="relative">
+                    <!-- Timeline Desktop -->
+                    <div class="hidden lg:block">
+                        <div class="relative">
+                            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-accent to-primary"></div>
+                            
+                            <div class="grid grid-cols-2 gap-y-12 mb-8">
+                                <!-- Item 1 -->
+                                <div class="text-right pr-12">
+                                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                                        <div class="absolute -right-6 top-1/2 transform -translate-y-1/2 size-12 bg-primary rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform">
+                                            <span class="material-symbols-outlined">flag</span>
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">2005</span>
+                                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Pendirian Sekolah</h3>
+                                            <p class="text-gray-600">SMK Tekno Harapan Bangsa didirikan dengan 2 program keahlian: Teknik Elektro dan Teknik Mesin.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pl-12"></div>
+
+                                <!-- Item 2 -->
+                                <div class="pl-12"></div>
+                                <div class="text-left pl-12">
+                                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                                        <div class="absolute -left-6 top-1/2 transform -translate-y-1/2 size-12 bg-accent rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform">
+                                            <span class="material-symbols-outlined">school</span>
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2010</span>
+                                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Akreditasi A</h3>
+                                            <p class="text-gray-600">Memperoleh akreditasi A dari BAN-SM dan menambah program keahlian Teknik Komputer & Jaringan.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Item 3 -->
+                                <div class="text-right pr-12">
+                                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                                        <div class="absolute -right-6 top-1/2 transform -translate-y-1/2 size-12 bg-primary rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform">
+                                            <span class="material-symbols-outlined">apartment</span>
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">2015</span>
+                                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Pindah ke Kampus Baru</h3>
+                                            <p class="text-gray-600">Relokasi ke Kawasan Teknopark dengan fasilitas modern dan laboratorium standar industri.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pl-12"></div>
+
+                                <!-- Item 4 -->
+                                <div class="pl-12"></div>
+                                <div class="text-left pl-12">
+                                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                                        <div class="absolute -left-6 top-1/2 transform -translate-y-1/2 size-12 bg-accent rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform">
+                                            <span class="material-symbols-outlined">workspace_premium</span>
+                                        </div>
+                                        <div class="text-left">
+                                            <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2020 - Sekarang</span>
+                                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Era Digital & Internasionalisasi</h3>
+                                            <p class="text-gray-600">Transformasi digital, penambahan program keahlian berbasis AI, dan kerjasama internasional dengan berbagai institusi.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Mobile -->
+                    <div class="lg:hidden space-y-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                            <div class="absolute -left-3 top-6 size-6 bg-primary rounded-full flex items-center justify-center text-white z-20"></div>
+                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">2005</span>
+                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Pendirian Sekolah</h3>
+                            <p class="text-gray-600">SMK Tekno Harapan Bangsa didirikan dengan 2 program keahlian: Teknik Elektro dan Teknik Mesin.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                            <div class="absolute -left-3 top-6 size-6 bg-accent rounded-full flex items-center justify-center text-white z-20"></div>
+                            <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2010</span>
+                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Akreditasi A</h3>
+                            <p class="text-gray-600">Memperoleh akreditasi A dari BAN-SM dan menambah program keahlian Teknik Komputer & Jaringan.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                            <div class="absolute -left-3 top-6 size-6 bg-primary rounded-full flex items-center justify-center text-white z-20"></div>
+                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">2015</span>
+                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Pindah ke Kampus Baru</h3>
+                            <p class="text-gray-600">Relokasi ke Kawasan Teknopark dengan fasilitas modern dan laboratorium standar industri.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 relative group hover:shadow-xl transition-all duration-300">
+                            <div class="absolute -left-3 top-6 size-6 bg-accent rounded-full flex items-center justify-center text-white z-20"></div>
+                            <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2020 - Sekarang</span>
+                            <h3 class="text-xl font-bold text-[#0A192F] mb-2">Era Digital & Internasionalisasi</h3>
+                            <p class="text-gray-600">Transformasi digital, penambahan program keahlian berbasis AI, dan kerjasama internasional dengan berbagai institusi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Struktur Organisasi -->
+        <section class="py-20 bg-white relative">
+            <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kepemimpinan</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Struktur Organisasi</h2>
+                    <p class="text-gray-600">
+                        Tim kepemimpinan yang solid dan profesional dalam mengelola pendidikan vokasi berkualitas.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Kepala Sekolah -->
+                    <div class="lg:col-span-4 flex flex-col items-center text-center mb-12">
+                        <div class="relative mb-6">
+                            <div class="size-40 rounded-full border-4 border-white shadow-2xl overflow-hidden">
+                                <div class="w-full h-full bg-cover bg-center"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmS1KM1gNvtDRQSOtoUglx7OUb5EmEuMoaLpSJ5a_23gsBGz9Mw8ONKg704uTOvOKEBAAeoiKf-KeKEjlY4IbJ16bQ59dBbQiJfAOZPXMbQ5OtUgx94EkIF_srynjTddnk35glU1UMaXn9DOZOyG_cY2F_pjY-kdWuKf72uZRtV0CwfKkN_X78WLcWEIKuQbd-em5LUmYVuUNFoRRHsAiBLAniNatTDGPP95o6ASxF5wb77EOgdiEHtzYL-9nm-1rDe5EZwbIT3aE');">
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-2 -right-2 size-12 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white">
+                                <span class="material-symbols-outlined">verified</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#0A192F] mb-1">Dr. Ir. Budi Santoso, M.T.</h3>
+                        <p class="text-primary font-bold mb-3">Kepala Sekolah</p>
+                        <p class="text-gray-600 max-w-lg">Memimpin transformasi pendidikan vokasi dengan visi yang jelas dan komitmen terhadap pengembangan siswa.</p>
+                    </div>
+
+                    <!-- Wakil Kepala Sekolah -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm group hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-24 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Drs. Ahmad Wijaya, M.Pd.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Wakasek Kurikulum</p>
+                            <p class="text-sm text-gray-500">Pengembangan kurikulum & akademik</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm group hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-24 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Siti Rahayu, S.Pd., M.M.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Wakasek Kesiswaan</p>
+                            <p class="text-sm text-gray-500">Pengembangan karakter siswa</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm group hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-24 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Ir. Hendra Gunawan, M.T.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Wakasek Sarpras</p>
+                            <p class="text-sm text-gray-500">Fasilitas & infrastruktur</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm group hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-24 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Dewi Anggraeni, S.E., M.M.</h4>
+                            <p class="text-sm text-primary font-semibold mb-2">Wakasek Humas</p>
+                            <p class="text-sm text-gray-500">Kerjasama & hubungan masyarakat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visi & Misi -->
+        <section id="visi-misi" class="py-20 bg-white relative">
+            <div class="absolute left-0 top-0 w-64 h-64 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+            <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-8">
+                        <div>
+                            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Visi Sekolah</span>
+                            <div class="bg-gradient-to-br from-primary to-primary-dark p-1 rounded-2xl">
+                                <div class="bg-white p-8 rounded-xl">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <div class="size-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                            <span class="material-symbols-outlined text-3xl">visibility</span>
+                                        </div>
+                                        <h3 class="text-2xl font-black text-[#0A192F]">Visi</h3>
+                                    </div>
+                                    <p class="text-lg italic text-gray-700 leading-relaxed">
+                                        "Menjadi SMK Pusat Keunggulan yang mencetak tenaga kerja profesional yang agamis, berkarakter, berwawasan lingkungan, berprestasi, dan berjiwa wirausaha, serta mampu bersaing di pasar kerja global."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Motto Sekolah</span>
+                            <div class="bg-gradient-to-r from-accent to-cyan-500 p-1 rounded-xl">
+                                <div class="bg-white p-6 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-accent text-2xl">format_quote</span>
+                                        <p class="text-xl font-bold text-[#0A192F]">"SMK Bisa & SMK Hebat"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Misi Sekolah</span>
+                        <div id="misi-container" class="space-y-4">
+                            <!-- Misi Card 1 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="0">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">school</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Pendidikan Berbasis Kompetensi</h4>
+                                        <p class="text-gray-600">Menyelenggarakan pendidikan kejuruan yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja, serta memperhatikan perkembangan ilmu pengetahuan dan teknologi terkini.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 2 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="1">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">diversity_2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Pengembangan Karakter</h4>
+                                        <p class="text-gray-600">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang mencerminkan nilai-nilai spiritual dan etika dalam kehidupan sehari-hari.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 3 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="2">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">person_book</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Kurikulum dan Pembelajaran</h4>
+                                        <p class="text-gray-600">Mengembangkan pembelajaran berbasis teaching factory sebagai wahana pembentukan keterampilan kerja riil, budaya kerja, serta pengalaman produksi atau layanan jasa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Misi Card 4 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="3">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">auto_awesome</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Prestasi Gemilang</h4>
+                                        <p class="text-gray-600">Mendorong pencapaian prestasi peserta didik di bidang akademik, vokasional, keagamaan, dan kepemimpinan, baik di tingkat lokal, nasional, maupun internasional.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 5 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="4">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">handshake</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Kemitraan Strategis</h4>
+                                        <p class="text-gray-600">Menguatkan kemitraan dengan dunia usaha dan dunia industri (DUDI) melalui pelaksanaan praktik kerja lapangan (PKL) dan program kolaboratif lainnya.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 6 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="5">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">prayer_times</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Kesadaran Beragama</h4>
+                                        <p class="text-gray-600">Menumbuhkan budaya sekolah yang religius, disiplin, peduli lingkungan, dan adaptif terhadap perubahan zaman, dengan tetap mencerminkan nilai-nilai kepesantrenan dalam kehidupan sekolah.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 7 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="6">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">groups</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Prospek Lulusan</h4>
+                                        <p class="text-gray-600">Mengembangkan jejaring kerja sama yang luas dan berkelanjutan untuk mendukung penyerapan lulusan serta peningkatan mutu pembelajaran dan pembinaan karakter peserta didik.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Misi Card 8 -->
+                            <div class="misi-card group p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer" data-index="7">
+                                <div class="flex items-start gap-4">
+                                    <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined">eco</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-[#0A192F] mb-2">Lingkungan Berkelanjutan</h4>
+                                        <p class="text-gray-600">Membangun kesadaran dan kepedulian terhadap lingkungan hidup melalui program-program ramah lingkungan dan pengelolaan sumber daya yang berkelanjutan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination Button -->
+                        <div class="mt-6 flex justify-center">
+                            <button id="btn-lihat-selanjutnya" class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                                <span id="btn-text">Lihat Selanjutnya</span>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer (Sama dengan index.html) -->
+        
+        {% include 'layouts/footer.html' %}
+
+        <a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
+            href="#">
+            <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Download
+                Profil</span>
+            <span class="material-symbols-outlined text-2xl">download</span>
+        </a>
+
+        <script>
+            // Pagination for Misi Cards
+            document.addEventListener('DOMContentLoaded', function() {
+                const misiCards = document.querySelectorAll('.misi-card');
+                const btnLihatSelanjutnya = document.getElementById('btn-lihat-selanjutnya');
+                const btnText = document.getElementById('btn-text');
+                const cardsPerPage = 3;
+                let currentPage = 0;
+                const totalPages = Math.ceil(misiCards.length / cardsPerPage);
+
+                // Function to show cards for current page
+                function showPage(page) {
+                    // Hide all cards first with fade out
+                    misiCards.forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    });
+
+                    // Calculate start and end index
+                    const startIndex = page * cardsPerPage;
+                    const endIndex = Math.min(startIndex + cardsPerPage, misiCards.length);
+
+                    // Show cards for current page with fade in
+                    setTimeout(() => {
+                        for (let i = startIndex; i < endIndex; i++) {
+                            misiCards[i].style.display = 'block';
+                            setTimeout(() => {
+                                misiCards[i].style.opacity = '1';
+                                misiCards[i].style.transform = 'translateY(0)';
+                            }, 50 * (i - startIndex));
+                        }
+                    }, 300);
+
+                    // Update button text
+                    if (page === totalPages - 1) {
+                        btnText.textContent = 'Kembali ke Awal';
+                    } else {
+                        btnText.textContent = 'Lihat Selanjutnya';
+                    }
+                }
+
+                // Add transition styles to cards
+                misiCards.forEach(card => {
+                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                });
+
+                // Initialize - show first page
+                showPage(0);
+
+                // Button click handler
+                btnLihatSelanjutnya.addEventListener('click', function() {
+                    currentPage = (currentPage + 1) % totalPages;
+                    showPage(currentPage);
+                    
+                    // Smooth scroll to misi section
+                    document.getElementById('misi-container').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                });
+            });
+        </script>
+
+    </body>
+
+    </html>
