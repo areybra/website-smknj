@@ -220,68 +220,71 @@
                             <option>Urutkan Terlama</option>
                         </select>
                     </div>
-
+                
+                    {% for pengumuman in pengumuman_list %}
                     <div class="space-y-4">
                         <!-- Pengumuman Item -->
                         <div class="announcement-card bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 p-6">
                             <div class="flex items-start justify-between mb-4">
                                 <div>
-                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-2">AKADEMIK</span>
-                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">Pengumuman Kelulusan Semester Genap 2023/2024</h3>
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-2">{{ pengumuman.category.nama }}</span>
+                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">{{  pengumuman.judul  }}</h3>
                                 </div>
-                                <span class="text-xs text-gray-500">2 hari lalu</span>
+                                <span class="text-xs text-gray-500">{{ pengumuman.created_at|date:"d M Y" }}</span>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">
-                                Daftar siswa yang dinyatakan lulus semester genap tahun ajaran 2023/2024.
+                                {{ pengumuman.deskripsi|safe }}
                             </p>
                             <div class="flex items-center justify-between">
                                 <div class="text-sm text-gray-500 flex items-center gap-2">
                                     <span class="material-symbols-outlined text-sm">attach_file</span>
-                                    2 File
+                                    {{ pengumuman.files.count }}
                                 </div>
-                                <button class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
+                                <a href="{% url 'announcements_detail' pengumuman.slug %}" class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
                                     Selengkapnya
                                     <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Pengumuman Item -->
-                        <div class="announcement-card bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 p-6">
-                            <div class="flex items-start justify-between mb-4">
-                                <div>
-                                    <span class="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full mb-2">KEGIATAN</span>
-                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">Jadwal Kunjungan Industri</h3>
-                                </div>
-                                <span class="text-xs text-gray-500">3 hari lalu</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">
-                                Informasi lengkap kunjungan industri untuk siswa kelas XI.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="text-sm text-gray-500 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">attach_file</span>
-                                    1 File
-                                </div>
-                                <button class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
-                                    Selengkapnya
-                                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
 
                     <!-- Pagination -->
+                    {% if pengumuman_list.paginator.num_pages > 1 %}
                     <div class="flex justify-center items-center gap-2 mt-8">
-                        <button class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
+                        {% if pengumuman_list.has_previous %}
+                        <a href="?page={{ pengumuman_list.previous_page_number }}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
                             <span class="material-symbols-outlined">chevron_left</span>
-                        </button>
-                        <button class="size-10 rounded-lg bg-primary text-white font-bold">1</button>
-                        <button class="size-10 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">2</button>
-                        <button class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
+                        </a>
+                        {% else %}
+                        <div class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </div>
+                        {% endif %}
+
+                        {% for page_num in pengumuman_list.paginator.page_range %}
+                            {% if pengumuman_list.number == page_num %}
+                            <div class="size-10 rounded-lg bg-primary text-white font-bold flex items-center justify-center">
+                                {{ page_num }}
+                            </div>
+                            {% else %}
+                            <a href="?page={{ page_num }}" class="size-10 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors flex items-center justify-center font-medium">
+                                {{ page_num }}
+                            </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if pengumuman_list.has_next %}
+                        <a href="?page={{ pengumuman_list.next_page_number }}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
                             <span class="material-symbols-outlined">chevron_right</span>
-                        </button>
+                        </a>
+                        {% else %}
+                        <div class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-300 cursor-not-allowed">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </div>
+                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
 

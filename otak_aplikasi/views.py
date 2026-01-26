@@ -8,6 +8,7 @@ from django.shortcuts import render
 
 
 def beranda(request):
+    pengumuman_list = Pengumuman.objects.all().order_by('-created_at')[:3]
     # Queryset Jurusan (yang dipagination)
     jurusan_qs = Jurusan.objects.all().order_by('id')
 
@@ -21,6 +22,7 @@ def beranda(request):
     context = {
         'jurusan_list': jurusan_page,
         'berita_list': berita_list,
+        'pengumuman_list': pengumuman_list,
     }
 
     return render(request, 'index.html', context)
@@ -90,8 +92,42 @@ def detail_berita(request, slug):
     }
     return render(request, 'berita/detail_berita.html', context)
 
-def pengumuman(request):
-    return render(request, 'pengumuman/pengumuman.html')
+def pengumuman_view(request):
+    pengumuman_list = Pengumuman.objects.all().order_by('-created_at')
+    pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')
+
+    paginator = Paginator(pengumuman_list, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'pengumuman_list': page_obj,
+        'pengumuman_penting': pengumuman_penting,
+    }
+    return render(request, 'pengumuman/pengumuman.html', context)
+
+def detail_pengumuman(request, slug):
+    # Mengambil pengumuman berdasarkan slug
+    pengumuman_detail = get_object_or_404(Pengumuman, slug=slug)
+    
+    # Increment view count
+    pengumuman_detail.view_count += 1
+    pengumuman_detail.save()
+    
+    # Mengambil pengumuman terkait (dari kategori yang sama)
+    pengumuman_terkait = Pengumuman.objects.filter(category=pengumuman_detail.category).exclude(slug=slug).order_by('-created_at')[:3]
+    
+    # Mengambil pengumuman sebelumnya dan selanjutnya
+    pengumuman_sebelumnya = Pengumuman.objects.filter(created_at__lt=pengumuman_detail.created_at).order_by('-created_at').first()
+    pengumuman_selanjutnya = Pengumuman.objects.filter(created_at__gt=pengumuman_detail.created_at).order_by('created_at').first()
+    
+    context = {
+        'pengumuman': pengumuman_detail,
+        'pengumuman_terkait': pengumuman_terkait,
+        'pengumuman_sebelumnya': pengumuman_sebelumnya,
+        'pengumuman_selanjutnya': pengumuman_selanjutnya,
+    }
+    return render(request, 'pengumuman/detail_pengumuman.html', context)
 
 def ektrakurikuler(request):
     ektra_list = ektra.objects.all().order_by('-created_at')

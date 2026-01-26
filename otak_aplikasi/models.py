@@ -248,3 +248,42 @@ class TestimoniAlumni(models.Model):
 
     def __str__(self):
         return f"{self.nama} ({self.jurusan.nama})"
+
+class categoryPengumuman(models.Model):
+    nama = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nama
+
+class Pengumuman(models.Model):
+    judul = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    deskripsi = RichTextField(blank=True, null=True)
+    category = models.ForeignKey(categoryPengumuman, on_delete=models.CASCADE, related_name='pengumuman')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    view_count = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.judul)
+            
+            original_slug = self.slug
+            counter = 1
+            while pengumuman.objects.filter(slug=self.slug).exists():
+                if self.pk and pengumuman.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.judul
+
+class FilePengumuman(models.Model):
+    pengumuman = models.ForeignKey(Pengumuman, on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(upload_to='pengumuman/files/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.pengumuman.judul} - {self.file.name}"

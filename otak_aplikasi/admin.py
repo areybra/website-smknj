@@ -27,3 +27,24 @@ class sertifikasiInline(admin.TabularInline):
 class jurusanAdmin(admin.ModelAdmin):
     inlines = [prospekKarirInline, fasilitasJurusanInline, testimoniAlumniInline, sertifikasiInline, KompetensiInline]     
 admin.site.register(Jurusan, jurusanAdmin)
+
+class FilePengumumanInline(admin.TabularInline):
+    model = FilePengumuman
+    extra = 1
+
+class pengumumanAdmin(admin.ModelAdmin):
+    inlines = [FilePengumumanInline]    
+    list_display = ('judul', 'category', 'created_at', 'updated_at')
+    list_filter = ('category', 'created_at', 'updated_at')
+    search_fields = ('judul', 'deskripsi')
+    ordering = ('-created_at',)
+    
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if not request.user.is_superuser:
+            queryset = queryset.filter(category__nama='PPDB')
+        return queryset
+
+admin.site.register(categoryPengumuman)
+admin.site.register(Pengumuman, pengumumanAdmin)
+
