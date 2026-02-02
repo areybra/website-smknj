@@ -132,7 +132,19 @@
                         </div>
                     </div>
                     
-                    <form class="space-y-6 contact-form">
+                    {% if messages %}
+                    <div class="mb-8 space-y-2">
+                        {% for message in messages %}
+                        <div class="p-4 rounded-xl {% if message.tags == 'success' %}bg-green-50 border border-green-200 text-green-700{% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700{% else %}bg-blue-50 border border-blue-200 text-blue-700{% endif %} flex items-center gap-3 animate-fade-in">
+                            <span class="material-symbols-outlined">{% if message.tags == 'success' %}check_circle{% elif message.tags == 'error' %}error{% else %}info{% endif %}</span>
+                            <p>{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form class="space-y-6 contact-form" method="POST" action="">
+                        {% csrf_token %}
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2" for="nama">Nama Lengkap *</label>
@@ -215,15 +227,16 @@
                                 <span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">chevron_right</span>
                             </a>
                             
-                            <div class="group flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-primary/50 hover:shadow-md transition-all duration-300">
+                            <a href="https://www.google.com/maps/place/SMK+Nurul+Jadid/@-7.7121754,113.4933046,17z/" target="_blank" class="group flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-primary/50 hover:shadow-md transition-all duration-300">
                                 <div class="size-12 rounded-lg bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
                                     <span class="material-symbols-outlined text-green-600">location_on</span>
                                 </div>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-500">Alamat</p>
-                                    <p class="font-bold text-[#0A192F]">Jl. Kyai Haji Mun'im, Dusun Tj. Lor, Karanganyar, Kec. Paiton, Kabupaten Probolinggo, Jawa Timur 67291</p>
+                                    <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors">Jl. Kyai Haji Mun'im, Dusun Tj. Lor, Karanganyar, Kec. Paiton, Kabupaten Probolinggo, Jawa Timur 67291</p>
                                 </div>
-                            </div>
+                                <span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">chevron_right</span>
+                            </a>
                             
                             <div class="group flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-primary/50 hover:shadow-md transition-all duration-300">
                                 <div class="size-12 rounded-lg bg-purple-50 flex items-center justify-center group-hover:bg-purple-100 transition-colors">
@@ -236,172 +249,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Social Media -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map & FAQ Section -->
-    <section class="py-20 bg-background-light relative">
-        <div class="absolute left-0 bottom-0 w-64 h-64 bg-triangle-pattern opacity-20 pointer-events-none"></div>
-        <div
-            class="absolute right-0 top-0 w-[500px] h-full bg-gradient-to-l from-white to-transparent opacity-50 pointer-events-none">
-        </div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-            <div class="grid lg:grid-cols-2 gap-12">
-                <!-- Map -->
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-[#0A192F] flex items-center gap-3">
-                        <span class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary">map</span>
-                        </span>
-                        Lokasi Kami
-                    </h3>
-                    
-                    <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white h-[400px] relative">
-                        <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                            <div class="text-center">
-                                <span class="material-symbols-outlined text-primary text-6xl mb-4">location_on</span>
-                                <p class="text-lg font-bold text-[#0A192F]">SMK Nurul Jadid</p>
-                                <p class="text-gray-600">Jl. Kyai Haji Mun'im, Probolinggo</p>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-lg">
-                            <a class="flex items-center gap-2 text-primary font-bold text-sm hover:underline" href="https://maps.app.goo.gl/u5sTwxPvfX143nbh7">
-                                <span class="material-symbols-outlined">open_in_new</span>
-                                Buka di Google Maps
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-xl border border-gray-100 text-center">
-                            <span class="material-symbols-outlined text-primary text-3xl mb-2">local_parking</span>
-                            <p class="font-bold text-[#0A192F]">Parkir Luas</p>
-                            <p class="text-sm text-gray-600">Area parkir untuk kendaraan roda 2 & 4</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- FAQ -->
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-[#0A192F] flex items-center gap-3">
-                        <span class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary">help</span>
-                        </span>
-                        Pertanyaan Umum
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <details
-                            class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
-                            <summary
-                                class="flex items-center justify-between p-5 font-bold text-base cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
-                                <span class="text-[#0A192F]">Bagaimana cara mendaftar sebagai siswa baru?</span>
-                                <span
-                                    class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <div
-                                class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100 animate-fade-in">
-                                <p class="mt-3">Pendaftaran dapat dilakukan secara online melalui website resmi sekolah atau datang langsung ke bagian administrasi. Persyaratan lengkap dapat dilihat di halaman pendaftaran.</p>
-                            </div>
-                        </details>
-                        
-                        <details
-                            class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
-                            <summary
-                                class="flex items-center justify-between p-5 font-bold text-base cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
-                                <span class="text-[#0A192F]">Apakah sekolah membuka program beasiswa?</span>
-                                <span
-                                    class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <div
-                                class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100">
-                                <p class="mt-3">Ya, sekolah menyediakan berbagai program beasiswa untuk siswa berprestasi dan siswa kurang mampu. Informasi detail dapat diperoleh melalui bagian kesiswaan.</p>
-                            </div>
-                        </details>
-                        
-                        <details
-                            class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
-                            <summary
-                                class="flex items-center justify-between p-5 font-bold text-base cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
-                                <span class="text-[#0A192F]">Bagaimana prosedur kunjungan industri?</span>
-                                <span
-                                    class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <div
-                                class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100">
-                                <p class="mt-3">Kunjungan industri diatur oleh program studi masing-masing dengan koordinasi dari bagian hubungan industri. Jadwal akan diinformasikan melalui wali kelas.</p>
-                            </div>
-                        </details>
-                        
-                        <details
-                            class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
-                            <summary
-                                class="flex items-center justify-between p-5 font-bold text-base cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
-                                <span class="text-[#0A192F]">Apakah sekolah menyediakan asrama?</span>
-                                <span
-                                    class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <div
-                                class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100">
-                                <p class="mt-3">Ya, sekolah menyediakan asrama untuk siswa putra dan putri dengan fasilitas lengkap. Informasi pendaftaran asrama terpisah dari pendaftaran sekolah.</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Department Contacts -->
-    <section class="py-20 bg-white">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Hubungi Langsung</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Bagian & Departemen</h2>
-                <p class="text-gray-600">
-                    Untuk pertanyaan spesifik, Anda dapat menghubungi bagian terkait secara langsung
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 group">
-                    <div class="size-14 rounded-xl bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-primary text-2xl">school</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#0A192F] mb-2">Bagian Akademik</h4>
-                    <p class="text-gray-600 text-sm mb-4">Informasi kurikulum, jadwal pelajaran, dan kegiatan akademik</p>
-                    <div class="space-y-2">
-                        <p class="text-sm font-medium text-gray-700">Bpk. Ahmad Rizal, M.Pd.</p>
-                        <a class="text-sm text-primary hover:underline font-medium" href="mailto:akademik@smknuruljadid.sch.id">akademik@smknuruljadid.sch.id</a>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 group">
-                    <div class="size-14 rounded-xl bg-cyan-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-accent text-2xl">groups</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#0A192F] mb-2">Kesiswaan</h4>
-                    <p class="text-gray-600 text-sm mb-4">Program ekstrakurikuler, pembinaan karakter, dan disiplin siswa</p>
-                    <div class="space-y-2">
-                        <p class="text-sm font-medium text-gray-700">Ibu Siti Fatimah, S.Pd.</p>
-                        <a class="text-sm text-primary hover:underline font-medium" href="mailto:kesiswaan@smknuruljadid.sch.id">kesiswaan@smknuruljadid.sch.id</a>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 group">
-                    <div class="size-14 rounded-xl bg-green-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-green-600 text-2xl">corporate_fare</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#0A192F] mb-2">Hubungan Industri</h4>
-                    <p class="text-gray-600 text-sm mb-4">Magang industri, kerjasama perusahaan, dan penyaluran kerja</p>
-                    <div class="space-y-2">
-                        <p class="text-sm font-medium text-gray-700">Bpk. Hendra Wijaya, S.T.</p>
-                        <a class="text-sm text-primary hover:underline font-medium" href="mailto:hu@smknuruljadid.sch.id">hu@smknuruljadid.sch.id</a>
                     </div>
                 </div>
             </div>

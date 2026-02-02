@@ -143,17 +143,17 @@
         <div class="max-w-[1280px] mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">15+</div>
+                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ laboratorium_list.count }}+</div>
                     <p class="font-bold text-[#0A192F]">Laboratorium</p>
                     <p class="text-sm text-gray-500 mt-1">Standar Industri</p>
                 </div>
                 <div class="bg-gradient-to-br from-accent/5 to-white p-6 rounded-2xl border border-accent/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">2,500+</div>
+                    <div class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">{{ peralatanlab_list.count }}+</div>
                     <p class="font-bold text-[#0A192F]">Unit Perangkat</p>
                     <p class="text-sm text-gray-500 mt-1">Teknologi Terbaru</p>
                 </div>
                 <div class="bg-gradient-to-br from-blue-500/5 to-white p-6 rounded-2xl border border-blue-500/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">8</div>
+                    <div class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">2</div>
                     <p class="font-bold text-[#0A192F]">Studio Khusus</p>
                     <p class="text-sm text-gray-500 mt-1">Produksi Digital</p>
                 </div>
@@ -179,162 +179,56 @@
             </div>
 
             <div class="space-y-8">
-                <!-- Laboratorium TKJ -->
+                {% for lab in laboratorium_list %}
+                <!-- {{ lab.nama_lab }} -->
                 <div class="facility-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                    <div class="md:flex">
+                    <div class="md:flex {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %}">
                         <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
                             <div class="absolute inset-0 bg-cover bg-center image-zoom"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo');">
+                                style="background-image: url('{% if lab.gambar %}{{ lab.gambar.url }}{% else %}https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo{% endif %}');">
                             </div>
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent md:bg-gradient-to-r md:from-blue-900/70 md:to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 md:bottom-auto md:top-4 md:left-4">
-                                <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">Teknik Komputer & Jaringan</span>
+                            <div class="absolute inset-0 {% if forloop.counter|divisibleby:2 %}bg-gradient-to-l from-{{ lab.warna_tema }}-900/70 to-transparent md:bg-gradient-to-l md:from-{{ lab.warna_tema }}-900/70 md:to-transparent{% else %}bg-gradient-to-r from-{{ lab.warna_tema }}-900/70 to-transparent md:bg-gradient-to-r md:from-{{ lab.warna_tema }}-900/70 md:to-transparent{% endif %}"></div>
+                            <div class="absolute {% if forloop.counter|divisibleby:2 %}bottom-4 right-4 md:bottom-auto md:top-4 md:right-4{% else %}bottom-4 left-4 md:bottom-auto md:top-4 md:left-4{% endif %}">
+                                <span class="inline-block px-3 py-1 bg-{{ lab.warna_tema }}-600 text-white text-xs font-bold rounded-full">{{ lab.jurusan.nama }}</span>
                             </div>
                         </div>
                         <div class="md:w-3/5 p-8">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="size-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
-                                    <span class="material-symbols-outlined">terminal</span>
+                                <div class="size-12 rounded-lg bg-{{ lab.warna_tema }}-100 text-{{ lab.warna_tema }}-600 flex items-center justify-center">
+                                    <span class="material-symbols-outlined">{{ lab.icon }}</span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-[#0A192F]">Lab. Komputer & Jaringan</h3>
+                                <h3 class="text-2xl font-bold text-[#0A192F]">{{ lab.nama_lab }}</h3>
                             </div>
                             <p class="text-gray-600 mb-6">
-                                Laboratorium yang dilengkapi dengan perangkat jaringan Cisco, Mikrotik, dan server untuk praktik administrasi jaringan, keamanan siber, dan cloud computing.
+                                {{ lab.deskripsi }}
                             </p>
                             <div class="grid md:grid-cols-2 gap-4">
+                                {% regroup lab.peralatan.all by kategori as peralatan_by_kategori %}
+                                {% for kategori_group in peralatan_by_kategori %}
                                 <div>
                                     <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-blue-600 text-sm">check_circle</span>
-                                        Peralatan Utama
+                                        <span class="material-symbols-outlined text-{{ lab.warna_tema }}-600 text-sm">check_circle</span>
+                                        {{ kategori_group.grouper }}
                                     </h4>
                                     <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• 40 Unit PC High-End</li>
-                                        <li>• Cisco Router & Switch</li>
-                                        <li>• Mikrotik Cloud Router</li>
-                                        <li>• Server Rack dengan UPS</li>
+                                        {% for peralatan in kategori_group.list %}
+                                        <li>• {{ peralatan.nama_peralatan }}</li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-blue-600 text-sm">check_circle</span>
-                                        Fitur Tambahan
-                                    </h4>
-                                    <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• Internet Fiber Optic 1Gbps</li>
-                                        <li>• Virtualization Server</li>
-                                        <li>• Network Security Lab</li>
-                                        <li>• CCTV Monitoring System</li>
-                                    </ul>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Laboratorium Multimedia -->
-                <div class="facility-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                    <div class="md:flex md:flex-row-reverse">
-                        <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
-                            <div class="absolute inset-0 bg-cover bg-center image-zoom"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKl_jZfyuNMIqA6GrjNjRugzXmQEHA4D65CIPMFamAFOQraWPn2frKLy6qyHcqwY4lDFoHGoyVGEhsCrJdMHZOtOVxlnrBXNVNBjEszhrvmcj2TIycg82jksJrFIZ_3ILHaIutmVZWcXNASzuNdHz6cP1lhBz-FJ70lTL2KpsJRe0aow55ANw44rRQdghijhb7H3h51dR22GCVi-PAQg3rEOct_DULzPdjpzJuim9x5V-S54RZwxhwM2NYg8uZrwQ9jgkShKF-QIo');">
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-l from-purple-900/70 to-transparent md:bg-gradient-to-l md:from-purple-900/70 md:to-transparent"></div>
-                            <div class="absolute bottom-4 right-4 md:bottom-auto md:top-4 md:right-4">
-                                <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full">Multimedia</span>
-                            </div>
-                        </div>
-                        <div class="md:w-3/5 p-8">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="size-12 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center">
-                                    <span class="material-symbols-outlined">movie</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-[#0A192F]">Studio Multimedia</h3>
-                            </div>
-                            <p class="text-gray-600 mb-6">
-                                Studio lengkap untuk produksi konten digital, animasi 3D, fotografi profesional, dan video editing dengan perangkat terbaru.
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-purple-600 text-sm">check_circle</span>
-                                        Peralatan Produksi
-                                    </h4>
-                                    <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• Kamera DSLR & Mirrorless</li>
-                                        <li>• Lighting Set Professional</li>
-                                        <li>• Green Screen Studio</li>
-                                        <li>• Audio Recording Booth</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-purple-600 text-sm">check_circle</span>
-                                        Workstation
-                                    </h4>
-                                    <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• Apple Mac Pro</li>
-                                        <li>• Wacom Tablet Display</li>
-                                        <li>• Adobe Creative Cloud</li>
-                                        <li>• 3D Animation Software</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {% empty %}
+                <div class="text-center py-12">
+                    <p class="text-gray-500 text-lg">Belum ada data laboratorium yang tersedia.</p>
                 </div>
-
-                <!-- Laboratorium Mekatronika -->
-                <div class="facility-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                    <div class="md:flex">
-                        <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
-                            <div class="absolute inset-0 bg-cover bg-center image-zoom"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBs4RuUkkCLr44G47DpHjmSTatb-hhjKu0D2YS_AmSlUo_Ls0v4GA4--WPpTOgXtKqz0I1PeTSTsJ56P_fX83MrXyvsfNnn8JoT8gEAP7R5naLA6I4i-41ef4PBJmyxDf0voB6Glq-Cf6nMAJY_Eif4nUaO0z7xZmWMDrpMYs0ToBSID6EKSc41-WfPieROeojd_rLV16sulom_IzZk5P5frw6__rGVuIf4XHK0yBGkO7bWjFnUQGX2mgeUDOHMXcf4KybwvFcsOHc');">
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-r from-orange-900/70 to-transparent md:bg-gradient-to-r md:from-orange-900/70 md:to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 md:bottom-auto md:top-4 md:left-4">
-                                <span class="inline-block px-3 py-1 bg-orange-600 text-white text-xs font-bold rounded-full">Mekatronika</span>
-                            </div>
-                        </div>
-                        <div class="md:w-3/5 p-8">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="size-12 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center">
-                                    <span class="material-symbols-outlined">precision_manufacturing</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-[#0A192F]">Bengkel Mekatronika & Robotika</h3>
-                            </div>
-                            <p class="text-gray-600 mb-6">
-                                Bengkel otomasi industri dengan perangkat PLC, robotika, dan IoT untuk praktik langsung dalam mengembangkan sistem otomasi.
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-orange-600 text-sm">check_circle</span>
-                                        Sistem Otomasi
-                                    </h4>
-                                    <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• PLC Siemens & Omron</li>
-                                        <li>• Pneumatic & Hydraulic Set</li>
-                                        <li>• Conveyor System</li>
-                                        <li>• Sensor & Aktuator Industri</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-orange-600 text-sm">check_circle</span>
-                                        Robotika & IoT
-                                    </h4>
-                                    <ul class="space-y-1 text-sm text-gray-600">
-                                        <li>• Robotic Arm 6-Axis</li>
-                                        <li>• Drone Development Kit</li>
-                                        <li>• IoT Development Board</li>
-                                        <li>• 3D Printer & CNC Machine</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+
+
         </div>
     </section>
 
@@ -408,11 +302,11 @@
                             <span class="material-symbols-outlined text-2xl">wifi</span>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-[#0A192F]">Wi-Fi Campus</h3>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Wi-Fi Sekolah</h3>
                             <p class="text-sm text-gray-500">High Speed Internet</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-4">Jaringan Wi-Fi 1Gbps dengan coverage seluruh area kampus, termasuk ruang terbuka.</p>
+                    <p class="text-gray-600 mb-4">Jaringan Wi-Fi 1Gbps dengan coverage seluruh area sekolah, termasuk ruang terbuka.</p>
                     <div class="flex items-center justify-between text-sm">
                         <span class="text-primary font-medium">• Hotspot Area</span>
                         <span class="text-gray-500">50+ access point</span>

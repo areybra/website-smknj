@@ -86,12 +86,13 @@
             <div class="max-w-[1280px] mx-auto px-4 md:px-8 pt-10 pb-20 lg:pt-20 lg:pb-32 relative z-10">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div class="flex flex-col gap-6 animate-fade-in-up">
+                        {% for pengumuman in pengumuman_penting %}
                         <div
                             class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
                             <span class="block size-2 rounded-full bg-primary animate-pulse"></span>
-                            <span class="text-xs font-bold text-primary uppercase tracking-wide">Penerimaan Siswa Baru
-                                2024/2025</span>
+                            <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman.judul }}</span>
                         </div>
+                        {% endfor %}
                         <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
                             Membangun <span class="text-primary relative inline-block">
                                 Masa Depan
@@ -131,26 +132,26 @@
                         </div>
                     </div>
                     <div class="relative z-10 lg:h-[500px] w-full group perspective-1000">
+                        {% for news in berita_list %}
                         <div
                             class="absolute inset-0 bg-gray-200 rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-1 group-hover:scale-[1.01] z-20 border-4 border-white">
                             <div class="w-full h-full bg-cover bg-center"
-                                data-alt="Students working on robotics in a modern laboratory"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo');">
+                                data-alt="{{ news.title }}"
+                                style="background-image: url('{{ news.image.url }}');">
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 to-transparent flex items-end p-8">
                                     <div class="text-white">
                                         <div class="flex items-center gap-2 mb-1">
                                             <span
-                                                class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">Fasilitas
-                                                Unggulan</span>
+                                                class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">{{ news.category }}</span>
                                         </div>
-                                        <p class="font-bold text-lg">Center of Excellence IoT</p>
-                                        <p class="text-sm opacity-90 text-gray-200">Laboratorium standar industri
-                                            internasional</p>
+                                        <p class="font-bold text-lg">{{ news.title|safe }}</p>
+                                        <p class="text-sm opacity-90 text-gray-200">{{ news.content|safe|truncatewords:10 }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                         <div class="absolute -top-4 -right-4 w-2/3 h-2/3 bg-primary rounded-2xl -z-10 opacity-20"></div>
                         <div class="absolute -bottom-6 -left-6 w-1/2 h-1/2 bg-accent rounded-2xl -z-10 opacity-20"></div>
                         <div
@@ -175,7 +176,7 @@
                 <div
                     class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-rows-auto lg:grid-rows-2 gap-4 h-auto lg:h-[500px]">
                     <div
-                        class="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 bg-white rounded-2xl p-6 lg:p-8 shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+                    class="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 bg-white rounded-2xl p-6 lg:p-8 shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
                         <div
                             class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full transition-transform group-hover:scale-110">
                         </div>
@@ -185,8 +186,8 @@
                         <div>
                             <div class="flex items-center gap-2 mb-4">
                                 <span
-                                    class="px-2 py-1 bg-primary/10 text-primary text-xs font-bold rounded uppercase">Sambutan
-                                    Kepala Sekolah</span>
+                                class="px-2 py-1 bg-primary/10 text-primary text-xs font-bold rounded uppercase">Sambutan
+                                Kepala Sekolah</span>
                             </div>
                             <h3 class="text-2xl font-bold text-[#0A192F] mb-4">"Inovasi adalah kunci kemajuan bangsa."</h3>
                             <p class="text-gray-600 mb-6 leading-relaxed">
@@ -195,17 +196,21 @@
                                 yang cepat.
                             </p>
                         </div>
+                        {% for guru_staff in guru_staff_list %}
+                        {% if guru_staff.jabatan == 'Kepala Sekolah' %}
                         <div class="flex items-center gap-4 mt-auto">
                             <div class="size-14 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-md">
                                 <div class="w-full h-full bg-cover bg-center" data-alt="Portrait of the headmaster"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmS1KM1gNvtDRQSOtoUglx7OUb5EmEuMoaLpSJ5a_23gsBGz9Mw8ONKg704uTOvOKEBAAeoiKf-KeKEjlY4IbJ16bQ59dBbQiJfAOZPXMbQ5OtUgx94EkIF_srynjTddnk35glU1UMaXn9DOZOyG_cY2F_pjY-kdWuKf72uZRtV0CwfKkN_X78WLcWEIKuQbd-em5LUmYVuUNFoRRHsAiBLAniNatTDGPP95o6ASxF5wb77EOgdiEHtzYL-9nm-1rDe5EZwbIT3aE');">
+                                    style="background-image: url('{{ guru_staff.foto.url }}');">
                                 </div>
                             </div>
                             <div>
-                                <p class="font-bold text-[#0A192F]">Akhmad Iqbal Yuliansyah, S.E.</p>
-                                <p class="text-sm text-gray-500">Kepala Sekolah</p>
+                                <p class="font-bold text-[#0A192F]">{{ guru_staff.nama }}</p>
+                                <p class="text-sm text-gray-500">{{ guru_staff.jabatan }}</p>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div
                         class="col-span-1 md:col-span-1 lg:col-span-1 row-span-2 bg-background-dark rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden text-white shadow-lg">
@@ -216,34 +221,66 @@
                                 <span class="material-symbols-outlined text-accent">analytics</span> Data Sekolah
                             </h4>
                             <div class="space-y-6">
+                                {% if school_stats %}
                                 <div class="group">
                                     <p class="text-gray-400 text-sm mb-1">Total Siswa Aktif</p>
                                     <div class="flex items-end gap-2">
                                         <span
-                                            class="text-3xl font-bold group-hover:text-accent transition-colors">1,450</span>
-                                        <span class="text-xs text-accent mb-1.5 font-medium">+12%</span>
+                                            class="text-3xl font-bold group-hover:text-accent transition-colors">{{ school_stats.total_siswa|default:"0" }}</span>
+                                        <span class="text-xs text-accent mb-1.5 font-medium">{{ school_stats.persentase_pertumbuhan_siswa|default:"+0%" }}</span>
                                     </div>
                                     <div class="w-full bg-white/10 h-1 mt-2 rounded-full overflow-hidden">
-                                        <div class="bg-primary h-full w-[85%] rounded-full"></div>
+                                        <div class="bg-primary h-full rounded-full" style="width: {{ school_stats.progress_siswa|default:85 }} %"></div>
                                     </div>
                                 </div>
                                 <div class="group">
                                     <p class="text-gray-400 text-sm mb-1">Instruktur Profesional</p>
                                     <div class="flex items-end gap-2">
-                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">92</span>
-                                        <span class="text-xs text-green-400 mb-1.5 font-medium">Sertifikasi</span>
+                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">{{ school_stats.total_instruktur|default:"0" }}</span>
+                                        <span class="text-xs text-green-400 mb-1.5 font-medium">{{ school_stats.status_instruktur|default:"Sertifikasi" }}</span>
                                     </div>
                                     <div class="w-full bg-white/10 h-1 mt-2 rounded-full overflow-hidden">
-                                        <div class="bg-primary h-full w-[95%] rounded-full"></div>
+                                        <div class="bg-primary h-full rounded-full" style="width: {{ school_stats.progress_instruktur|default:95 }} %"></div>
                                     </div>
                                 </div>
                                 <div class="group">
                                     <p class="text-gray-400 text-sm mb-1">Mitra Industri</p>
                                     <div class="flex items-end gap-2">
-                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">56</span>
+                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">{{ school_stats.total_mitra|default:"0" }}</span>
+                                        <span class="text-xs text-green-400 mb-1.5 font-medium">{{ school_stats.label_mitra|default:"Perusahaan" }}</span>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <!-- Fallback jika belum ada data -->
+                                <div class="group">
+                                    <p class="text-gray-400 text-sm mb-1">Total Siswa Aktif</p>
+                                    <div class="flex items-end gap-2">
+                                        <span
+                                            class="text-3xl font-bold group-hover:text-accent transition-colors">0</span>
+                                        <span class="text-xs text-accent mb-1.5 font-medium">+0%</span>
+                                    </div>
+                                    <div class="w-full bg-white/10 h-1 mt-2 rounded-full overflow-hidden">
+                                        <div class="bg-primary h-full w-[0%] rounded-full"></div>
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    <p class="text-gray-400 text-sm mb-1">Instruktur Profesional</p>
+                                    <div class="flex items-end gap-2">
+                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">0</span>
+                                        <span class="text-xs text-green-400 mb-1.5 font-medium">Sertifikasi</span>
+                                    </div>
+                                    <div class="w-full bg-white/10 h-1 mt-2 rounded-full overflow-hidden">
+                                        <div class="bg-primary h-full w-[0%] rounded-full"></div>
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    <p class="text-gray-400 text-sm mb-1">Mitra Industri</p>
+                                    <div class="flex items-end gap-2">
+                                        <span class="text-3xl font-bold group-hover:text-accent transition-colors">0</span>
                                         <span class="text-xs text-green-400 mb-1.5 font-medium">Perusahaan</span>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                         <button
@@ -510,26 +547,32 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 relative">
-                    <div
-                        class="rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px] relative group border-4 border-white">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                            data-alt="Group of students wearing uniforms holding books"
-                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2WwkiG1c5Kl5tfPvcGJAWEV9K-J3APH9K7zRxzEEz7F9lp8HYR7zS-Zxd4vmQIbBHYdNWm3efcLddTyl0U5iqCDSDIuXDreh7oflpRTmDkXgmOZK1JyUVmDXOX16Fh8liS9Z-DER15_hDV5WLrI4WaEXfwhcjYyF6vmGJG18kuZSCQG9ueMmHAEYLhRGWdz4bMj-uxRne8kXlwSfsrabCRS37hfrc3yVW_afYwm7k2IpVVHVtqTta-mliIcvTdlUEDXoW59beWgs');">
-                        </div>
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-background-dark/30 to-transparent flex flex-col justify-end p-8">
-                            <div class="flex items-center gap-4 mb-4">
-                                <button
-                                    class="size-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 hover:bg-primary hover:border-primary transition-all shadow-lg group">
-                                    <span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
-                                </button>
-                                <span class="text-white font-bold text-lg">Kehidupan Kampus</span>
+                <div class="rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px] relative group border-4 border-white">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                        style="background-image: url('https://img.youtube.com/vi/NCMuVN4fFgo/maxresdefault.jpg');">
+                    </div>
+                    
+                    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center z-10">
+                        <div class="text-center">
+                            <div class="inline-block size-24 rounded-full bg-white/20 backdrop-blur-md border-4 border-white flex items-center justify-center mb-4 animate-pulse">
+                                <span class="material-symbols-outlined text-6xl text-white">play_arrow</span>
                             </div>
-                            <p class="text-white/80 text-sm">Saksikan bagaimana kedisiplinan dan kreativitas berpadu dalam
-                                keseharian siswa kami di laboratorium dan bengkel kerja.</p>
+                            <p class="text-white font-bold text-xl">Tonton Video</p>
                         </div>
                     </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-background-dark/30 to-transparent flex flex-col justify-end p-8 z-20">
+                        <div class="flex items-center gap-4 mb-4">
+                            <button onclick="window.open('https://www.youtube.com/watch?v=NCMuVN4fFgo', '_blank')"
+                                class="size-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 hover:bg-primary hover:border-primary transition-all shadow-lg group transform hover:scale-110">
+                                <span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+                            </button>
+                            <span class="text-white font-bold text-lg">Tentang Kami</span>
+                        </div>
+                        <p class="text-white/80 text-sm">Saksikan bagaimana kedisiplinan dan kreativitas berpadu dalam keseharian siswa kami di laboratorium dan bengkel kerja.</p>
+                    </div>
                 </div>
+            </div>
             </div>
         </section>
         <section class="py-20 bg-white">

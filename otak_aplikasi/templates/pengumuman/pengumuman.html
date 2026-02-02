@@ -124,23 +124,25 @@
             <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div class="w-full md:w-auto">
                     <div class="relative">
-                        <input type="text" placeholder="Cari pengumuman atau dokumen..." 
-                            class="w-full md:w-96 h-12 pl-12 pr-4 rounded-full border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
-                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                            search
-                        </span>
+                        <form method="get" action="" class="inline-block w-full md:w-96">
+                            <input type="text" name="search" placeholder="Cari pengumuman atau dokumen" 
+                                value="{{ search_query }}" 
+                                class="w-full h-12 pl-12 pr-4 rounded-full border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                            <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary hover:text-primary/80 transition-colors">
+                                <span class="material-symbols-outlined">search</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-primary-dark transition-colors">
+                    <a href="{% url 'announcements' %}" class="px-4 py-2 {% if not selected_category %}bg-primary text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %} rounded-full text-sm font-bold hover:bg-primary-dark transition-colors">
                         Semua
-                    </button>
-                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                        Akademik
-                    </button>
-                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                        PPDB
-                    </button>
+                    </a>
+                    {% for category in pengumuman_category %} 
+                    <a href="?category={{ category.nama|lower }}" class="px-4 py-2 {% if selected_category.nama == category.nama %}bg-primary text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %} rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                        {{ category.nama }}
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -153,107 +155,88 @@
                 <div class="mb-8">
                     <h2 class="text-2xl font-black mb-6">Pengumuman Penting</h2>
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Pengumuman 1 -->
+                        {% for pengumuman in pengumuman_penting %}
+                        <!-- Pengumuman {{ pengumuman.id }} -->
                         <div class="announcement-card bg-gradient-to-br from-primary/5 to-white rounded-xl border border-primary/20 p-6 hover:shadow-lg transition-all duration-300">
                             <div class="flex items-start justify-between mb-4">
                                 <div>
-                                    <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded-full mb-2">PPDB</span>
-                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">Penerimaan Siswa Baru 2024/2025</h3>
+                                    <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded-full mb-2">{{ pengumuman.category.nama }}</span>
+                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">{{ pengumuman.judul }}</h3>
                                 </div>
                                 <span class="material-symbols-outlined text-primary text-2xl file-icon">campaign</span>
                             </div>
                             <p class="text-gray-600 mb-6 text-sm">
-                                Pendaftaran PPDB gelombang 1 dibuka mulai 20 Juli - 10 Agustus 2024.
+                                {{ pengumuman.deskripsi|safe }}
                             </p>
                             <div class="flex items-center justify-between">
                                 <div class="text-sm text-gray-500">
                                     <span class="flex items-center gap-1">
                                         <span class="material-symbols-outlined text-sm">calendar_today</span>
-                                        20 Jul - 10 Agt 2024
+                                        {{ pengumuman.tanggal }}
                                     </span>
                                 </div>
                                 <div class="flex gap-2">
-                                    <button class="download-btn px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all flex items-center gap-2">
+                                    <a href="{% url 'announcements_detail' pengumuman.slug %}" class="download-btn px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all flex items-center gap-2">
                                         <span class="material-symbols-outlined text-sm">visibility</span>
                                         Lihat
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Pengumuman 2 -->
-                        <div class="announcement-card bg-gradient-to-br from-accent/5 to-white rounded-xl border border-accent/20 p-6 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-start justify-between mb-4">
-                                <div>
-                                    <span class="inline-block px-3 py-1 bg-accent text-white text-xs font-bold rounded-full mb-2">AKADEMIK</span>
-                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">Jadwal Ujian Sertifikasi Kompetensi</h3>
-                                </div>
-                                <span class="material-symbols-outlined text-accent text-2xl file-icon">description</span>
-                            </div>
-                            <p class="text-gray-600 mb-6 text-sm">
-                                Pelaksanaan USK Tahap 1 untuk seluruh program keahlian.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="text-sm text-gray-500">
-                                    <span class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm">calendar_today</span>
-                                        12-15 Agustus 2024
-                                    </span>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button class="download-btn px-4 py-2 bg-accent text-white text-sm font-bold rounded-lg hover:bg-cyan-600 transition-all flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-sm">visibility</span>
-                                        Lihat
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
 
                 <!-- Recent Announcements -->
                 <div>
                     <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-black">Pengumuman Terbaru</h2>
-                        <select class="h-10 px-4 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm">
-                            <option>Urutkan Terbaru</option>
-                            <option>Urutkan Terlama</option>
-                        </select>
+                        <h2 class="text-2xl font-black">Pengumuman Terbaru</h2>     
                     </div>
                 
-                    {% for pengumuman in pengumuman_list %}
+                    {% if pengumuman_list %}
                     <div class="space-y-4">
-                        <!-- Pengumuman Item -->
-                        <div class="announcement-card bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 p-6">
-                            <div class="flex items-start justify-between mb-4">
-                                <div>
-                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-2">{{ pengumuman.category.nama }}</span>
-                                    <h3 class="text-lg font-bold text-[#0A192F] mb-2">{{  pengumuman.judul  }}</h3>
+                        {% for pengumuman in pengumuman_list %}
+                            <!-- Pengumuman Item -->
+                            <div class="announcement-card bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-2">{{ pengumuman.category.nama }}</span>
+                                        <h3 class="text-lg font-bold text-[#0A192F] mb-2">{{ pengumuman.judul }}</h3>
+                                    </div>
+                                    <span class="text-xs text-gray-500">{{ pengumuman.created_at|date:"d M Y" }}</span>
                                 </div>
-                                <span class="text-xs text-gray-500">{{ pengumuman.created_at|date:"d M Y" }}</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">
-                                {{ pengumuman.deskripsi|safe }}
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="text-sm text-gray-500 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">attach_file</span>
-                                    {{ pengumuman.files.count }}
+                                <p class="text-gray-600 text-sm mb-4">
+                                    {{ pengumuman.deskripsi|safe }}
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500 flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sm">attach_file</span>
+                                        {{ pengumuman.files.count }}
+                                    </div>
+                                    <a href="{% url 'announcements_detail' pengumuman.slug %}" class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
+                                        Selengkapnya
+                                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </a>
                                 </div>
-                                <a href="{% url 'announcements_detail' pengumuman.slug %}" class="text-sm font-bold text-primary hover:text-primary-dark inline-flex items-center gap-1 group">
-                                    Selengkapnya
-                                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </a>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-12">
+                        <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">search</span>
+                        <h3 class="text-xl font-bold text-gray-700 mb-2">Tidak ada hasil untuk "{{ search_query }}"</h3>
+                        <p class="text-gray-500 mb-6">Coba cari dengan kata kunci yang berbeda atau periksa kembali ejaan Anda.</p>
+                        <a href="{% url 'announcements' %}" class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-dark transition-colors">
+                            Kembali ke Semua Pengumuman
+                        </a>
+                    </div>
+                {% endif %}
 
                     <!-- Pagination -->
                     {% if pengumuman_list.paginator.num_pages > 1 %}
                     <div class="flex justify-center items-center gap-2 mt-8">
                         {% if pengumuman_list.has_previous %}
-                        <a href="?page={{ pengumuman_list.previous_page_number }}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
+                        <a href="?page={{ pengumuman_list.previous_page_number }}{% if selected_category %}&category={{ selected_category.nama }}{% endif %}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
                             <span class="material-symbols-outlined">chevron_left</span>
                         </a>
                         {% else %}
@@ -268,14 +251,14 @@
                                 {{ page_num }}
                             </div>
                             {% else %}
-                            <a href="?page={{ page_num }}" class="size-10 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors flex items-center justify-center font-medium">
+                            <a href="?page={{ page_num }}{% if selected_category %}&category={{ selected_category.nama }}{% endif %}" class="size-10 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors flex items-center justify-center font-medium">
                                 {{ page_num }}
                             </a>
                             {% endif %}
                         {% endfor %}
 
                         {% if pengumuman_list.has_next %}
-                        <a href="?page={{ pengumuman_list.next_page_number }}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
+                        <a href="?page={{ pengumuman_list.next_page_number }}{% if selected_category %}&category={{ selected_category.nama }}{% endif %}" class="size-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-primary hover:text-primary transition-colors">
                             <span class="material-symbols-outlined">chevron_right</span>
                         </a>
                         {% else %}
@@ -291,121 +274,129 @@
             <!-- Right Column - Download & Info -->
             <div class="space-y-8">
                 <!-- Download Section -->
+                <!-- Download Section -->
                 <div class="bg-white rounded-xl border border-gray-200 p-6">
                     <h3 class="text-xl font-bold text-[#0A192F] mb-6 flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary">download</span>
                         File Download
                     </h3>
                     
+                    {% if pengumuman_file %}
                     <div class="space-y-4 mb-6">
-                        <!-- File Item -->
-                        <div class="file-preview bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-start gap-3 mb-3">
-                                <div class="size-10 rounded-lg bg-red-100 flex items-center justify-center text-red-600 shrink-0">
-                                    <span class="material-symbols-outlined">picture_as_pdf</span>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-[#0A192F] mb-1">Formulir PPDB 2024</h4>
-                                    <div class="text-sm text-gray-500">
-                                        PDF • 245 KB
+                        {% for pengumuman in pengumuman_file %}
+                            {% if pengumuman.files.exists %}
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-[#0A192F] mb-3 px-3 py-2 bg-gray-50 rounded-lg">
+                                    {{ pengumuman.judul }}
+                                </h4>
+                                
+                                <div class="space-y-3">
+                                    {% for file in pengumuman.files.all %}
+                                    <div class="file-preview bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-all duration-300">
+                                        <div class="flex items-start gap-3">
+                                            <!-- Icon File -->
+                                            <div class="size-10 rounded-lg bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                                                <span class="material-symbols-outlined">file_copy</span>
+                                            </div>
+                                            
+                                            <!-- Info File -->
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-start justify-between gap-3">
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="font-medium text-[#0A192F] mb-1 truncate">
+                                                            {{ file.file_name|truncatechars:10}}
+                                                        </p>
+                                                        <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                                                            <span class="px-2 py-1 bg-gray-100 rounded">
+                                                                {{ file.file_type|upper }}
+                                                            </span>
+                                                            <span class="px-2 py-1 bg-gray-100 rounded">
+                                                                {{ file.file_size }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Button Download -->
+                                                    <a href="{% url 'download_pengumuman_file' file.id %}"
+                                                    class="shrink-0 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all flex items-center gap-2 group"
+                                                    title="Download {{ file.file_name }}">
+                                                        <span class="material-symbols-outlined text-sm group-hover:animate-bounce">
+                                                            download
+                                                        </span>
+                                                        <span class="hidden md:block">Download</span>
+                                                    </a>
+                                                </div>
+                                                
+                                                <!-- Metadata -->
+                                                <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+                                                    <span>
+                                                        Diupload: {{ file.uploaded_at|date:"d M Y, H:i" }}
+                                                    </span>
+                                                    {% if file.last_downloaded %}
+                                                    <span>
+                                                        Terakhir: {{ file.last_downloaded|date:"d M Y" }}
+                                                    </span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs text-gray-500">Diupdate: 15 Agt 2024</span>
-                                <button class="download-btn px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">download</span>
-                                    Download
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- File Item -->
-                        <div class="file-preview bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-start gap-3 mb-3">
-                                <div class="size-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
-                                    <span class="material-symbols-outlined">description</span>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-[#0A192F] mb-1">Template Laporan PKL</h4>
-                                    <div class="text-sm text-gray-500">
-                                        DOCX • 1.2 MB
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs text-gray-500">Diupdate: 10 Agt 2024</span>
-                                <button class="download-btn px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">download</span>
-                                    Download
-                                </button>
-                            </div>
-                        </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-
+                    
+                    <!-- Button Lihat Semua -->
                     <div class="text-center">
-                        <button class="px-6 py-2 border border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all">
+                        <a href="{% url 'announcements' %}" 
+                        class="px-6 py-2 border border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined">list</span>
                             Lihat Semua File
-                        </button>
+                        </a>
                     </div>
+                    
+                    {% else %}
+                    <!-- Tidak ada file -->
+                    <div class="text-center py-12"> 
+                        <div class="text-5xl mb-4">📭</div>
+                        <p class="text-gray-500 font-medium">Belum ada file yang tersedia untuk di-download</p>
+                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- File Categories -->
-                <div class="bg-white rounded-xl border border-gray-200 p-6">
-                    <h3 class="text-xl font-bold text-[#0A192F] mb-4">Kategori File</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm">description</span>
-                            Semua File
-                        </button>
-                        <button class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
-                            PDF
-                        </button>
-                        <button class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm">description</span>
-                            Word
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Urgent Announcement -->
-                <div class="bg-gradient-to-r from-red-500 to-orange-500 rounded-xl p-6 text-white">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="size-12 rounded-lg bg-white/20 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-2xl">warning</span>
-                        </div>
-                        <h3 class="text-xl font-bold">Pengumuman Mendesak!</h3>
-                    </div>
-                    <p class="opacity-90 mb-6 text-sm">
-                        Libur Nasional Hari Kemerdekaan RI tanggal 17 Agustus 2024. Download surat edaran lengkap.
-                    </p>
-                    <div class="flex gap-3">
-                        <button class="download-btn px-4 py-2 bg-white text-red-600 font-bold rounded-lg hover:bg-gray-100 transition-all flex items-center gap-2">
-                            <span class="material-symbols-outlined">visibility</span>
-                            Baca
-                        </button>
-                        <button class="download-btn px-4 py-2 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all flex items-center gap-2">
-                            <span class="material-symbols-outlined">download</span>
-                            Download
-                        </button>
-                    </div>
-                </div>
 
                 <!-- Quick Stats -->
+                <!-- pengumuman/pengumuman.html -->
+
                 <div class="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-6">
-                    <h3 class="text-lg font-bold text-[#0A192F] mb-4">Statistik</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="text-center">
-                            <div class="text-2xl font-black text-primary mb-1">48</div>
-                            <p class="text-sm text-gray-600">Total File</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-black text-accent mb-1">1,245</div>
-                            <p class="text-sm text-gray-600">Total Download</p>
-                        </div>
+                <h3 class="text-lg font-bold text-[#0A192F] mb-4">Statistik</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Total File -->
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-primary mb-1">{{ total_files }}</div>
+                        <p class="text-sm text-gray-600">Total File</p>
+                    </div>
+                    
+                    <!-- Total Download -->
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-accent mb-1">{{ total_downloads }}</div>
+                        <p class="text-sm text-gray-600">Total Download</p>
                     </div>
                 </div>
+                
+                <!-- Info File Paling Populer (Opsional) -->
+                {% if most_downloaded_file %}
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-700">File Paling Populer:</p>
+                    <p class="text-sm text-primary font-medium">
+                        {{ most_downloaded_file.file_name }} 
+                        <span class="text-accent">({{ most_downloaded_file.download_count }} downloads)</span>
+                    </p>
+                </div>
+                {% endif %}
+            </div>
             </div>
         </div>
     </div>

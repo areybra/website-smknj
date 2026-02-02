@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fu*ct8a+b@1h&!0a5rx%5xsunc9e^g!hnc5g0tmdcb)%a_4fw0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -147,8 +147,26 @@ JAZZMIN_SETTINGS = {
     "site_title": "Admin SMK",
     "site_header": "Dashboard SMK Nurul Jadid",
     "site_brand": "SMK NJ",
+    "site_logo": "images/logo/logo.png",
     "welcome_sign": "Selamat Datang di Sistem Admin",
     "custom_css": "css/jazzmin-custom.css",
 }
+
+
+# Email Configuration
+# Default to console backend for development
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Untuk production/sending real emails via Gmail:
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'alamatkeemailpengirim@gmail.com'  # Ganti dengan email pengirim
+#EMAIL_HOST_USER = [EMAIL_ADDRESS]' # Ganti dengan email asli anda untuk mengirim
+# EMAIL_HOST_PASSWORD = 'password_app_anda'  # App Password, bukan password email biasa
+#EMAIL_HOST_PASSWORD = 'password_app_anda' # Ganti dengan App Password anda
+# RECIPIENT_ADDRESS = 'smknurja.paiton@gmail.com'
+#RECIPIENT_ADDRESS = 'smknurja.paiton@gmail.com'
 
 

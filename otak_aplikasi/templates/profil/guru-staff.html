@@ -143,7 +143,7 @@
         <div class="max-w-[1280px] mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">92</div>
+                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ leaders_list.count }}</div>
                     <p class="font-bold text-[#0A192F]">Guru & Instruktur</p>
                     <p class="text-sm text-gray-500 mt-1">Profesional</p>
                 </div>
@@ -157,11 +157,7 @@
                     <p class="font-bold text-[#0A192F]">Tahun Pengalaman</p>
                     <p class="text-sm text-gray-500 mt-1">Rata-rata</p>
                 </div>
-                <div class="bg-gradient-to-br from-green-500/5 to-white p-6 rounded-2xl border border-green-500/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-green-600 mb-2 group-hover:scale-110 transition-transform">78</div>
-                    <p class="font-bold text-[#0A192F]">Tenaga Kependidikan</p>
-                    <p class="text-sm text-gray-500 mt-1">Administrasi & Support</p>
-                </div>
+
             </div>
         </div>
     </section>
@@ -180,91 +176,102 @@
 
             <div class="flex flex-col items-center">
                 <!-- Kepala Sekolah -->
+                 {% for guru_staff in leaders_list %}
+                 {% if guru_staff.jabatan == 'Kepala Sekolah' %}
                 <div class="mb-16 text-center">
                     <div class="relative mb-6">
                         <div class="size-48 rounded-full border-4 border-white shadow-2xl overflow-hidden mx-auto">
                             <div class="w-full h-full bg-cover bg-center profile-image"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmS1KM1gNvtDRQSOtoUglx7OUb5EmEuMoaLpSJ5a_23gsBGz9Mw8ONKg704uTOvOKEBAAeoiKf-KeKEjlY4IbJ16bQ59dBbQiJfAOZPXMbQ5OtUgx94EkIF_srynjTddnk35glU1UMaXn9DOZOyG_cY2F_pjY-kdWuKf72uZRtV0CwfKkN_X78WLcWEIKuQbd-em5LUmYVuUNFoRRHsAiBLAniNatTDGPP95o6ASxF5wb77EOgdiEHtzYL-9nm-1rDe5EZwbIT3aE');">
+                                style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');">
                             </div>
                         </div>
                         <div class="absolute -bottom-2 -right-2 size-14 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg">
                             <span class="material-symbols-outlined text-2xl">verified</span>
                         </div>
                     </div>
-                    <h3 class="text-3xl font-bold text-[#0A192F] mb-2">Dr. Ir. Budi Santoso, M.T.</h3>
-                    <p class="text-primary font-bold text-lg mb-4">Kepala Sekolah</p>
+                    <h3 class="text-3xl font-bold text-[#0A192F] mb-2">{{ guru_staff.nama }}</h3>
+                    <p class="text-primary font-bold text-lg mb-4">{{ guru_staff.jabatan }}</p>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        Memimpin transformasi pendidikan vokasi dengan visi yang jelas dan komitmen terhadap pengembangan siswa. 
-                        Memiliki pengalaman 25 tahun dalam dunia pendidikan dan industri teknologi.
+                        {{ guru_staff.deskripsi }}
                     </p>
                     <div class="flex flex-wrap gap-3 justify-center mt-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">Ph.D Electrical Engineering</span>
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">Sertifikasi Industri</span>
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">25 Tahun Pengalaman</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.pendidikan }}</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
                     </div>
                 </div>
-
-                <!-- Wakil Kepala Sekolah -->
+                {% endif %}
+                {% endfor %}
+        
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                    <!-- Wakil Kepala Sekolah bidang administrasi dan support-->
+                    {% for guru_staff in leaders_list %}
+                    {% if guru_staff.jabatan == 'Waka bidang Kurikulum' %}
                     <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
                         <div class="flex flex-col items-center text-center">
                             <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
                             </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Drs. Ahmad Wijaya, M.Pd.</h4>
-                            <p class="text-primary font-semibold mb-2">Wakasek Kurikulum</p>
-                            <p class="text-sm text-gray-500 mb-3">Pengembangan kurikulum & akademik</p>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
+                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
                             <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Sertifikasi</span>
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">18 Tahun</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
+                    <!-- Wakil Kepala Sekolah bidang sarana dan prasarana-->
+                     {% if guru_staff.jabatan == 'Waka bidang Sarana dan Prasarana' %}
+                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
+                            </div>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
+                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
 
+                    {% if guru_staff.jabatan == 'Waka bidang Hubungan Masyarakat' %}
                     <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
                         <div class="flex flex-col items-center text-center">
                             <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
                             </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Siti Rahayu, S.Pd., M.M.</h4>
-                            <p class="text-primary font-semibold mb-2">Wakasek Kesiswaan</p>
-                            <p class="text-sm text-gray-500 mb-3">Pengembangan karakter siswa</p>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
+                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
                             <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Psikologi</span>
-                                <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">15 Tahun</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
                             </div>
                         </div>
                     </div>
-
+                    {% endif %}
+                    {% if guru_staff.jabatan == 'Waka bidang Kesiswaan' %}
                     <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
                         <div class="flex flex-col items-center text-center">
                             <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
                             </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Ir. Hendra Gunawan, M.T.</h4>
-                            <p class="text-primary font-semibold mb-2">Wakasek Sarpras</p>
-                            <p class="text-sm text-gray-500 mb-3">Fasilitas & infrastruktur</p>
+                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                            <p class="text-primary font-semibold mb-2">{{ guru_staff.jabatan }}</p>
+                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
                             <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Teknik</span>
-                                <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">20 Tahun</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                            </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">Dewi Anggraeni, S.E., M.M.</h4>
-                            <p class="text-primary font-semibold mb-2">Wakasek Humas</p>
-                            <p class="text-sm text-gray-500 mb-3">Kerjasama & hubungan masyarakat</p>
-                            <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">Komunikasi</span>
-                                <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">12 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -281,281 +288,57 @@
                 </p>
             </div>
 
-            <!-- Filter Kategori -->
-            <div class="flex flex-wrap gap-3 justify-center mb-12">
-                <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-primary-dark transition-colors">
-                    Semua
-                </button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Teknik Komputer & Jaringan
-                </button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Multimedia
-                </button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Mekatronika
-                </button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Guru Normatif & Adaptif
-                </button>
-            </div>
-
             <!-- Daftar Guru -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Guru TKJ -->
+                {% for guru_staff in guru_staff_list %}
                 <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="flex flex-col items-center text-center">
                         <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
                         </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Rina Wijayanti, S.Kom., M.Kom.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif TKJ</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Jaringan Komputer & Keamanan Siber</p>
+                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                        <p class="text-sm text-primary font-semibold mb-2">{{ guru_staff.jabatan }}</p>
+                        <p class="text-xs text-gray-500 mb-4">{{ guru_staff.deskripsi }}</p>
                         <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">CCNA</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">MTCNA</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Linux</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
                         </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 10 Tahun</p>
                     </div>
                 </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Arif Rahman, S.Ds., M.Ds.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Multimedia</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Desain Grafis & Animasi 3D</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Adobe Expert</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">UI/UX</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">3D Modeling</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 8 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Bambang Sutrisno, S.T., M.Eng.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Mekatronika</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Otomasi Industri & Robotika</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">PLC Expert</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Robotika</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">IoT</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 12 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Drs. Agus Setiawan, M.Pd.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Bahasa Inggris</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: English for Specific Purposes</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">TOEFL 650</span>
-                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">Business English</span>
-                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs font-medium rounded">TOEIC</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 15 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Maya Sari, S.Pd., M.Pd.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Matematika</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Matematika Teknik</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Master Pendidikan</span>
-                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Olimpiade</span>
-                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">15 Tahun</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 15 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Joko Prasetyo, S.Pd., M.T.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif TKJ</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Cloud Computing & DevOps</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">AWS</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Docker</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">Kubernetes</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 7 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Sari Dewi, S.Sn., M.Ds.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Multimedia</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Video Production & Editing</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Premiere Pro</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">After Effects</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded">Cinematography</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 9 Tahun</p>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">Hendra Kurniawan, S.T., M.Eng.</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">Guru Produktif Mekatronika</p>
-                        <p class="text-xs text-gray-500 mb-4">Spesialisasi: Industrial Automation</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">Siemens PLC</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">SCADA</span>
-                            <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded">HMI</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Pengalaman: 11 Tahun</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tenaga Kependidikan -->
-    <section class="py-20 bg-background-light relative">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Staff Pendukung</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Tenaga Kependidikan</h2>
-                <p class="text-gray-600">
-                    Tim profesional yang mendukung kelancaran operasional sekolah dan kenyamanan lingkungan belajar.
-                </p>
+                {% endfor %}
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Dian Pertiwi, S.Kom.</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">Kepala Tata Usaha</p>
-                            <p class="text-sm text-gray-600">Mengelola administrasi sekolah dan keuangan dengan sistem terintegrasi.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Sistem Informasi</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">10 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Pagination -->
+            {% if guru_staff_list.has_other_pages %}
+            <div class="flex justify-center mt-12 animate-fade-in-up" style="animation-delay: 0.3s">
+                <nav class="flex items-center gap-2" aria-label="Pagination">
+                    {% if guru_staff_list.has_previous %}
+                    <a href="?page={{ guru_staff_list.previous_page_number }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                    </a>
+                    {% endif %}
 
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Bayu Santoso, A.Md.</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">Laboran Teknik</p>
-                            <p class="text-sm text-gray-600">Bertanggung jawab atas perawatan dan pemeliharaan alat laboratorium.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Teknik Elektro</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">8 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% for i in guru_staff_list.paginator.page_range %}
+                        {% if guru_staff_list.number == i %}
+                        <span class="size-10 flex items-center justify-center rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/30 pointer-events-none">
+                            {{ i }}
+                        </span>
+                        {% else %}
+                        <a href="?page={{ i }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+                            {{ i }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}
 
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Siti Fatimah, S.Pd.</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">Pustakawan</p>
-                            <p class="text-sm text-gray-600">Mengelola perpustakaan digital dan program literasi sekolah.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Ilmu Perpustakaan</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">6 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Agus Salim</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">Kepala Keamanan</p>
-                            <p class="text-sm text-gray-600">Mengawasi keamanan kampus 24/7 dengan sistem CCTV terintegrasi.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Security Certified</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">12 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Mira Handayani</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">Kepala Kebersihan</p>
-                            <p class="text-sm text-gray-600">Memastikan lingkungan sekolah selalu bersih dan sehat.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Higiene</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">9 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                        <div class="size-16 rounded-full border-4 border-white shadow-lg overflow-hidden">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] mb-1">Rudi Hartono, S.Kom.</h4>
-                            <p class="text-sm text-primary font-semibold mb-2">IT Support</p>
-                            <p class="text-sm text-gray-600">Mendukung infrastktur IT dan troubleshooting perangkat teknologi.</p>
-                            <div class="flex gap-2 mt-3">
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">Networking</span>
-                                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">7 Tahun</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% if guru_staff_list.has_next %}
+                    <a href="?page={{ guru_staff_list.next_page_number }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    </a>
+                    {% endif %}
+                </nav>
             </div>
+            {% endif %}
+            
         </div>
     </section>
 
@@ -605,32 +388,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-primary to-primary-dark relative overflow-hidden">
-        <div class="absolute inset-0 bg-triangle-pattern opacity-10 pointer-events-none"></div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center text-white max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-black mb-6">Ingin Bergabung dengan Tim Kami?</h2>
-                <p class="text-lg opacity-90 mb-8">
-                    Kami selalu membuka peluang bagi profesional pendidikan yang berkomitmen untuk mengembangkan generasi muda Indonesia.
-                </p>
-                <div class="flex flex-wrap gap-4 justify-center">
-                    <a href="#"
-                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white text-primary text-base font-bold shadow-lg hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <span>Lowongan Kerja</span>
-                        <span class="material-symbols-outlined text-sm">work</span>
-                    </a>
-                    <a href="profile.html"
-                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-transparent border-2 border-white text-white text-base font-bold hover:bg-white/10 transition-all duration-300">
-                        <span>Kembali ke Profil</span>
-                        <span class="material-symbols-outlined text-sm">arrow_back</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    </section>  
 
     <!-- Footer -->
     

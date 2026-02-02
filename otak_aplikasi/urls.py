@@ -15,4 +15,5 @@ urlpatterns = [
    path('program-studi/', views.program_studi, name='program_studi'),
    path('program-studi/<slug:slug>/', views.program_studi_detail, name='program_studi_detail'),
    path('kontak/', views.kontak, name='kontak'),
+   path('pengumuman/download/<int:file_id>/', views.download_pengumuman_file, name='download_pengumuman_file')
 ]
