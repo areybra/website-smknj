@@ -128,7 +128,7 @@ class ektra(models.Model):
     hari = models.CharField(max_length=200, choices=hari)
     type_ektra = models.CharField(max_length=200, choices=type_ektra)
     siswa_aktif = models.IntegerField(default=0)
-    pretasi = models.IntegerField(default=0)
+    prestasi = models.IntegerField(default=0)
     tahun = models.IntegerField()
     image = models.ImageField(upload_to='ektra/images/%Y_%m_%d', blank=True, null=True)
     video = models.URLField(blank=True, null=True)
@@ -208,11 +208,10 @@ class Jurusan(models.Model):
         output.seek(0)
         content_file = ContentFile(output.getvalue(), name=image.name)
         return content_file
-
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.nama)
-            
             original_slug = self.slug
             counter = 1
             while Jurusan.objects.filter(slug=self.slug).exists():

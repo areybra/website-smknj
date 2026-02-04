@@ -17,12 +17,7 @@ def beranda(request):
     guru_staff_list = StaffDanGuru.objects.all()
     pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')[:2]
     pengumuman_list = Pengumuman.objects.all().order_by('-created_at')[:3]
-    # Queryset Jurusan (yang dipagination)
-    jurusan_qs = Jurusan.objects.all().order_by('id')
-
-    paginator = Paginator(jurusan_qs, 3)  # 3 jurusan per halaman
-    page_number = request.GET.get('page')
-    jurusan_page = paginator.get_page(page_number)
+    jurusan_list = Jurusan.objects.all()
 
     # Queryset Berita (tanpa pagination)
     berita_list = news.objects.all().order_by('-created_at')[:1]
@@ -31,13 +26,13 @@ def beranda(request):
     school_stats = SchoolStatistics.objects.filter(is_active=True).first()
 
     context = {
-        'jurusan_list': jurusan_page,
+        'jurusan_list': jurusan_list,
         'berita_list': berita_list,
         'pengumuman_list': pengumuman_list,
         'pengumuman_penting': pengumuman_penting,
         'school_stats': school_stats,
         'guru_staff_list': guru_staff_list,
-    }
+    }   
 
     return render(request, 'index.html', context)
 
@@ -311,7 +306,13 @@ def program_studi(request):
 def program_studi_detail(request, slug):
     # Mengambil jurusan berdasarkan slug
     jurusan_detail = get_object_or_404(Jurusan, slug=slug)
-    jurusan_detail = Jurusan.objects.get(slug=slug)
+    # Test untuk memastikan slug tidak ditemukan → 404, dan slug valid → 200
+    client = Client()
+    response_404 = client.get(reverse('program_studi_detail', kwargs={'slug': 'tidak-ada'}))
+    assert response_404.status_code == 404
+    response_200 = client.get(reverse('program_studi_detail', kwargs={'slug': jurusan_detail.slug}))
+    assert response_200.status_code == 200
+
     return render(request, 'program/jurusan/detail_jurusan.html', {'jurusan': jurusan_detail})
 
 def kontak(request):

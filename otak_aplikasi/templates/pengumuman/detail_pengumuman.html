@@ -125,14 +125,19 @@
                                         <div class="size-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm">
                                             <span class="material-symbols-outlined">description</span>
                                         </div>
-                                        <div class="max-w-[150px]">
-                                            <p class="text-sm font-bold text-[#0A192F] truncate">{{ file_obj.file.name }}</p>
-                                            <p class="text-xs text-gray-500">{{ file_obj.file.size|filesizeformat }}</p>
+                                        <div class="max-w-[200px]">
+                                            <p class="text-sm font-bold text-[#0A192F] truncate" title="{{ file_obj.file_name }}">{{ file_obj.file_name }}</p>
+                                            <p class="text-xs text-gray-500">{{ file_obj.file_size }}</p>
                                         </div>
                                     </div>
-                                    <a href="{{ file_obj.file.url }}" download class="size-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
-                                        <span class="material-symbols-outlined text-sm">download</span>
-                                    </a>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ file_obj.file.url }}" target="_blank" class="size-8 rounded-full bg-blue-50 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm" title="Preview File">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </a>
+                                        <a href="{{ file_obj.file.url }}" download class="size-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-all shadow-lg shadow-primary/20" title="Download File">
+                                            <span class="material-symbols-outlined text-sm">download</span>
+                                        </a>
+                                    </div>
                                 </div>
                                 {% endfor %}
                             </div>
