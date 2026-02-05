@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import Http404, FileResponse
+from django.core.cache import cache
 from .models import *
 from django.views.generic import ListView, DetailView
 from django.db.models import Q, Sum
@@ -14,25 +15,35 @@ from django.utils import timezone
 
 def beranda(request):
     
-    guru_staff_list = StaffDanGuru.objects.all()
-    pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')[:2]
-    pengumuman_list = Pengumuman.objects.all().order_by('-created_at')[:3]
-    jurusan_list = Jurusan.objects.all()
-
-    # Queryset Berita (tanpa pagination)
-    berita_list = news.objects.all().order_by('-created_at')[:1]
+    # Check if data is already cached
+    cache_key = 'beranda_data'
+    cached_data = cache.get(cache_key)
     
-    # Ambil statistik sekolah yang aktif
-    school_stats = SchoolStatistics.objects.filter(is_active=True).first()
+    if cached_data:
+        context = cached_data
+    else:
+        guru_staff_list = StaffDanGuru.objects.all()
+        pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')[:2]
+        pengumuman_list = Pengumuman.objects.all().order_by('-created_at')[:3]
+        jurusan_list = Jurusan.objects.all()
 
-    context = {
-        'jurusan_list': jurusan_list,
-        'berita_list': berita_list,
-        'pengumuman_list': pengumuman_list,
-        'pengumuman_penting': pengumuman_penting,
-        'school_stats': school_stats,
-        'guru_staff_list': guru_staff_list,
-    }   
+        # Queryset Berita (tanpa pagination)
+        berita_list = news.objects.all().order_by('-created_at')[:1]
+        
+        # Ambil statistik sekolah yang aktif
+        school_stats = SchoolStatistics.objects.filter(is_active=True).first()
+
+        context = {
+            'jurusan_list': jurusan_list,
+            'berita_list': berita_list,
+            'pengumuman_list': pengumuman_list,
+            'pengumuman_penting': pengumuman_penting,
+            'school_stats': school_stats,
+            'guru_staff_list': guru_staff_list,
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
 
     return render(request, 'index.html', context)
 
@@ -40,74 +51,115 @@ def beranda(request):
 
 def profil(request):
 
-    struktur_organisasi = StaffDanGuru.objects.all()
+    # Check if data is already cached
+    cache_key = 'profil_data'
+    cached_data = cache.get(cache_key)
     
-    context = {
-        'struktur_organisasi': struktur_organisasi,
-    }
+    if cached_data:
+        context = cached_data
+    else:
+        struktur_organisasi = StaffDanGuru.objects.all()
+        
+        context = {
+            'struktur_organisasi': struktur_organisasi,
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'profil/profil_sekolah.html', context)
 
 def fasilitas(request):
-    # Ambil semua data laboratorium beserta peralatannya
-    peralatanlab_list = PeralatanLab.objects.all()
-    laboratorium_list = FasilitasLab.objects.select_related('jurusan').prefetch_related('peralatan').all()
+    # Check if data is already cached
+    cache_key = 'fasilitas_data'
+    cached_data = cache.get(cache_key)
     
-    context = {
-        'laboratorium_list': laboratorium_list,
-        'peralatanlab_list': peralatanlab_list,
-    }
+    if cached_data:
+        context = cached_data
+    else:
+        # Ambil semua data laboratorium beserta peralatannya
+        peralatanlab_list = PeralatanLab.objects.all()
+        laboratorium_list = FasilitasLab.objects.select_related('jurusan').prefetch_related('peralatan').all()
+        
+        context = {
+            'laboratorium_list': laboratorium_list,
+            'peralatanlab_list': peralatanlab_list,
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'profil/fasilitas.html', context)
 
 def guru_staff(request):
     leader_titles = ['Kepala Sekolah', 'Waka bidang Sarana dan Prasarana', 'Waka bidang Kurikulum', 'Waka bidang Hubungan Masyarakat', 'Waka bidang Kesiswaan']
-    # Ambil semua data staff untuk bagian pimpinan (filter di template)
-    all_staff = StaffDanGuru.objects.filter(jabatan__in=leader_titles).order_by('created_at')
     
-    # Filter untuk paginasi (hanya guru reguler, exclude pimpinan)
-    regular_staff = StaffDanGuru.objects.exclude(jabatan__in=leader_titles).order_by('created_at')
+    # Check if data is already cached
+    cache_key = 'guru_staff_data'
+    cached_data = cache.get(cache_key)
     
-    # Pagination (6 guru per halaman)
-    paginator = Paginator(regular_staff, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
+    if cached_data:
+        context = cached_data
+    else:
+        # Ambil semua data staff untuk bagian pimpinan (filter di template)
+        all_staff = StaffDanGuru.objects.filter(jabatan__in=leader_titles).order_by('created_at')
+        
+        # Filter untuk paginasi (hanya guru reguler, exclude pimpinan)
+        regular_staff = StaffDanGuru.objects.exclude(jabatan__in=leader_titles).order_by('created_at')
+        
+        # Pagination (6 guru per halaman)
+        paginator = Paginator(regular_staff, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
 
-    context = {
-        'leaders_list': all_staff, # Untuk section Kepala Sekolah & Waka
-        'guru_staff_list': page_obj, # Untuk section Daftar Guru (paginated)
-    }
+        context = {
+            'leaders_list': all_staff, # Untuk section Kepala Sekolah & Waka
+            'guru_staff_list': page_obj, # Untuk section Daftar Guru (paginated)
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'profil/guru-staff.html', context)
 
 def berita(request):
-    # Mengambil semua berita dari database, diurutkan dari yang terbaru
-    berita_list = news.objects.all().order_by('-created_at')
+    # Check if data is already cached
+    cache_key = 'berita_data'
+    cached_data = cache.get(cache_key)
     
-    # Mengambil berita utama (berita terbaru)
-    berita_utama = berita_list.first() if berita_list.exists() else None
-    
-    # Mengambil kategori untuk filter
-    kategori_list = newsCategory.objects.all()
-    
-    # Filter berdasarkan kategori jika ada parameter
-    kategori_filter = request.GET.get('kategori')
-    if kategori_filter:
-        berita_list = berita_list.filter(category__slug=kategori_filter)
-    
-    # Pencarian
-    search_query = request.GET.get('search')
-    if search_query:
-        berita_list = berita_list.filter(title__icontains=search_query)
-    
-    # Pagination (6 berita per halaman)
-    paginator = Paginator(berita_list, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'berita_list': page_obj,
-        'berita_utama': berita_utama,
-        'kategori_list': kategori_list,
-    }
+    if cached_data:
+        context = cached_data
+    else:
+        # Mengambil semua berita dari database, diurutkan dari yang terbaru
+        berita_list = news.objects.all().order_by('-created_at')
+        
+        # Mengambil berita utama (berita terbaru)
+        berita_utama = berita_list.first() if berita_list.exists() else None
+        
+        # Mengambil kategori untuk filter
+        kategori_list = newsCategory.objects.all()
+        
+        # Filter berdasarkan kategori jika ada parameter
+        kategori_filter = request.GET.get('kategori')
+        if kategori_filter:
+            berita_list = berita_list.filter(category__slug=kategori_filter)
+        
+        # Pencarian
+        search_query = request.GET.get('search')
+        if search_query:
+            berita_list = berita_list.filter(title__icontains=search_query)
+        
+        # Pagination (6 berita per halaman)
+        paginator = Paginator(berita_list, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context = {
+            'berita_list': page_obj,
+            'berita_utama': berita_utama,
+            'kategori_list': kategori_list,
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'berita/berita.html', context)
 
 def detail_berita(request, slug):
@@ -157,64 +209,74 @@ def download_pengumuman_file(request, file_id):
         raise Http404(f"Error saat download file: {str(e)}")
 
 def pengumuman_view(request):
-    pengumuman_list = Pengumuman.objects.all().order_by('-created_at')
-    pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')
+    # Check if data is already cached
+    cache_key = 'pengumuman_data'
+    cached_data = cache.get(cache_key)
     
-    # Pencarian
-    search_query = request.GET.get('search')
-    if search_query:
-        pengumuman_list = pengumuman_list.filter(
-            Q(judul__icontains=search_query) | 
-            Q(deskripsi__icontains=search_query) |
-            Q(category__nama__icontains=search_query)
-        )
-    
-    # Fetch all categories for the filter buttons
-    pengumuman_category = categoryPengumuman.objects.all().order_by('nama')
-    
-    # Filter by category if present
-    category_name = request.GET.get('category')
-    selected_category = categoryPengumuman.objects.filter(nama=category_name).first() if category_name else None
-    
-    if category_name:
-        try:
-            pengumuman_list = pengumuman_list.filter(category__nama=category_name)
-        except (ValueError, categoryPengumuman.DoesNotExist):
-            pass
+    if cached_data:
+        context = cached_data
+    else:
+        pengumuman_list = Pengumuman.objects.all().order_by('-created_at')
+        pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')
+        
+        # Pencarian
+        search_query = request.GET.get('search')
+        if search_query:
+            pengumuman_list = pengumuman_list.filter(
+                Q(judul__icontains=search_query) | 
+                Q(deskripsi__icontains=search_query) |
+                Q(category__nama__icontains=search_query)
+            )
+        
+        # Fetch all categories for the filter buttons
+        pengumuman_category = categoryPengumuman.objects.all().order_by('nama')
+        
+        # Filter by category if present
+        category_name = request.GET.get('category')
+        selected_category = categoryPengumuman.objects.filter(nama=category_name).first() if category_name else None
+        
+        if category_name:
+            try:
+                pengumuman_list = pengumuman_list.filter(category__nama=category_name)
+            except (ValueError, categoryPengumuman.DoesNotExist):
+                pass
 
-    # For files section - filter based on filtered announcements
-    pengumuman_file = pengumuman_list.filter(files__isnull=False).distinct().order_by('-created_at')
+        # For files section - filter based on filtered announcements
+        pengumuman_file = pengumuman_list.filter(files__isnull=False).distinct().order_by('-created_at')
 
-    # ===== HITUNG STATISTIK DOWNLOAD =====
-    # Total file yang ada
-    total_files = FilePengumuman.objects.filter(pengumuman__in=pengumuman_list).count()
-    
-    # Total download dari semua file
-    total_downloads = FilePengumuman.objects.filter(
-        pengumuman__in=pengumuman_list
-    ).aggregate(total=Sum('download_count'))['total'] or 0
-    
-    # File paling banyak di-download
-    most_downloaded_file = FilePengumuman.objects.filter(
-        pengumuman__in=pengumuman_list
-    ).order_by('-download_count').first()
+        # ===== HITUNG STATISTIK DOWNLOAD =====
+        # Total file yang ada
+        total_files = FilePengumuman.objects.filter(pengumuman__in=pengumuman_list).count()
+        
+        # Total download dari semua file
+        total_downloads = FilePengumuman.objects.filter(
+            pengumuman__in=pengumuman_list
+        ).aggregate(total=Sum('download_count'))['total'] or 0
+        
+        # File paling banyak di-download
+        most_downloaded_file = FilePengumuman.objects.filter(
+            pengumuman__in=pengumuman_list
+        ).order_by('-download_count').first()
 
-    paginator = Paginator(pengumuman_list, 2)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+        paginator = Paginator(pengumuman_list, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-    context = {
-        'pengumuman_list': page_obj,
-        'search_query': search_query,
-        'pengumuman_penting': pengumuman_penting,
-        'pengumuman_category': pengumuman_category,
-        'pengumuman_file': pengumuman_file,
-        'selected_category': selected_category,
-        # ===== TAMBAHKAN STATISTIK KE CONTEXT =====
-        'total_files': total_files,
-        'total_downloads': total_downloads,
-        'most_downloaded_file': most_downloaded_file,
-    }
+        context = {
+            'pengumuman_list': page_obj,
+            'search_query': search_query,
+            'pengumuman_penting': pengumuman_penting,
+            'pengumuman_category': pengumuman_category,
+            'pengumuman_file': pengumuman_file,
+            'selected_category': selected_category,
+            # ===== TAMBAHKAN STATISTIK KE CONTEXT =====
+            'total_files': total_files,
+            'total_downloads': total_downloads,
+            'most_downloaded_file': most_downloaded_file,
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'pengumuman/pengumuman.html', context)
 
 def detail_pengumuman(request, slug):
@@ -241,30 +303,40 @@ def detail_pengumuman(request, slug):
     return render(request, 'pengumuman/detail_pengumuman.html', context)
 
 def ektrakurikuler(request):
-    ektra_list = ektra.objects.all().order_by('-created_at')
+    # Check if data is already cached
+    cache_key = 'ektrakurikuler_data'
+    cached_data = cache.get(cache_key)
     
-    # Mengambil ektra utama (ektra terbaru)
-    ektra_utama = ektra_list.first() if ektra_list.exists() else None
-    
-    # Mengambil kategori untuk filter
-    kategori_list = ektraCategory.objects.all()
-    
-    # Filter berdasarkan kategori jika ada parameter
-    kategori_filter = request.GET.get('kategori')
-    if kategori_filter:
-        ektra_list = ektra_list.filter(category__slug=kategori_filter)
-    
-    # Pencarian
-    search_query = request.GET.get('search')
-    if search_query:
-        ektra_list = ektra_list.filter(title__icontains=search_query)
-    
-    context = {
-        'ektra_list': ektra_list,
-        'ektra_utama': ektra_utama,
-        'kategori_list': kategori_list,
-        'count_ektra': ektra.objects.all().count(),
-    }
+    if cached_data:
+        context = cached_data
+    else:
+        ektra_list = ektra.objects.all().order_by('-created_at')
+        
+        # Mengambil ektra utama (ektra terbaru)
+        ektra_utama = ektra_list.first() if ektra_list.exists() else None
+        
+        # Mengambil kategori untuk filter
+        kategori_list = ektraCategory.objects.all()
+        
+        # Filter berdasarkan kategori jika ada parameter
+        kategori_filter = request.GET.get('kategori')
+        if kategori_filter:
+            ektra_list = ektra_list.filter(category__slug=kategori_filter)
+        
+        # Pencarian
+        search_query = request.GET.get('search')
+        if search_query:
+            ektra_list = ektra_list.filter(title__icontains=search_query)
+        
+        context = {
+            'ektra_list': ektra_list,
+            'ektra_utama': ektra_utama,
+            'kategori_list': kategori_list,
+            'count_ektra': ektra.objects.all().count(),
+        }
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, context, 900)
     return render(request, 'program/ektrakurikuler/ektrakurikuler.html', context)
 
 def detail_ektrakurikuler(request, slug):
@@ -293,10 +365,21 @@ def detail_ektrakurikuler(request, slug):
     return render(request, 'program/ektrakurikuler/detail_ektrakurikuler.html', context)
 
 def program_studi(request):
-    # Mengambil semua jurusan dari database, diurutkan dari yang terbaru
-    jurusan_utama = Jurusan.objects.all()[:4]
-    jurusan_list = Jurusan.objects.all()
-    mitra_industri_list = MitraIndustri.objects.all()
+    # Check if data is already cached
+    cache_key = 'program_studi_data'
+    cached_data = cache.get(cache_key)
+    
+    if cached_data:
+        jurusan_utama, jurusan_list, mitra_industri_list = cached_data
+    else:
+        # Mengambil semua jurusan dari database, diurutkan dari yang terbaru
+        jurusan_utama = Jurusan.objects.all()[:4]
+        jurusan_list = Jurusan.objects.all()
+        mitra_industri_list = MitraIndustri.objects.all()
+        
+        # Cache the data for 15 minutes (900 seconds)
+        cache.set(cache_key, (jurusan_utama, jurusan_list, mitra_industri_list), 900)
+    
     return render(request, 'program/jurusan/jurusan.html', {
         'jurusan_list': jurusan_list, 
         'jurusan_utama': jurusan_utama,
