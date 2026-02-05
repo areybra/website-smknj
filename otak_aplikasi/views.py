@@ -389,12 +389,6 @@ def program_studi(request):
 def program_studi_detail(request, slug):
     # Mengambil jurusan berdasarkan slug
     jurusan_detail = get_object_or_404(Jurusan, slug=slug)
-    # Test untuk memastikan slug tidak ditemukan → 404, dan slug valid → 200
-    client = Client()
-    response_404 = client.get(reverse('program_studi_detail', kwargs={'slug': 'tidak-ada'}))
-    assert response_404.status_code == 404
-    response_200 = client.get(reverse('program_studi_detail', kwargs={'slug': jurusan_detail.slug}))
-    assert response_200.status_code == 200
 
     return render(request, 'program/jurusan/detail_jurusan.html', {'jurusan': jurusan_detail})
 

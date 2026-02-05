@@ -236,7 +236,6 @@ class Jurusan(models.Model):
 class Kompetensi(models.Model):
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='kompetensi')
     TYPES = [('Hard', 'Hard Skill'), ('Soft', 'Soft Skill')]
-    jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='kompetensi')
     nama = models.CharField(max_length=200)
     tipe = models.CharField(max_length=10, choices=TYPES)
 
