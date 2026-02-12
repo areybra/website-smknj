@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'layouts/base.html' %}
 {% load static %}
 
@@ -44,10 +45,135 @@
     <div class="max-w-[1280px] mx-auto px-4 md:px-8">
         <ol class="flex items-center gap-2 text-sm">
             <li>
+=======
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{{ berita.title }} - SMK Nurul Jadid</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    backgroundImage: {
+                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0A192F;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #0047AB;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #4B5563;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-100 py-4">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <nav class="flex items-center gap-2 text-sm">
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
                 <a href="{% url 'home' %}" class="text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
                     <span class="material-symbols-outlined text-sm">home</span>
                     Beranda
                 </a>
+<<<<<<< HEAD
             </li>
             <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-gray-300 text-sm" aria-hidden="true">chevron_right</span>
@@ -274,3 +400,238 @@
     }
 </script>
 {% endblock %}
+=======
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <a href="{% url 'berita' %}" class="text-gray-500 hover:text-primary transition-colors">Berita</a>
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <span class="text-primary font-medium">Detail Berita</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section Detail Berita -->
+    <header class="relative w-full overflow-hidden bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12">
+            <div class="max-w-4xl mx-auto">
+                <!-- Kategori & Tanggal -->
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">
+                            {{ berita.category.name }}
+                        </span>
+                        <span class="text-gray-500 text-sm flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            {{ berita.created_at|date:"d F Y" }}
+                        </span>
+                        <span class="text-gray-500 text-sm flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            {{ berita.created_at|timesince }} yang lalu
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500 text-sm flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">visibility</span>
+                            {{ berita.view_count }} kali dilihat
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Judul Berita -->
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-[#0A192F] mb-6 leading-tight">
+                    {{ berita.title }}
+                </h1>
+
+                <!-- Penulis & Share -->
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#0A192F]">Tim Humas SMK NJ</p>
+                            <p class="text-sm text-gray-500">Penulis Berita</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500 text-sm">Bagikan:</span>
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer"
+                           class="size-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all duration-300" title="Facebook">
+                            <svg class="size-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <!-- WhatsApp -->
+                        <a href="https://api.whatsapp.com/send?text={{ berita.title|urlencode }}%20{{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer"
+                           class="size-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300" title="WhatsApp">
+                            <svg class="size-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                        <!-- X (Twitter) -->
+                        <a href="https://twitter.com/intent/tweet?text={{ berita.title|urlencode }}&url={{ request.build_absolute_uri|urlencode }}" target="_blank" rel="noopener noreferrer"
+                           class="size-8 rounded-full bg-gray-50 text-gray-900 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300" title="X">
+                            <svg class="size-3 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <!-- Mail -->
+                        <a href="mailto:?subject={{ berita.title|urlencode }}&body=Baca%20artikel%20ini:%20{{ request.build_absolute_uri|urlencode }}"
+                           class="size-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all duration-300" title="Email">
+                            <span class="material-symbols-outlined text-sm">mail</span>
+                        </a>
+                        <!-- Share -->
+                        <button onclick="shareArticle('{{ berita.title|escapejs }}', '{{ request.build_absolute_uri|escapejs }}')"
+                           class="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300" title="Bagikan">
+                            <span class="material-symbols-outlined text-sm">share</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                {% if berita.image %}
+                <div class="relative rounded-2xl overflow-hidden mb-8">
+                    <div class="h-96 md:h-[500px] w-full bg-cover bg-center"
+                        style="background-image: url('{{ berita.image.url }}');">
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg">
+                        <p class="text-xs text-gray-600">{{ berita.title }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Artikel -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Konten Utama -->
+                    <div class="lg:col-span-2">
+                        <div class="article-content">
+                            {{ berita.content|safe }}
+                        </div>
+
+                        <!-- Navigasi Berita -->
+                        <div class="border-t border-gray-200 pt-8 mt-8">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                {% if berita_sebelumnya %}
+                                <a href="{% url 'news_detail' berita_sebelumnya.slug %}" class="group p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-blue-50 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary">arrow_back</span>
+                                        <div>
+                                            <p class="text-sm text-gray-500">Sebelumnya</p>
+                                            <p class="font-medium text-[#0A192F] group-hover:text-primary">{{ berita_sebelumnya.title|truncatewords:5 }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endif %}
+                                {% if berita_selanjutnya %}
+                                <a href="{% url 'news_detail' berita_selanjutnya.slug %}" class="group p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-blue-50 transition-all text-right">
+                                    <div class="flex items-center gap-3 justify-end">
+                                        <div>
+                                            <p class="text-sm text-gray-500">Selanjutnya</p>
+                                            <p class="font-medium text-[#0A192F] group-hover:text-primary">{{ berita_selanjutnya.title|truncatewords:5 }}</p>
+                                        </div>
+                                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary">arrow_forward</span>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="lg:col-span-1">
+                        <!-- Berita Terkait -->
+                        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+                            <h4 class="font-bold text-lg text-[#0A192F] mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">auto_stories</span>
+                                Berita Terkait
+                            </h4>
+                            <div class="space-y-4">
+                                {% for related in berita_terkait %}
+                                <a href="{% url 'news_detail' related.slug %}" class="group block">
+                                    <div class="flex items-start gap-3">
+                                        <div class="size-12 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+                                            <div class="w-full h-full bg-cover bg-center"
+                                                style="background-image: url('{% if related.image %}{{ related.image.url }}{% else %}https://via.placeholder.com/100{% endif %}');">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-[#0A192F] group-hover:text-primary transition-colors line-clamp-2">
+                                                {{ related.title }}
+                                            </p>
+                                            <span class="text-xs text-gray-500">{{ related.created_at|date:"d M Y" }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Newsletter Sidebar -->
+                        <div class="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/20 p-6">
+                            <h4 class="font-bold text-lg text-[#0A192F] mb-4">Ingin Berita Terbaru?</h4>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Dapatkan update berita langsung ke email Anda.
+                            </p>
+                            <form class="space-y-3">
+                                <input type="email" placeholder="Email Anda" 
+                                    class="w-full h-10 px-4 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm">
+                                <button type="submit"
+                                    class="w-full h-10 rounded-lg bg-primary text-white font-bold hover:bg-primary-dark transition-colors text-sm">
+                                    Berlangganan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Berita Lainnya -->
+    <section class="py-20 bg-background-light">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-black text-[#0A192F] mb-4">Berita Lainnya</h2>
+                <p class="text-gray-600">Simak berita dan informasi menarik lainnya dari SMK Nurul Jadid</p>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{% url 'berita' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30">
+                    <span>Lihat Semua Berita</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+    {% include 'layouts/footer.html' %}
+
+    <script>
+        function shareArticle(title, url) {
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: 'Baca berita menarik ini di SMK Nurul Jadid:',
+                    url: url
+                }).catch(err => {
+                    console.error('Error sharing:', err);
+                });
+            } else {
+                copyToClipboard(url);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link berita telah disalin ke clipboard!');
+            }).catch(err => {
+                console.error('Gagal menyalin link:', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac

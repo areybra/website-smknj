@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.utils import timezone
+<<<<<<< HEAD
 from .utils import compress_image, generate_unique_slug
 
 # Buat model Anda di sini.
@@ -37,13 +38,34 @@ class newsCategory(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, blank=True)
 
+=======
+
+# Buat model Anda di sini.
+class newsCategory(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
+<<<<<<< HEAD
             self.slug = generate_unique_slug(newsCategory, self.name)
+=======
+            self.slug = slugify(self.name)
+            
+            original_slug = self.slug
+            counter = 1
+            while newsCategory.objects.filter(slug=self.slug).exists():
+                if self.pk and newsCategory.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+        
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -51,16 +73,23 @@ class newsCategory(models.Model):
 
 class news(models.Model):
     title = models.CharField(max_length=200)
+<<<<<<< HEAD
     slug = models.SlugField(max_length=200, unique=True, blank=True)
 
     content = RichTextField(blank=True, null=True)
     image = models.ImageField(upload_to=news_upload_path, blank=True, null=True)
+=======
+    slug = models.SlugField(max_length=200, unique=True)
+    content = RichTextField(blank=True, null=True)
+    image = models.ImageField(upload_to='news/images/%Y_%m_%d', blank=True, null=True)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     video = models.URLField(blank=True, null=True)
     view_count = models.IntegerField(default=0)
     category = models.ForeignKey(newsCategory, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+<<<<<<< HEAD
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(news, self.title)
@@ -79,6 +108,34 @@ class news(models.Model):
             except Exception:
                 pass
 
+=======
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            
+            original_slug = self.slug
+            counter = 1
+            while news.objects.filter(slug=self.slug).exists():
+                if self.pk and news.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+        
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -86,15 +143,33 @@ class news(models.Model):
 
 class ektraCategory(models.Model):
     name = models.CharField(max_length=100)
+<<<<<<< HEAD
     slug = models.SlugField(max_length=100, blank=True)
 
+=======
+    slug = models.SlugField(max_length=100)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
+<<<<<<< HEAD
             self.slug = generate_unique_slug(ektraCategory, self.name)
+=======
+            self.slug = slugify(self.name)
+            
+            original_slug = self.slug
+            counter = 1
+            while ektraCategory.objects.filter(slug=self.slug).exists():
+                if self.pk and ektraCategory.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+        
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -117,28 +192,45 @@ class ektra(models.Model):
         ('Sabtu', 'Sabtu'),
         ('Minggu', 'Minggu'),
     ]
+<<<<<<< HEAD
     type_ektra_choices = [
+=======
+    type_ektra = [
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         ('Wajib', 'Wajib'),
         ('Pilihan', 'Pilihan'),
     ]
     title = models.CharField(max_length=200)
+<<<<<<< HEAD
     slug = models.SlugField(max_length=200, unique=True, blank=True)
+=======
+    slug = models.SlugField(max_length=200, unique=True)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     pembina = models.CharField(max_length=200)
     lokasi = models.CharField(max_length=200)
     content = models.TextField(blank=True, null=True)
     jadwal = models.CharField(max_length=200, choices=jam)
     hari = models.CharField(max_length=200, choices=hari)
+<<<<<<< HEAD
     type_ektra = models.CharField(max_length=200, choices=type_ektra_choices)
     siswa_aktif = models.IntegerField(default=0)
     prestasi = models.IntegerField(default=0)
     tahun = models.IntegerField()
     image = models.ImageField(upload_to=ektra_upload_path, blank=True, null=True)
+=======
+    type_ektra = models.CharField(max_length=200, choices=type_ektra)
+    siswa_aktif = models.IntegerField(default=0)
+    prestasi = models.IntegerField(default=0)
+    tahun = models.IntegerField()
+    image = models.ImageField(upload_to='ektra/images/%Y_%m_%d', blank=True, null=True)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     video = models.URLField(blank=True, null=True)
     view_count = models.IntegerField(default=0)
     category = models.ForeignKey(ektraCategory, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+<<<<<<< HEAD
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -154,6 +246,34 @@ class ektra(models.Model):
             except Exception:
                 pass
 
+=======
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            
+            original_slug = self.slug
+            counter = 1
+            while ektra.objects.filter(slug=self.slug).exists():
+                if self.pk and ektra.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+        
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -187,6 +307,7 @@ class Jurusan(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+<<<<<<< HEAD
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(Jurusan, self.nama)
@@ -201,6 +322,32 @@ class Jurusan(models.Model):
             except Exception:
                 pass
 
+=======
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nama)
+            original_slug = self.slug
+            counter = 1
+            while Jurusan.objects.filter(slug=self.slug).exists():
+                if self.pk and Jurusan.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     @property
@@ -264,6 +411,7 @@ class TestimoniAlumni(models.Model):
     perusahaan = models.CharField(max_length=200)
     tahun_lulus = models.IntegerField()
     testimoni = models.TextField()
+<<<<<<< HEAD
     image = models.ImageField(upload_to=testimoni_upload_path, blank=True, null=True)
 
     def save(self, *args, **kwargs):
@@ -278,6 +426,22 @@ class TestimoniAlumni(models.Model):
                 pass
 
         super().save(*args, **kwargs)
+=======
+    image = models.ImageField(upload_to='jurusan/testimoni/%Y_%m_%d', blank=True, null=True)
+
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 
     def __str__(self):
         return f"{self.nama} ({self.jurusan.nama})"
@@ -304,7 +468,19 @@ class Pengumuman(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
+<<<<<<< HEAD
             self.slug = generate_unique_slug(Pengumuman, self.judul)
+=======
+            self.slug = slugify(self.judul)
+            original_slug = self.slug
+            counter = 1
+            while Pengumuman.objects.filter(slug=self.slug).exists():
+                if self.pk and Pengumuman.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                    self.slug = f"{original_slug}-{counter}"
+                    counter += 1
+                else:
+                    break
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -355,6 +531,7 @@ class StaffDanGuru(models.Model):
     deskripsi = models.TextField()
     mata_pelajaran = models.ManyToManyField(MataPelajaran, related_name='guru_staff')
     pendidikan = models.CharField(max_length=200)
+<<<<<<< HEAD
     image = models.ImageField(upload_to=staff_upload_path, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -371,6 +548,24 @@ class StaffDanGuru(models.Model):
                 pass
 
         super().save(*args, **kwargs)
+=======
+    image = models.ImageField(upload_to='staff_dan_guru/%Y_%m_%d', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 
     def __str__(self):
         return self.nama
@@ -379,12 +574,17 @@ class FasilitasLab(models.Model):
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='laboratorium')
     nama_lab = models.CharField(max_length=200, help_text='Nama Laboratorium')
     deskripsi = models.TextField(help_text='Deskripsi singkat tentang laboratorium')
+<<<<<<< HEAD
     gambar = models.ImageField(upload_to=lab_upload_path, blank=True, null=True)
+=======
+    gambar = models.ImageField(upload_to='fasilitas_lab/images/%Y_%m_%d', blank=True, null=True)
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     icon = models.CharField(max_length=50, default='terminal', help_text='Material Symbols icon name')
     warna_tema = models.CharField(max_length=50, default='blue', help_text='Warna tema untuk card (blue, purple, red, pink, green, dll)')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+<<<<<<< HEAD
     def save(self, *args, **kwargs):
         if self.gambar:
             try:
@@ -397,6 +597,20 @@ class FasilitasLab(models.Model):
                 pass
 
         super().save(*args, **kwargs)
+=======
+    def compress_image(self, image):
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.base import ContentFile
+        
+        img = Image.open(image)
+        img.thumbnail((800, 800))
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+        content_file = ContentFile(output.getvalue(), name=image.name)
+        return content_file
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 
     def __str__(self):
         return f"{self.nama_lab} - {self.jurusan.nama}"

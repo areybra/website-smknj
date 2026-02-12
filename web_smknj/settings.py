@@ -83,7 +83,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'web_smknj_db',
         'USER': 'root',
+<<<<<<< HEAD
         'PASSWORD': '',
+=======
+        'PASSWORD': 'Domon123@',
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -155,6 +159,7 @@ CKEDITOR_CONFIGS = {
 }
 
 JAZZMIN_SETTINGS = {
+<<<<<<< HEAD
   "site_title": "Admin SMK Nurul Jadid",
   "site_header": "Dashboard SMK",
   "site_brand": "SMK NJ",
@@ -168,6 +173,14 @@ JAZZMIN_SETTINGS = {
   ],
   "show_ui_builder": True,
   "custom_css": "static/css/jazzmin-custom.css",
+=======
+    "site_title": "Admin SMK",
+    "site_header": "Dashboard SMK Nurul Jadid",
+    "site_brand": "SMK NJ",
+    "site_logo": "images/logo/logo.png",
+    "welcome_sign": "Selamat Datang di Sistem Admin",
+    "custom_css": "css/jazzmin-custom.css",
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 }
 
 

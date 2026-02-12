@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'layouts/base.html' %}
 {% load static %}
 
@@ -294,3 +295,369 @@
     <span class="material-symbols-outlined text-2xl" aria-hidden="true">visibility</span>
 </a>
 {% endblock %}
+=======
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SMK Nurul Jadid - Fasilitas & Sarana Prasarana</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    backgroundImage: {
+                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .facility-card {
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .image-zoom {
+            transition: transform 0.7s ease;
+        }
+        
+        .facility-card:hover .image-zoom {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Hero Section Fasilitas -->
+    <header class="relative w-full overflow-hidden bg-white py-16 lg:py-24">
+        <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none"></div>
+        <div class="absolute top-0 left-0 w-1/3 h-1/2 bg-gradient-to-br from-primary/10 to-accent/10 rounded-br-full blur-3xl"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 animate-fade-in-up">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
+                        <span class="block size-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-xs font-bold text-primary uppercase tracking-wide">Infrastruktur Modern</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
+                        Fasilitas & <span class="text-primary relative inline-block">
+                            Sarana Prasarana
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                                preserveAspectRatio="none" viewBox="0 0 100 10">
+                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                            </svg>
+                        </span>
+                    </h1>
+                    <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                        Didukung oleh fasilitas pembelajaran yang lengkap dan berstandar industri untuk menunjang kompetensi siswa dalam menghadapi tantangan global.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <a href="#laboratorium"
+                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <span>Telusuri Laboratorium</span>
+                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative lg:h-[500px] w-full group">
+                    <div
+                        class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] z-20 border-8 border-white">
+                        <div class="w-full h-full bg-cover bg-center image-zoom"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo');">
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-accent/20 rounded-3xl -z-10 blur-xl opacity-60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Statistik Fasilitas -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ laboratorium_list.count }}+</div>
+                    <p class="font-bold text-[#0A192F]">Laboratorium</p>
+                    <p class="text-sm text-gray-500 mt-1">Standar Industri</p>
+                </div>
+                <div class="bg-gradient-to-br from-accent/5 to-white p-6 rounded-2xl border border-accent/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">{{ peralatanlab_list.count }}+</div>
+                    <p class="font-bold text-[#0A192F]">Unit Perangkat</p>
+                    <p class="text-sm text-gray-500 mt-1">Teknologi Terbaru</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500/5 to-white p-6 rounded-2xl border border-blue-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">2</div>
+                    <p class="font-bold text-[#0A192F]">Studio Khusus</p>
+                    <p class="text-sm text-gray-500 mt-1">Produksi Digital</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500/5 to-white p-6 rounded-2xl border border-green-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                    <div class="text-3xl font-black text-green-600 mb-2 group-hover:scale-110 transition-transform">24/7</div>
+                    <p class="font-bold text-[#0A192F]">Akses Wi-Fi</p>
+                    <p class="text-sm text-gray-500 mt-1">Konektivitas Penuh</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laboratorium Unggulan -->
+    <section id="laboratorium" class="py-20 bg-background-light relative">
+        <div class="absolute inset-0 bg-triangle-pattern opacity-5 pointer-events-none"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Laboratorium</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Fasilitas Laboratorium Unggulan</h2>
+                <p class="text-gray-600">
+                    Setiap program keahlian didukung oleh laboratorium khusus dengan perangkat standar industri.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                {% for lab in laboratorium_list %}
+                <!-- {{ lab.nama_lab }} -->
+                <div class="facility-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="md:flex {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %}">
+                        <div class="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+                            <div class="absolute inset-0 bg-cover bg-center image-zoom"
+                                style="background-image: url('{% if lab.gambar %}{{ lab.gambar.url }}{% else %}https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo{% endif %}');">
+                            </div>
+                            <div class="absolute inset-0 {% if forloop.counter|divisibleby:2 %}bg-gradient-to-l from-{{ lab.warna_tema }}-900/70 to-transparent md:bg-gradient-to-l md:from-{{ lab.warna_tema }}-900/70 md:to-transparent{% else %}bg-gradient-to-r from-{{ lab.warna_tema }}-900/70 to-transparent md:bg-gradient-to-r md:from-{{ lab.warna_tema }}-900/70 md:to-transparent{% endif %}"></div>
+                            <div class="absolute {% if forloop.counter|divisibleby:2 %}bottom-4 right-4 md:bottom-auto md:top-4 md:right-4{% else %}bottom-4 left-4 md:bottom-auto md:top-4 md:left-4{% endif %}">
+                                <span class="inline-block px-3 py-1 bg-{{ lab.warna_tema }}-600 text-white text-xs font-bold rounded-full">{{ lab.jurusan.nama }}</span>
+                            </div>
+                        </div>
+                        <div class="md:w-3/5 p-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="size-12 rounded-lg bg-{{ lab.warna_tema }}-100 text-{{ lab.warna_tema }}-600 flex items-center justify-center">
+                                    <span class="material-symbols-outlined">{{ lab.icon }}</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-[#0A192F]">{{ lab.nama_lab }}</h3>
+                            </div>
+                            <p class="text-gray-600 mb-6">
+                                {{ lab.deskripsi }}
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                {% regroup lab.peralatan.all by kategori as peralatan_by_kategori %}
+                                {% for kategori_group in peralatan_by_kategori %}
+                                <div>
+                                    <h4 class="font-bold text-[#0A192F] mb-2 flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-{{ lab.warna_tema }}-600 text-sm">check_circle</span>
+                                        {{ kategori_group.grouper }}
+                                    </h4>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        {% for peralatan in kategori_group.list %}
+                                        <li>• {{ peralatan.nama_peralatan }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-12">
+                    <p class="text-gray-500 text-lg">Belum ada data laboratorium yang tersedia.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Fasilitas Penunjang -->
+    <section class="py-20 bg-white relative">
+        <div class="absolute right-0 top-0 w-64 h-64 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Fasilitas Penunjang</span>
+                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Sarana Prasarana Lainnya</h2>
+                <p class="text-gray-600">
+                    Fasilitas lengkap untuk menunjang kegiatan belajar mengajar dan pengembangan diri siswa.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">library_books</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Perpustakaan Digital</h3>
+                            <p class="text-sm text-gray-500">Layanan 24/7 Online</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Koleksi 10.000+ buku fisik dan e-book dengan akses digital melalui aplikasi mobile.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• Ruang Baca Nyaman</span>
+                        <span class="text-gray-500">200 seat</span>
+                    </div>
+                </div>
+
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">fitness_center</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Lapangan Olahraga</h3>
+                            <p class="text-sm text-gray-500">Multifungsi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Lapangan futsal, basket, voli, dan badminton dengan standar nasional.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• Tribun Penonton</span>
+                        <span class="text-gray-500">500 seat</span>
+                    </div>
+                </div>
+
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">restaurant</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Kantin Sehat</h3>
+                            <p class="text-sm text-gray-500">Food Court Modern</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">20 tenant dengan menu sehat dan bergizi, dilengkapi dengan sistem pembayaran digital.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• Free Wi-Fi Area</span>
+                        <span class="text-gray-500">24/7</span>
+                    </div>
+                </div>
+
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">wifi</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Wi-Fi Sekolah</h3>
+                            <p class="text-sm text-gray-500">High Speed Internet</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Jaringan Wi-Fi 1Gbps dengan coverage seluruh area sekolah, termasuk ruang terbuka.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• Hotspot Area</span>
+                        <span class="text-gray-500">50+ access point</span>
+                    </div>
+                </div>
+
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">medical_services</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Klinik Sekolah</h3>
+                            <p class="text-sm text-gray-500">UKS Terakreditasi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Unit Kesehatan Sekolah dengan dokter dan perawat tetap, serta ruang istirahat yang nyaman.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• 24/7 Emergency</span>
+                        <span class="text-gray-500">Ambulance stand-by</span>
+                    </div>
+                </div>
+
+                <div class="facility-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="size-14 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">theater_comedy</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#0A192F]">Auditorium</h3>
+                            <p class="text-sm text-gray-500">Multifungsi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Ruang serbaguna kapasitas 500 orang untuk seminar, workshop, dan pertunjukan seni.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-primary font-medium">• Full Audio-Visual</span>
+                        <span class="text-gray-500">500 seat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'layouts/footer.html' %}
+
+    <a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
+        href="#">
+        <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Virtual
+            Tour</span>
+        <span class="material-symbols-outlined text-2xl">visibility</span>
+    </a>
+
+</body>
+
+</html>
+>>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
