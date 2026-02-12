@@ -291,42 +291,152 @@
             </div>
 
             <div>
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Misi Sekolah</span>
-                <div class="space-y-4">
-                    <!-- Misi Item -->
-                    <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm block">Misi Sekolah</span>
+                    <div class="flex items-center gap-2">
+                        <button id="misi-prev" class="size-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_left</span>
+                        </button>
+                        <button id="misi-next" class="size-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="misi-list" class="space-y-4 min-h-[400px]">
+                    <!-- Misi Item 1 -->
+                    <div class="misi-card p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
                         <div class="flex items-start gap-4">
-                            <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0" aria-hidden="true">1</div>
-                            <p class="text-gray-700">Menyelenggarakan pendidikan kejuruan yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja.</p>
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">school</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Misi 01</p>
+                                <p class="text-gray-700 leading-relaxed font-medium">Menyelenggarakan pendidikan kejuruan yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary transition-all duration-300">
+                    <!-- Misi Item 2 -->
+                    <div class="misi-card p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
                         <div class="flex items-start gap-4">
-                            <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0" aria-hidden="true">2</div>
-                            <p class="text-gray-700">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter.</p>
+                            <div class="size-12 rounded-xl bg-accent/5 text-accent flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">verified_user</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Misi 02</p>
+                                <p class="text-gray-700 leading-relaxed font-medium">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary transition-all duration-300">
+                    <!-- Misi Item 3 -->
+                    <div class="misi-card p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
                         <div class="flex items-start gap-4">
-                            <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0" aria-hidden="true">3</div>
-                            <p class="text-gray-700">Mengembangkan pembelajaran berbasis teaching factory sebagai wahana pembentukan keterampilan kerja riil.</p>
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">factory</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Misi 03</p>
+                                <p class="text-gray-700 leading-relaxed font-medium">Mengembangkan pembelajaran berbasis teaching factory sebagai wahana pembentukan keterampilan kerja riil.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary transition-all duration-300">
+                    <!-- Misi Item 4 -->
+                    <div class="misi-card p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
                         <div class="flex items-start gap-4">
-                            <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0" aria-hidden="true">4</div>
-                            <p class="text-gray-700">Mendorong pencapaian prestasi peserta didik di berbagai bidang akademik dan non-akademik.</p>
+                            <div class="size-12 rounded-xl bg-accent/5 text-accent flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Misi 04</p>
+                                <p class="text-gray-700 leading-relaxed font-medium">Mendorong pencapaian prestasi peserta didik di berbagai bidang akademik dan non-akademik.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary transition-all duration-300">
+                    <!-- Misi Item 5 -->
+                    <div class="misi-card p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
                         <div class="flex items-start gap-4">
-                            <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0" aria-hidden="true">5</div>
-                            <p class="text-gray-700">Menguatkan kemitraan dengan dunia usaha dan dunia industri (DUDI) secara berkelanjutan.</p>
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">handshake</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Misi 05</p>
+                                <p class="text-gray-700 leading-relaxed font-medium">Menguatkan kemitraan dengan dunia usaha dan dunia industri (DUDI) secara berkelanjutan.</p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <span id="misi-page-indicator" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Halaman 1 dari 2</span>
+                    <div class="flex gap-1">
+                        <span class="pagination-dot size-2 rounded-full bg-primary transition-all"></span>
+                        <span class="pagination-dot size-2 rounded-full bg-gray-200 transition-all"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+{% block extra_body %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const missionCards = document.querySelectorAll('.misi-card');
+        const prevBtn = document.getElementById('misi-prev');
+        const nextBtn = document.getElementById('misi-next');
+        const pageIndicator = document.getElementById('misi-page-indicator');
+        const dots = document.querySelectorAll('.pagination-dot');
+        
+        let currentPage = 1;
+        const itemsPerPage = 3;
+        const totalPages = Math.ceil(missionCards.length / itemsPerPage);
+
+        function updateMissions() {
+            missionCards.forEach((card, index) => {
+                const cardPage = Math.floor(index / itemsPerPage) + 1;
+                if (cardPage === currentPage) {
+                    card.style.display = 'block';
+                    card.classList.add('animate-fade-in-up');
+                    // Reset animation after it finishes to allow re-triggering if needed
+                    setTimeout(() => card.classList.remove('animate-fade-in-up'), 800);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            pageIndicator.textContent = `Halaman ${currentPage} dari ${totalPages}`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index + 1 === currentPage) {
+                    dot.classList.remove('bg-gray-200');
+                    dot.classList.add('bg-primary', 'w-4');
+                } else {
+                    dot.classList.remove('bg-primary', 'w-4');
+                    dot.classList.add('bg-gray-200');
+                }
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateMissions();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateMissions();
+            }
+        });
+
+        // Initialize
+        updateMissions();
+    });
+</script>
+{% endblock %}
 {% endblock %}

@@ -4,20 +4,23 @@
 {% block title %}SMK Nurul Jadid - Beranda{% endblock %}
 
 {% block extra_head %}
-<meta name="description" content="SMK Nurul Jadid adalah institusi pendidikan kejuruan unggulan yang mencetak generasi profesional kompeten di bidang teknologi. Jelajahi program keahlian, prestasi, dan fasilitas kami.">
-<meta name="keywords" content="SMK Nurul Jadid, Sekolah Menengah Kejuruan, Pendidikan Vokasi, Jurusan TI, Sekolah Unggulan">
+<meta name="description"
+    content="SMK Nurul Jadid adalah institusi pendidikan kejuruan unggulan yang mencetak generasi profesional kompeten di bidang teknologi. Jelajahi program keahlian, prestasi, dan fasilitas kami.">
+<meta name="keywords"
+    content="SMK Nurul Jadid, Sekolah Menengah Kejuruan, Pendidikan Vokasi, Jurusan TI, Sekolah Unggulan">
 {% endblock %}
 
 {% block content %}
 <header class="relative w-full overflow-hidden bg-white" role="banner">
     <div class="absolute inset-0 bg-triangle-pattern opacity-60 pointer-events-none" aria-hidden="true"></div>
-    <div
-        class="absolute -top-[10%] -right-[5%] w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl pointer-events-none opacity-50 hidden md:block" aria-hidden="true">
+    <div class="absolute -top-[10%] -right-[5%] w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl pointer-events-none opacity-50 hidden md:block"
+        aria-hidden="true">
     </div>
-    <div
-        class="absolute top-[40%] -left-[10%] w-[400px] h-[400px] bg-cyan-100 rounded-full blur-3xl pointer-events-none opacity-50 hidden md:block" aria-hidden="true">
+    <div class="absolute top-[40%] -left-[10%] w-[400px] h-[400px] bg-cyan-100 rounded-full blur-3xl pointer-events-none opacity-50 hidden md:block"
+        aria-hidden="true">
     </div>
-    <div class="absolute right-0 bottom-0 w-1/3 h-full overflow-hidden pointer-events-none hidden lg:block" aria-hidden="true">
+    <div class="absolute right-0 bottom-0 w-1/3 h-full overflow-hidden pointer-events-none hidden lg:block"
+        aria-hidden="true">
         <svg class="absolute bottom-0 right-0 w-full h-full text-primary/5" preserveAspectRatio="none"
             viewBox="0 0 100 100">
             <path d="M100 0 L100 100 L0 100 Z" fill="currentColor"></path>
@@ -27,10 +30,11 @@
         <div class="grid lg:grid-cols-2 gap-12 items-center">
             <section class="flex flex-col gap-6 animate-fade-in-up">
                 {% if pengumuman_penting %}
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit" role="alert">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit"
+                    role="alert">
                     <span class="block size-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
-                    <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman_penting.judul }}</span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman_penting.judul
+                        }}</span>
                 </div>
                 {% endif %}
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
@@ -55,8 +59,8 @@
                     </a>
                     <button
                         class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
-                        <span
-                            class="material-symbols-outlined text-primary group-hover:text-accent transition-colors" aria-hidden="true">play_circle</span>
+                        <span class="material-symbols-outlined text-primary group-hover:text-accent transition-colors"
+                            aria-hidden="true">play_circle</span>
                         <span>Virtual Tour</span>
                     </button>
                 </div>
@@ -75,16 +79,15 @@
                 {% for news in berita_list %}
                 <article
                     class="absolute inset-0 bg-gray-200 rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-1 group-hover:scale-[1.01] z-20 border-4 border-white">
-                    <div class="w-full h-full bg-cover bg-center"
-                        aria-label="{{ news.title }}"
-                        role="img"
+                    <div class="w-full h-full bg-cover bg-center" aria-label="{{ news.title }}" role="img"
                         style="background-image: url('{{ news.image.url }}');">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 to-transparent flex items-end p-8">
                             <div class="text-white">
                                 <div class="flex items-center gap-2 mb-1">
                                     <span
-                                        class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">{{ news.category }}</span>
+                                        class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">{{
+                                        news.category }}</span>
                                 </div>
                                 <h3 class="font-bold text-lg">{{ news.title|safe }}</h3>
                                 <p class="text-sm opacity-90 text-gray-200">{{ news.content|safe|truncatewords:10 }}</p>
@@ -93,8 +96,10 @@
                     </div>
                 </article>
                 {% endfor %}
-                <div class="absolute -top-4 -right-4 w-2/3 h-2/3 bg-primary rounded-2xl -z-10 opacity-20" aria-hidden="true"></div>
-                <div class="absolute -bottom-6 -left-6 w-1/2 h-1/2 bg-accent rounded-2xl -z-10 opacity-20" aria-hidden="true"></div>
+                <div class="absolute -top-4 -right-4 w-2/3 h-2/3 bg-primary rounded-2xl -z-10 opacity-20"
+                    aria-hidden="true"></div>
+                <div class="absolute -bottom-6 -left-6 w-1/2 h-1/2 bg-accent rounded-2xl -z-10 opacity-20"
+                    aria-hidden="true"></div>
             </div>
         </div>
     </div>
@@ -102,21 +107,26 @@
 
 <!-- Sambutan Kepala Sekolah Section -->
 <section class="py-20 bg-white relative overflow-hidden" aria-labelledby="sambutan-heading">
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none"></div>
-    
+    <div
+        class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none">
+    </div>
+
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-16">
             <!-- Text Content (Left) -->
             <div class="lg:w-3/5 space-y-8 animate-fade-in-up">
-                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
                     <span class="block size-2 rounded-full bg-primary" aria-hidden="true"></span>
                     <span class="text-xs font-black text-primary uppercase tracking-widest">Sambutan</span>
                 </div>
-                
+
                 <div class="space-y-6">
                     <h2 id="sambutan-heading" class="text-4xl md:text-5xl font-black text-[#0A192F] leading-tight">
-                        "Inovasi adalah kunci <br/>
+                        "Inovasi adalah kunci <br />
                         <span class="text-primary">kemajuan bangsa.</span>"
                     </h2>
                     <p class="text-lg text-gray-600 leading-relaxed">
@@ -125,7 +135,9 @@
                         yang cepat, membekali setiap siswa dengan kompetensi yang relevan dan karakter yang kuat.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        Kami percaya bahwa setiap anak memiliki potensi emas. Dengan bimbingan instruktur profesional dan fasilitas modern, kami berkomitmen untuk mewujudkan mimpi mereka menjadi kenyataan di dunia industri.
+                        Kami percaya bahwa setiap anak memiliki potensi emas. Dengan bimbingan instruktur profesional
+                        dan fasilitas modern, kami berkomitmen untuk mewujudkan mimpi mereka menjadi kenyataan di dunia
+                        industri.
                     </p>
                 </div>
 
@@ -146,26 +158,33 @@
             <div class="lg:w-2/5 relative">
                 <figure class="relative w-full aspect-square md:w-[450px] md:h-[450px] mx-auto">
                     <!-- Background Shapes -->
-                    <div class="absolute inset-0 bg-primary rounded-3xl rotate-6 animate-pulse opacity-10" aria-hidden="true"></div>
-                    <div class="absolute inset-0 bg-accent rounded-full -rotate-12 animate-pulse delay-700 opacity-5" aria-hidden="true"></div>
-                    
+                    <div class="absolute inset-0 bg-primary rounded-3xl rotate-6 animate-pulse opacity-10"
+                        aria-hidden="true"></div>
+                    <div class="absolute inset-0 bg-accent rounded-full -rotate-12 animate-pulse delay-700 opacity-5"
+                        aria-hidden="true"></div>
+
                     <!-- Main Photo Container -->
-                    <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group z-10 bg-gray-100">
+                    <div
+                        class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group z-10 bg-gray-100">
                         {% if kepala_sekolah %}
-                            <img src="{% if kepala_sekolah.image %}{{ kepala_sekolah.image.url }}{% else %}https://ui-avatars.com/api/?name={{ kepala_sekolah.nama|urlencode }}&background=0A192F&color=fff{% endif %}" 
-                                 alt="Foto {{ kepala_sekolah.nama }}"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <img src="{% if kepala_sekolah.image %}{{ kepala_sekolah.image.url }}{% else %}https://ui-avatars.com/api/?name={{ kepala_sekolah.nama|urlencode }}&background=0A192F&color=fff{% endif %}"
+                            alt="Foto {{ kepala_sekolah.nama }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
                         {% else %}
-                            <img src="https://ui-avatars.com/api/?name=Kepala+Sekolah&background=0A192F&color=fff" 
-                                 alt="Foto Kepala Sekolah"
-                                 class="w-full h-full object-cover">
+                        <img src="https://ui-avatars.com/api/?name=Kepala+Sekolah&background=0A192F&color=fff"
+                            alt="Foto Kepala Sekolah" class="w-full h-full object-cover">
                         {% endif %}
-                        
+
                         <!-- Floating Badge -->
-                        <figcaption class="absolute bottom-6 right-6 p-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 transform hover:scale-105 transition-transform hidden md:block z-20">
-                            <span class="material-symbols-outlined text-primary text-3xl mb-1" aria-hidden="true">verified_user</span>
-                            <p class="text-[10px] font-bold text-[#0A192F] uppercase tracking-tighter">Leader & Visionary</p>
+                        <figcaption
+                            class="absolute bottom-6 right-6 p-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 transform hover:scale-105 transition-transform hidden md:block z-20">
+                            <span class="material-symbols-outlined text-primary text-3xl mb-1"
+                                aria-hidden="true">verified_user</span>
+                            <p class="text-[10px] font-bold text-[#0A192F] uppercase tracking-tighter">Leader &
+                                Visionary</p>
                         </figcaption>
                     </div>
 
@@ -180,94 +199,136 @@
 <section id="statistik" class="py-24 bg-[#F8FAFC] relative overflow-hidden" aria-labelledby="stats-heading">
     <!-- Background Decorations -->
     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-    <div class="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-    
+    <div
+        class="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none">
+    </div>
+
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
         <div class="flex flex-col lg:flex-row gap-8 items-stretch">
-            
+
             <!-- Statistical Dashboard (Major - 62%) -->
-            <div class="lg:w-[62%]">
-                <article class="h-full bg-background-dark rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden text-white shadow-2xl group transition-all duration-500 hover:shadow-primary/20">
+            <div class="lg:w-[{{ school.width_dashboard }}%]">
+                <article
+                    class="h-full bg-background-dark rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden text-white shadow-2xl group transition-all duration-500 hover:shadow-primary/20">
                     <!-- Visual Accents -->
-                    <div class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)] pointer-events-none"></div>
-                    <div class="absolute -right-20 -top-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] animate-pulse"></div>
-                    
+                    <div
+                        class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)] pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute -right-20 -top-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] animate-pulse">
+                    </div>
+
                     <div class="relative z-10 flex flex-col h-full">
                         <header class="flex items-center justify-between mb-12">
                             <div>
                                 <h2 id="stats-heading" class="text-3xl font-black mb-2 flex items-center gap-3">
-                                    <span class="p-2.5 rounded-2xl bg-primary/20 backdrop-blur-md border border-white/10 shrink-0">
-                                        <span class="material-symbols-outlined text-accent text-3xl block">analytics</span>
+                                    <span
+                                        class="p-2.5 rounded-2xl bg-primary/20 backdrop-blur-md border border-white/10 shrink-0">
+                                        <span
+                                            class="material-symbols-outlined text-accent text-3xl block">analytics</span>
                                     </span>
                                     <span>Statistik Pendidikan</span>
                                 </h2>
-                                <p class="text-gray-400 text-sm font-medium tracking-wide">Monitoring perkembangan institusi secara real-time tahun 2026.</p>
+                                <p class="text-gray-400 text-sm font-medium tracking-wide">Monitoring perkembangan
+                                    institusi secara real-time tahun 2026.</p>
                             </div>
                             <div class="hidden md:block text-right">
-                                <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Live Update</span>
+                                <span
+                                    class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Live
+                                    Update</span>
                             </div>
                         </header>
 
                         <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 flex-1 relative z-10">
                             {% if school_stats %}
                             <!-- Stat Item 1 -->
-                            <div class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
-                                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
+                            <div
+                                class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
+                                <div
+                                    class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
                                     <span class="material-symbols-outlined text-7xl font-light">groups</span>
                                 </div>
-                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Total Siswa Aktif</dt>
+                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Total
+                                    Siswa Aktif</dt>
                                 <dd class="flex items-baseline gap-2 mb-4">
-                                    <span class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors" aria-label="{{ school_stats.total_siswa }} Siswa">{{ school_stats.total_siswa|default:"0" }}</span>
-                                    <span class="text-xs text-accent font-bold bg-accent/10 px-2 py-0.5 rounded-full">{{ school_stats.persentase_pertumbuhan_siswa|default:"+0%" }}</span>
+                                    <span
+                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors"
+                                        aria-label="{{ school_stats.total_siswa }} Siswa">{{
+                                        school_stats.total_siswa|default:"0" }}</span>
+                                    <span class="text-xs text-accent font-bold bg-accent/10 px-2 py-0.5 rounded-full">{{
+                                        school_stats.persentase_pertumbuhan_siswa|default:"+0%" }}</span>
                                 </dd>
                                 <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000" style="width: {{ school_stats.progress_siswa|default:85 }}%"></div>
+                                    <div class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000"
+                                        style="width: {{ school_stats.progress_siswa|default:85 }}%"></div>
                                 </div>
                             </div>
 
                             <!-- Stat Item 2 -->
-                            <div class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
-                                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
+                            <div
+                                class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
+                                <div
+                                    class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
                                     <span class="material-symbols-outlined text-7xl font-light">verified_user</span>
                                 </div>
-                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Tenaga Pendidik</dt>
+                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Tenaga
+                                    Pendidik</dt>
                                 <dd class="flex items-baseline gap-2 mb-4">
-                                    <span class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{ school_stats.total_instruktur|default:"0" }}</span>
-                                    <span class="text-[9px] text-green-400 font-bold px-2 py-0.5 rounded bg-green-400/10 whitespace-nowrap">{{ school_stats.status_instruktur|default:"Certified" }}</span>
+                                    <span
+                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{
+                                        school_stats.total_instruktur|default:"0" }}</span>
+                                    <span
+                                        class="text-[9px] text-green-400 font-bold px-2 py-0.5 rounded bg-green-400/10 whitespace-nowrap">{{
+                                        school_stats.status_instruktur|default:"Certified" }}</span>
                                 </dd>
                                 <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-gradient-to-r from-accent to-green-400 h-full rounded-full transition-all duration-1000" style="width: {{ school_stats.progress_instruktur|default:95 }}%"></div>
+                                    <div class="bg-gradient-to-r from-accent to-green-400 h-full rounded-full transition-all duration-1000"
+                                        style="width: {{ school_stats.progress_instruktur|default:95 }}%"></div>
                                 </div>
                             </div>
 
                             <!-- Stat Item 3 -->
-                            <div class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
-                                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
+                            <div
+                                class="relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/stat flex flex-col justify-center overflow-hidden">
+                                <div
+                                    class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity">
                                     <span class="material-symbols-outlined text-7xl font-light">handshake</span>
                                 </div>
-                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Mitra Industri</dt>
+                                <dt class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-3">Mitra
+                                    Industri</dt>
                                 <dd class="flex items-baseline gap-2 mb-6">
-                                    <span class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{ school_stats.total_mitra|default:"0" }}</span>
+                                    <span
+                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{
+                                        school_stats.total_mitra|default:"0" }}</span>
                                     <span class="text-xs text-gray-400 font-medium whitespace-nowrap">Instansi</span>
                                 </dd>
-                                <div class="flex -space-x-3 items-center group-hover/stat:translate-x-2 transition-transform duration-300">
-                                    <div class="size-8 rounded-full border-2 border-background-dark bg-gray-600 flex items-center justify-center text-[10px] font-bold" title="Industri IT">IT</div>
-                                    <div class="size-8 rounded-full border-2 border-background-dark bg-primary flex items-center justify-center text-[10px] font-bold" title="Industri Marketing">MK</div>
-                                    <div class="size-8 rounded-full border-2 border-background-dark bg-accent flex items-center justify-center text-[10px] font-black" title="Lebih Banyak Mitra">+DU</div>
+                                <div
+                                    class="flex -space-x-3 items-center group-hover/stat:translate-x-2 transition-transform duration-300">
+                                    <div class="size-8 rounded-full border-2 border-background-dark bg-gray-600 flex items-center justify-center text-[10px] font-bold"
+                                        title="Industri IT">IT</div>
+                                    <div class="size-8 rounded-full border-2 border-background-dark bg-primary flex items-center justify-center text-[10px] font-bold"
+                                        title="Industri Marketing">MK</div>
+                                    <div class="size-8 rounded-full border-2 border-background-dark bg-accent flex items-center justify-center text-[10px] font-black"
+                                        title="Lebih Banyak Mitra">+DU</div>
                                 </div>
                             </div>
                             {% else %}
-                            <div class="col-span-full py-12 text-center border-2 border-dashed border-white/10 rounded-3xl">
-                                <p class="text-gray-500 font-medium">Data statistik belum tersedia untuk periode ini.</p>
+                            <div
+                                class="col-span-full py-12 text-center border-2 border-dashed border-white/10 rounded-3xl">
+                                <p class="text-gray-500 font-medium">Data statistik belum tersedia untuk periode ini.
+                                </p>
                             </div>
                             {% endif %}
                         </dl>
 
-                        <footer class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10 mt-auto">
-                            <div class="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        <footer
+                            class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10 mt-auto">
+                            <div
+                                class="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                                 <div class="flex items-center gap-2">
                                     <span class="relative flex h-2 w-2">
-                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span
+                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                     </span>
                                     System Active
@@ -286,25 +347,33 @@
             <!-- News & Announcements (Minor - 38%) -->
             <aside class="lg:w-[38%] flex flex-col gap-8">
                 <!-- Announcements Widget -->
-                <div class="flex-1 bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col group/aside hover:border-primary/20 transition-all duration-500">
+                <div
+                    class="flex-1 bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col group/aside hover:border-primary/20 transition-all duration-500">
                     <header class="flex items-center justify-between mb-8">
                         <div class="flex items-center gap-4">
-                            <div class="size-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary transition-colors group-hover/aside:bg-primary group-hover/aside:text-white">
+                            <div
+                                class="size-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary transition-colors group-hover/aside:bg-primary group-hover/aside:text-white">
                                 <span class="material-symbols-outlined text-2xl font-black">campaign</span>
                             </div>
                             <h2 class="text-xl font-black text-[#0A192F] uppercase tracking-tighter">Pengumuman</h2>
                         </div>
-                        <a href="{% url 'announcements' %}" class="size-11 rounded-full border border-gray-50 flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition-all shadow-sm" title="Lihat semua pengumuman">
+                        <a href="{% url 'announcements' %}"
+                            class="size-11 rounded-full border border-gray-50 flex items-center justify-center text-gray-400 hover:bg-accent hover:text-white transition-all shadow-sm"
+                            title="Lihat semua pengumuman">
                             <span class="material-symbols-outlined text-xl">open_in_new</span>
                         </a>
                     </header>
 
                     <div class="flex-1 space-y-4 overflow-y-auto custom-scrollbar pr-2">
                         {% for pengumuman in pengumuman_list %}
-                        <article class="group/item p-4 rounded-2xl bg-gray-50/50 hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer border border-transparent hover:border-primary-light">
+                        <article
+                            class="group/item p-4 rounded-2xl bg-gray-50/50 hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer border border-transparent hover:border-primary-light">
                             <div class="flex items-center gap-3 mb-2">
-                                <span class="text-[9px] font-black px-2 py-0.5 rounded bg-primary/10 text-primary group-hover/item:bg-white/20 group-hover/item:text-white uppercase tracking-tighter">{{ pengumuman.tanggal|date:"D" }}</span>
-                                <span class="text-[10px] font-bold opacity-50">{{ pengumuman.tanggal|date:"d M Y" }}</span>
+                                <span
+                                    class="text-[9px] font-black px-2 py-0.5 rounded bg-primary/10 text-primary group-hover/item:bg-white/20 group-hover/item:text-white uppercase tracking-tighter">{{
+                                    pengumuman.tanggal|date:"D" }}</span>
+                                <span class="text-[10px] font-bold opacity-50">{{ pengumuman.tanggal|date:"d M Y"
+                                    }}</span>
                             </div>
                             <h3 class="text-sm font-bold leading-snug line-clamp-2">
                                 {{ pengumuman.judul }}
@@ -312,28 +381,35 @@
                         </article>
                         {% empty %}
                         <div class="py-10 text-center opacity-40">
-                             <span class="material-symbols-outlined text-4xl mb-2">inbox</span>
-                             <p class="text-xs">Belum ada pengumuman</p>
+                            <span class="material-symbols-outlined text-4xl mb-2">inbox</span>
+                            <p class="text-xs">Belum ada pengumuman</p>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
 
                 <!-- Featured Secondary Card -->
-                <section class="h-48 bg-primary rounded-[2.5rem] p-8 text-white relative overflow-hidden group/news cursor-pointer shadow-2xl shadow-primary/20">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay group-hover/news:scale-110 transition-transform duration-1000"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
-                    
+                <section
+                    class="h-48 bg-primary rounded-[2.5rem] p-8 text-white relative overflow-hidden group/news cursor-pointer shadow-2xl shadow-primary/20">
+                    <div
+                        class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay group-hover/news:scale-110 transition-transform duration-1000">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none">
+                    </div>
+
                     <div class="relative z-10 flex flex-col h-full justify-between">
                         <header class="flex items-center justify-between">
-                            <span class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-black uppercase tracking-widest">Informasi Terkini</span>
+                            <span
+                                class="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-black uppercase tracking-widest">Informasi
+                                Terkini</span>
                             <span class="material-symbols-outlined text-accent animate-pulse">new_releases</span>
                         </header>
                         <div class="mt-auto">
                             <h2 class="text-2xl font-black mb-1">Berita Terbaru</h2>
                             <div class="flex items-center gap-2 text-sm font-bold text-white/80">
                                 <span class="border-b border-accent/50 pb-0.5">Semua Kabar Sekolah</span>
-                                <a href="{% url 'berita' %}" class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">trending_flat</a>
+                                <a href="{% url 'berita' %}"
+                                    class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">trending_flat</a>
                             </div>
                         </div>
                     </div>
@@ -346,12 +422,14 @@
 
 <!-- Kurikulum Section -->
 <section id="jurusan" class="py-20 bg-white relative overflow-hidden" aria-labelledby="pusat-keunggulan-heading">
-    <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white pointer-events-none"
+        aria-hidden="true"></div>
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kurikulum Berbasis
                 Industri</span>
-            <h2 id="pusat-keunggulan-heading" class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Pusat Keunggulan</h2>
+            <h2 id="pusat-keunggulan-heading" class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Pusat
+                Keunggulan</h2>
             <p class="text-gray-600">
                 Memadukan hard skills teknis yang mendalam dengan soft skills pengembangan karakter profesional
                 untuk mencetak lulusan siap kerja.
@@ -361,7 +439,8 @@
             <div class="flex flex-col gap-6">
                 <header class="flex items-center justify-between border-b-2 border-primary pb-4 mb-2">
                     <h3 class="text-2xl font-bold flex items-center gap-3 text-[#0A192F]">
-                        <span class="flex items-center justify-center size-10 rounded-lg bg-blue-600 text-white" aria-hidden="true">
+                        <span class="flex items-center justify-center size-10 rounded-lg bg-blue-600 text-white"
+                            aria-hidden="true">
                             <span class="material-symbols-outlined">computer</span>
                         </span>
                         Program Studi
@@ -369,24 +448,29 @@
                 </header>
                 <dl id="jurusan-track" class="flex flex-col gap-6 items-stretch">
                     {% for jurusan in jurusan_list %}
-                    <article class="jurusan-card group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-blue-400 hover:bg-blue-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                        <div class="absolute top-0 right-0 size-16 bg-blue-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                    <article
+                        class="jurusan-card group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-blue-400 hover:bg-blue-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                        <div class="absolute top-0 right-0 size-16 bg-blue-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"
+                            aria-hidden="true"></div>
                         <div class="flex items-start gap-4 relative z-10">
-                            <figure class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
+                            <figure
+                                class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
                                 {% if jurusan.logo %}
-                                    <img src="{{ jurusan.logo.url }}" alt="Logo {{ jurusan.nama }}" class="w-8 h-8 object-contain">
+                                <img src="{{ jurusan.logo.url }}" alt="Logo {{ jurusan.nama }}"
+                                    class="w-8 h-8 object-contain">
                                 {% else %}
-                                    <span class="material-symbols-outlined" aria-hidden="true">computer</span>
+                                <span class="material-symbols-outlined" aria-hidden="true">computer</span>
                                 {% endif %}
                             </figure>
                             <div>
-                                <dt class="text-lg font-bold text-[#0A192F] group-hover:text-blue-700 mb-1">{{ jurusan.nama }}</dt>
+                                <dt class="text-lg font-bold text-[#0A192F] group-hover:text-blue-700 mb-1">{{
+                                    jurusan.nama }}</dt>
                                 <dd class="text-sm text-gray-500">{{ jurusan.deskripsi_singkat }}</dd>
                             </div>
                         </div>
                     </article>
                     {% empty %}
-                        <p class="text-center text-gray-500">Data jurusan belum tersedia.</p>
+                    <p class="text-center text-gray-500">Data jurusan belum tersedia.</p>
                     {% endfor %}
                 </dl>
 
@@ -395,7 +479,8 @@
                 </div>
 
                 <div class="mt-6 flex justify-center">
-                    <button id="btn-lihat-selanjutnya" class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    <button id="btn-lihat-selanjutnya"
+                        class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                         <span id="btn-text">Lihat Selanjutnya</span>
                         <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
                     </button>
@@ -404,49 +489,65 @@
             <div class="flex flex-col gap-6">
                 <header class="flex items-center justify-between border-b-2 border-accent pb-4 mb-2">
                     <h3 class="text-2xl font-bold flex items-center gap-3 text-[#0A192F]">
-                        <span class="flex items-center justify-center size-10 rounded-lg bg-accent text-white" aria-hidden="true">
+                        <span class="flex items-center justify-center size-10 rounded-lg bg-accent text-white"
+                            aria-hidden="true">
                             <span class="material-symbols-outlined">psychology</span>
                         </span>
                         Pengembangan Karakter
                     </h3>
                     <span class="text-sm font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">Soft Skills</span>
                 </header>
-                
-                <article class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+
+                <article
+                    class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"
+                        aria-hidden="true"></div>
                     <div class="flex items-start gap-4 relative z-10">
-                        <div class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <div
+                            class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" aria-hidden="true">language</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Global Language Program</h4>
-                            <p class="text-sm text-gray-600">Penguasaan Bahasa Inggris Bisnis dan Bahasa Jepang/Jerman Teknik.</p>
+                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Global Language
+                                Program</h4>
+                            <p class="text-sm text-gray-600">Penguasaan Bahasa Inggris Bisnis dan Bahasa Jepang/Jerman
+                                Teknik.</p>
                         </div>
                     </div>
                 </article>
 
-                <article class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                <article
+                    class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"
+                        aria-hidden="true"></div>
                     <div class="flex items-start gap-4 relative z-10">
-                        <div class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <div
+                            class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" aria-hidden="true">groups</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Leadership & Entrepreneurship</h4>
-                            <p class="text-sm text-gray-600">Program kepemimpinan dan inkubator bisnis startup siswa (Teaching Factory).</p>
+                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Leadership &
+                                Entrepreneurship</h4>
+                            <p class="text-sm text-gray-600">Program kepemimpinan dan inkubator bisnis startup siswa
+                                (Teaching Factory).</p>
                         </div>
                     </div>
                 </article>
 
-                <article class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                <article
+                    class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:border-accent hover:bg-cyan-50/10 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 size-16 bg-cyan-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"
+                        aria-hidden="true"></div>
                     <div class="flex items-start gap-4 relative z-10">
-                        <div class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <div
+                            class="size-12 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Sertifikasi Internasional</h4>
-                            <p class="text-sm text-gray-600">Persiapan dan ujian sertifikasi keahlian dari vendor IT ternama (Cisco, Mikrotik, Adobe).</p>
+                            <h4 class="text-lg font-bold text-[#0A192F] group-hover:text-accent mb-1">Sertifikasi
+                                Internasional</h4>
+                            <p class="text-sm text-gray-600">Persiapan dan ujian sertifikasi keahlian dari vendor IT
+                                ternama (Cisco, Mikrotik, Adobe).</p>
                         </div>
                     </div>
                 </article>
@@ -463,8 +564,7 @@
         <div class="lg:w-1/2">
             <h2 class="text-3xl font-black text-[#0A192F] mb-6">Filosofi Pendidikan</h2>
             <div class="space-y-4">
-                <details
-                    class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden"
+                <details class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden"
                     open="">
                     <summary
                         class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
@@ -474,11 +574,12 @@
                     </summary>
                     <div
                         class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100 animate-fade-in">
-                        <p class="mt-3">"Menjadi SMK Pusat Keunggulan yang mencetak tenaga kerja profesional yang agamis, berkarakter, berwawasan lingkungan, berprestasi, dan berjiwa wirausaha, serta mampu bersaing di pasar kerja global."</p>
+                        <p class="mt-3">"Menjadi SMK Pusat Keunggulan yang mencetak tenaga kerja profesional yang
+                            agamis, berkarakter, berwawasan lingkungan, berprestasi, dan berjiwa wirausaha, serta mampu
+                            bersaing di pasar kerja global."</p>
                     </div>
                 </details>
-                <details
-                    class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
+                <details class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
                     <summary
                         class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
                         <span class="text-[#0A192F]">Misi Sekolah</span>
@@ -488,66 +589,88 @@
                     <div class="px-5 pb-6 pt-2 border-t border-transparent group-open:border-gray-100 bg-gray-50/50">
                         <div class="space-y-4 mt-4">
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Menyelenggarakan pendidikan kejuruan yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja, serta memperhatikan perkembangan ilmu pengetahuan dan teknologi terkini.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Menyelenggarakan pendidikan kejuruan
+                                    yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja, serta
+                                    memperhatikan perkembangan ilmu pengetahuan dan teknologi terkini.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang mencerminkan nilai-nilai spiritual and etika dalam kehidupan sehari-hari.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Membentuk lulusan yang agamis dan
+                                    berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang
+                                    mencerminkan nilai-nilai spiritual and etika dalam kehidupan sehari-hari.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Mengembangkan pembelajaran berbasis teaching factory sebagai wahana pembentukan keterampilan kerja riil, budaya kerja, serta pengalaman produksi atau layanan jasa.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Mengembangkan pembelajaran berbasis
+                                    teaching factory sebagai wahana pembentukan keterampilan kerja riil, budaya kerja,
+                                    serta pengalaman produksi atau layanan jasa.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Mendorong pencapaian prestasi peserta didik di bidang akademik, vokasional, keagamaan, dan kepemimpinan, baik di tingkat lokal, nasional, maupun internasional.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Mendorong pencapaian prestasi peserta
+                                    didik di bidang akademik, vokasional, keagamaan, dan kepemimpinan, baik di tingkat
+                                    lokal, nasional, maupun internasional.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Menguatkan kemitraan dengan dunia usaha dan dunia industri (DUDI) melalui pelaksanaan praktik kerja lapangan (PKL) dan program kolaboratif lainnya.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Menguatkan kemitraan dengan dunia usaha
+                                    dan dunia industri (DUDI) melalui pelaksanaan praktik kerja lapangan (PKL) dan
+                                    program kolaboratif lainnya.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Menumbuhkan budaya sekolah yang religius, disiplin, peduli lingkungan, dan adaptif terhadap perubahan zaman, dengan tetap mencerminkan nilai-nilai kepesantrenan dalam kehidupan sekolah.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Menumbuhkan budaya sekolah yang
+                                    religius, disiplin, peduli lingkungan, dan adaptif terhadap perubahan zaman, dengan
+                                    tetap mencerminkan nilai-nilai kepesantrenan dalam kehidupan sekolah.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Mengembangkan jejaring kerja sama yang luas dan berkelanjutan untuk mendukung penyerapan lulusan serta peningkatan mutu pembelajaran dan pembinaan karakter peserta didik.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Mengembangkan jejaring kerja sama yang
+                                    luas dan berkelanjutan untuk mendukung penyerapan lulusan serta peningkatan mutu
+                                    pembelajaran dan pembinaan karakter peserta didik.</p>
                             </div>
                             <div class="flex gap-4 items-start">
-                                <div class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                                     <span class="material-symbols-outlined text-[14px] font-black">check</span>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">Membangun kesadaran dan kepedulian terhadap lingkungan hidup melalui program-program ramah lingkungan dan pengelolaan sumber daya yang berkelanjutan.</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Membangun kesadaran dan kepedulian
+                                    terhadap lingkungan hidup melalui program-program ramah lingkungan dan pengelolaan
+                                    sumber daya yang berkelanjutan.</p>
                             </div>
                         </div>
                     </div>
                 </details>
-                <details
-                    class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
+                <details class="group bg-white rounded-xl shadow-sm open:ring-2 open:ring-primary/20 overflow-hidden">
                     <summary
                         class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-white hover:bg-gray-50 transition-colors">
                         <span class="text-[#0A192F]">Budaya Kerja 5R</span>
                         <span
                             class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
                     </summary>
-                    <div
-                        class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100">
+                    <div class="px-5 pb-5 pt-0 text-gray-600 border-t border-transparent group-open:border-gray-100">
                         <p class="mt-3">Kami menerapkan standar industri dengan budaya Ringkas, Rapi, Resik, Rawat,
                             dan Rajin dalam setiap aktivitas pembelajaran praktik.</p>
                     </div>
@@ -558,94 +681,109 @@
             <div class="rounded-2xl overflow-hidden shadow-2xl relative border-4 border-white">
                 <div id="videoWrapper" class="w-full aspect-video bg-black relative">
                     <!-- Thumbnail + Play Button (accessible) -->
-                    <button id="playVideoBtn" aria-label="Putar video" class="absolute inset-0 flex items-center justify-center bg-cover bg-center" style="background-image: url('https://img.youtube.com/vi/NCMuVN4fFgo/maxresdefault.jpg');">
-                        <span class="size-24 rounded-full bg-white/20 backdrop-blur-md border-4 border-white flex items-center justify-center animate-pulse p-6">
+                    <button id="playVideoBtn" aria-label="Putar video"
+                        class="absolute inset-0 flex items-center justify-center bg-cover bg-center"
+                        style="background-image: url('https://img.youtube.com/vi/NCMuVN4fFgo/maxresdefault.jpg');">
+                        <span
+                            class="size-24 rounded-full bg-white/20 backdrop-blur-md border-4 border-white flex items-center justify-center animate-pulse p-6">
                             <span class="material-symbols-outlined text-6xl text-white">play_arrow</span>
                         </span>
                     </button>
 
                     <!-- Unmute/Mute toggle (hidden until player exists) -->
-                    <button id="unmuteBtn" aria-label="Unmute video" class="hidden absolute bottom-4 right-4 z-20 bg-white/90 text-black px-3 py-2 rounded-full shadow-md text-sm font-semibold">Unmute</button>
+                    <button id="unmuteBtn" aria-label="Unmute video"
+                        class="hidden absolute bottom-4 right-4 z-20 bg-white/90 text-black px-3 py-2 rounded-full shadow-md text-sm font-semibold">Unmute</button>
                 </div>
             </div>
 
             <script>
-            (function() {
-                const VIDEO_ID = 'NCMuVN4fFgo';
-                const playBtn = document.getElementById('playVideoBtn');
-                const unmuteBtn = document.getElementById('unmuteBtn');
-                const wrapper = document.getElementById('videoWrapper');
-                let player = null;
+                (function () {
+                    const VIDEO_ID = 'NCMuVN4fFgo';
+                    const playBtn = document.getElementById('playVideoBtn');
+                    const unmuteBtn = document.getElementById('unmuteBtn');
+                    const wrapper = document.getElementById('videoWrapper');
+                    let player = null;
 
-                function loadYouTubeAPI() {
-                    if (window.YT && window.YT.Player) return Promise.resolve();
-                    return new Promise((resolve) => {
-                        const tag = document.createElement('script');
-                        tag.src = 'https://www.youtube.com/iframe_api';
-                        const firstScript = document.getElementsByTagName('script')[0];
-                        firstScript.parentNode.insertBefore(tag, firstScript);
-                        window.onYouTubeIframeAPIReady = function() { resolve(); };
-                    });
-                }
-
-                function createPlayer() {
-                    if (!window.YT || !window.YT.Player) return;
-                    player = new YT.Player('playerIframe', {
-                        events: {
-                            onReady: function(e) {
-                                // show unmute option (video starts muted)
-                                unmuteBtn.classList.remove('hidden');
-                                updateUnmuteText();
-                            }
-                        }
-                    });
-                }
-
-                function updateUnmuteText() {
-                    if (!player) return;
-                    const isMuted = player.isMuted();
-                    unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
-                    unmuteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
-                }
-
-                playBtn && playBtn.addEventListener('click', async function () {
-                    // Create iframe muted initially to ensure consistent autoplay across browsers
-                    const iframe = document.createElement('iframe');
-                    iframe.id = 'playerIframe';
-                    iframe.className = 'w-full h-full';
-                    iframe.src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=1`;
-                    iframe.title = 'Video Tentang Kami';
-                    iframe.frameBorder = '0';
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                    iframe.allowFullscreen = true;
-
-                    wrapper.innerHTML = '';
-                    wrapper.appendChild(iframe);
-
-                    // Load API and init player
-                    await loadYouTubeAPI();
-                    createPlayer();
-                });
-
-                unmuteBtn && unmuteBtn.addEventListener('click', function() {
-                    if (!player) return;
-                    if (player.isMuted()) {
-                        player.unMute();
-                        player.playVideo();
-                    } else {
-                        player.mute();
+                    function loadYouTubeAPI() {
+                        if (window.YT && window.YT.Player) return Promise.resolve();
+                        return new Promise((resolve) => {
+                            const tag = document.createElement('script');
+                            tag.src = 'https://www.youtube.com/iframe_api';
+                            const firstScript = document.getElementsByTagName('script')[0];
+                            firstScript.parentNode.insertBefore(tag, firstScript);
+                            window.onYouTubeIframeAPIReady = function () { resolve(); };
+                        });
                     }
-                    updateUnmuteText();
-                });
 
-            })();
+                    function createPlayer() {
+                        if (!window.YT || !window.YT.Player) return;
+                        player = new YT.Player('playerIframe', {
+                            events: {
+                                onReady: function (e) {
+                                    // show unmute option (video starts muted)
+                                    unmuteBtn.classList.remove('hidden');
+                                    updateUnmuteText();
+                                }
+                            }
+                        });
+                    }
+
+                    function updateUnmuteText() {
+                        if (!player) return;
+                        const isMuted = player.isMuted();
+                        unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+                        unmuteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
+                    }
+
+                    playBtn && playBtn.addEventListener('click', async function () {
+                        // Create iframe muted initially to ensure consistent autoplay across browsers
+                        const iframe = document.createElement('iframe');
+                        iframe.id = 'playerIframe';
+                        iframe.className = 'w-full h-full';
+                        iframe.src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=1`;
+                        iframe.title = 'Video Tentang Kami';
+                        iframe.frameBorder = '0';
+                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                        iframe.allowFullscreen = true;
+
+                        wrapper.innerHTML = '';
+                        wrapper.appendChild(iframe);
+
+                        // Load API and init player
+                        await loadYouTubeAPI();
+                        createPlayer();
+                    });
+
+                    unmuteBtn && unmuteBtn.addEventListener('click', function () {
+                        if (!player) return;
+                        if (player.isMuted()) {
+                            player.unMute();
+                            player.playVideo();
+                        } else {
+                            player.mute();
+                        }
+                        updateUnmuteText();
+                    });
+
+                })();
             </script>
 
             <style>
-            /* Accessibility focus for the play button */
-            #playVideoBtn:focus { outline: 3px solid rgba(0,71,171,0.35); outline-offset: 2px; }
-            #playVideoBtn { background-size: cover; background-position: center; }
-            #unmuteBtn:focus { outline: 3px solid rgba(0,71,171,0.35); outline-offset: 2px; }
+                /* Accessibility focus for the play button */
+                #playVideoBtn:focus {
+                    outline: 3px solid rgba(0, 71, 171, 0.35);
+                    outline-offset: 2px;
+                }
+
+                #playVideoBtn {
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                #unmuteBtn:focus {
+                    outline: 3px solid rgba(0, 71, 171, 0.35);
+                    outline-offset: 2px;
+                }
             </style>
         </div>
     </div>
@@ -665,8 +803,7 @@
                 class="flex flex-col bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                 <div class="h-48 overflow-hidden relative">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                        aria-label="{{ berita.title }}"
-                        role="img"
+                        aria-label="{{ berita.title }}" role="img"
                         style="background-image: url('{% if berita.image %}{{ berita.image.url }}{% else %}https://via.placeholder.com/400x300{% endif %}');">
                     </div>
                     <div
@@ -676,7 +813,8 @@
                 </div>
                 <div class="p-5 flex flex-col flex-1">
                     <span class="text-gray-400 text-xs font-medium mb-2 flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px]">calendar_today</span>{{ berita.created_at|date:"d F Y" }} 
+                        <span class="material-symbols-outlined text-[14px]">calendar_today</span>{{
+                        berita.created_at|date:"d F Y" }}
                     </span>
                     <h3
                         class="text-lg font-bold text-[#0A192F] mb-3 leading-tight group-hover:text-primary transition-colors">
@@ -705,120 +843,120 @@
 </a>
 
 <script>
-// Pagination (non-scrolling): show/hide cards per page with fade transitions
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = Array.from(document.querySelectorAll('.jurusan-card'));
-    const prevBtn = document.getElementById('jurusan-prev');
-    const nextBtn = document.getElementById('jurusan-next');
-    const prevMobile = document.getElementById('jurusan-prev-mobile');
-    const nextMobile = document.getElementById('jurusan-next-mobile');
-    const dotsContainer = document.getElementById('jurusan-dots');
-    const lihatBtn = document.getElementById('btn-lihat-selanjutnya');
-    const lihatText = document.getElementById('btn-text');
+    // Pagination (non-scrolling): show/hide cards per page with fade transitions
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = Array.from(document.querySelectorAll('.jurusan-card'));
+        const prevBtn = document.getElementById('jurusan-prev');
+        const nextBtn = document.getElementById('jurusan-next');
+        const prevMobile = document.getElementById('jurusan-prev-mobile');
+        const nextMobile = document.getElementById('jurusan-next-mobile');
+        const dotsContainer = document.getElementById('jurusan-dots');
+        const lihatBtn = document.getElementById('btn-lihat-selanjutnya');
+        const lihatText = document.getElementById('btn-text');
 
-    function getCardsPerPage() {
-        const w = window.innerWidth;
-        if (w < 640) return 1; // mobile
-        if (w < 1024) return 2; // tablet
-        return 3; // desktop
-    }
-
-    let cardsPerPage = getCardsPerPage();
-    let currentPage = 0;
-    let totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
-
-    function renderDots() {
-        if (!dotsContainer) return;
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'w-2 h-2 rounded-full bg-gray-300 transition-all';
-            btn.setAttribute('aria-label', `Halaman ${i + 1}`);
-            btn.addEventListener('click', () => showPage(i));
-            dotsContainer.appendChild(btn);
+        function getCardsPerPage() {
+            const w = window.innerWidth;
+            if (w < 640) return 1; // mobile
+            if (w < 1024) return 2; // tablet
+            return 3; // desktop
         }
-        updateDots();
-    }
 
-    function updateDots() {
-        if (!dotsContainer) return;
-        Array.from(dotsContainer.children).forEach((el, idx) => {
-            el.classList.toggle('bg-primary', idx === currentPage);
-            el.classList.toggle('bg-gray-300', idx !== currentPage);
-            if (idx === currentPage) {
-                el.classList.add('w-3', 'h-3');
-            } else {
-                el.classList.remove('w-3', 'h-3');
+        let cardsPerPage = getCardsPerPage();
+        let currentPage = 0;
+        let totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+
+        function renderDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'w-2 h-2 rounded-full bg-gray-300 transition-all';
+                btn.setAttribute('aria-label', `Halaman ${i + 1}`);
+                btn.addEventListener('click', () => showPage(i));
+                dotsContainer.appendChild(btn);
             }
-        });
-    }
-
-    function showPage(page) {
-        if (cards.length === 0) return;
-        page = Math.max(0, Math.min(page, totalPages - 1));
-        const start = page * cardsPerPage;
-        const end = Math.min(start + cardsPerPage, cards.length);
-
-        cards.forEach((card, idx) => {
-            if (idx >= start && idx < end) {
-                // show with fade
-                card.style.display = 'block';
-                requestAnimationFrame(() => { card.style.opacity = '1'; });
-            } else {
-                // hide with fade then display none
-                card.style.opacity = '0';
-                setTimeout(() => { if (!(idx >= start && idx < end)) card.style.display = 'none'; }, 240);
-            }
-        });
-
-        currentPage = page;
-        if (lihatText) lihatText.textContent = (page === totalPages - 1) ? 'Kembali ke Awal' : 'Lihat Selanjutnya';
-        updateDots();
-        updateButtons();
-    }
-
-    function updateButtons() {
-        if (prevBtn) prevBtn.disabled = (currentPage === 0);
-        if (nextBtn) nextBtn.disabled = (currentPage === totalPages - 1);
-        if (prevMobile) prevMobile.disabled = (currentPage === 0);
-        if (nextMobile) nextMobile.disabled = (currentPage === totalPages - 1);
-    }
-
-    function nextPage() {
-        if (currentPage === totalPages - 1) showPage(0);
-        else showPage(currentPage + 1);
-    }
-    function prevPage() { showPage(Math.max(0, currentPage - 1)); }
-
-    if (nextBtn) nextBtn.addEventListener('click', nextPage);
-    if (prevBtn) prevBtn.addEventListener('click', prevPage);
-    if (nextMobile) nextMobile.addEventListener('click', nextPage);
-    if (prevMobile) prevMobile.addEventListener('click', prevPage);
-    if (lihatBtn) lihatBtn.addEventListener('click', function() { nextPage(); /* keep focus in place, no scroll */ });
-
-    // debounce helper
-    function debounce(fn, wait) {
-        let t;
-        return function() { clearTimeout(t); t = setTimeout(() => fn.apply(this, arguments), wait); };
-    }
-
-    window.addEventListener('resize', debounce(() => {
-        const newPer = getCardsPerPage();
-        if (newPer !== cardsPerPage) {
-            cardsPerPage = newPer;
-            totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
-            currentPage = Math.min(currentPage, totalPages - 1);
-            renderDots();
-            showPage(currentPage);
+            updateDots();
         }
-    }, 120));
 
-    // init
-    cards.forEach(card => { card.style.transition = 'opacity 240ms ease'; });
-    totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
-    renderDots();
-    showPage(0);
-});
+        function updateDots() {
+            if (!dotsContainer) return;
+            Array.from(dotsContainer.children).forEach((el, idx) => {
+                el.classList.toggle('bg-primary', idx === currentPage);
+                el.classList.toggle('bg-gray-300', idx !== currentPage);
+                if (idx === currentPage) {
+                    el.classList.add('w-3', 'h-3');
+                } else {
+                    el.classList.remove('w-3', 'h-3');
+                }
+            });
+        }
+
+        function showPage(page) {
+            if (cards.length === 0) return;
+            page = Math.max(0, Math.min(page, totalPages - 1));
+            const start = page * cardsPerPage;
+            const end = Math.min(start + cardsPerPage, cards.length);
+
+            cards.forEach((card, idx) => {
+                if (idx >= start && idx < end) {
+                    // show with fade
+                    card.style.display = 'block';
+                    requestAnimationFrame(() => { card.style.opacity = '1'; });
+                } else {
+                    // hide with fade then display none
+                    card.style.opacity = '0';
+                    setTimeout(() => { if (!(idx >= start && idx < end)) card.style.display = 'none'; }, 240);
+                }
+            });
+
+            currentPage = page;
+            if (lihatText) lihatText.textContent = (page === totalPages - 1) ? 'Kembali ke Awal' : 'Lihat Selanjutnya';
+            updateDots();
+            updateButtons();
+        }
+
+        function updateButtons() {
+            if (prevBtn) prevBtn.disabled = (currentPage === 0);
+            if (nextBtn) nextBtn.disabled = (currentPage === totalPages - 1);
+            if (prevMobile) prevMobile.disabled = (currentPage === 0);
+            if (nextMobile) nextMobile.disabled = (currentPage === totalPages - 1);
+        }
+
+        function nextPage() {
+            if (currentPage === totalPages - 1) showPage(0);
+            else showPage(currentPage + 1);
+        }
+        function prevPage() { showPage(Math.max(0, currentPage - 1)); }
+
+        if (nextBtn) nextBtn.addEventListener('click', nextPage);
+        if (prevBtn) prevBtn.addEventListener('click', prevPage);
+        if (nextMobile) nextMobile.addEventListener('click', nextPage);
+        if (prevMobile) prevMobile.addEventListener('click', prevPage);
+        if (lihatBtn) lihatBtn.addEventListener('click', function () { nextPage(); /* keep focus in place, no scroll */ });
+
+        // debounce helper
+        function debounce(fn, wait) {
+            let t;
+            return function () { clearTimeout(t); t = setTimeout(() => fn.apply(this, arguments), wait); };
+        }
+
+        window.addEventListener('resize', debounce(() => {
+            const newPer = getCardsPerPage();
+            if (newPer !== cardsPerPage) {
+                cardsPerPage = newPer;
+                totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+                currentPage = Math.min(currentPage, totalPages - 1);
+                renderDots();
+                showPage(currentPage);
+            }
+        }, 120));
+
+        // init
+        cards.forEach(card => { card.style.transition = 'opacity 240ms ease'; });
+        totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+        renderDots();
+        showPage(0);
+    });
 </script>
 {% endblock %}
