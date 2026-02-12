@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-from django.http import HttpResponse
-=======
 """
 URL configuration for web_smknj project.
 
@@ -17,7 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings

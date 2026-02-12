@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'layouts/base.html' %}
 {% load static %}
 
@@ -77,7 +76,7 @@
     <div class="max-w-[1280px] mx-auto px-4 md:px-8">
         <dl class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
-                <dt class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ leaders_list.count|default:"50" }}+</dt>
+                <dt class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ leaders_list.count|add:guru_staff_list.paginator.count }}+</dt>
                 <dd class="font-bold text-[#0A192F]">Guru & Instruktur</dd>
                 <p class="text-xs text-gray-500 mt-1 uppercase font-bold tracking-widest">Profesional</p>
             </div>
@@ -100,9 +99,76 @@
     </div>
 </section>
 
-<!-- Tim Pengajar -->
-<section id="tim-pengajar" class="py-20 bg-background-light relative" aria-labelledby="tim-heading">
+<!-- Kepemimpinan Sekolah -->
+<section class="py-20 bg-background-light relative" aria-labelledby="kepemimpinan-heading">
     <div class="absolute inset-0 bg-triangle-pattern opacity-5 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kepemimpinan</span>
+            <h2 id="kepemimpinan-heading" class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Struktur Kepemimpinan Sekolah</h2>
+            <p class="text-gray-600">
+                Tim kepemimpinan yang solid dan visioner dalam memajukan pendidikan vokasi di Indonesia.
+            </p>
+        </header>
+
+        <div class="flex flex-col items-center">
+            <!-- Kepala Sekolah -->
+            {% for guru_staff in leaders_list %}
+            {% if guru_staff.jabatan == 'Kepala Sekolah' %}
+            <article class="mb-16 text-center">
+                <div class="relative mb-6 inline-block">
+                    <figure class="size-48 rounded-full border-4 border-white shadow-2xl overflow-hidden mx-auto">
+                        <div class="w-full h-full bg-cover bg-center profile-image"
+                            role="img" aria-label="Foto {{ guru_staff.nama }}"
+                            style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=0A192F&color=fff{% endif %}');">
+                        </div>
+                    </figure>
+                    <div class="absolute -bottom-2 -right-2 size-14 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg" aria-hidden="true">
+                        <span class="material-symbols-outlined text-2xl">verified</span>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-[#0A192F] mb-2">{{ guru_staff.nama }}</h3>
+                <p class="text-primary font-bold text-lg mb-4">{{ guru_staff.jabatan }}</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    {{ guru_staff.deskripsi|default:"Pimpinan visioner yang berdedikasi tinggi dalam memajukan kualitas pendidikan vokasi di SMK Nurul Jadid." }}
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center mt-6">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.pendidikan }}</span>
+                    {% if guru_staff.mata_pelajaran.exists %}
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
+                    {% endif %}
+                </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+    
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                {% for guru_staff in leaders_list %}
+                {% if guru_staff.jabatan != 'Kepala Sekolah' %}
+                <article class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <figure class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-gray-200 profile-image" 
+                                role="img" aria-label="Foto {{ guru_staff.nama }}"
+                                style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=0A192F&color=fff{% endif %}');"></div>
+                        </figure>
+                        <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
+                        <p class="text-primary font-semibold mb-2 text-sm">{{ guru_staff.jabatan }}</p>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-2">{{ guru_staff.deskripsi }}</p>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase rounded">{{ guru_staff.pendidikan }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tim Pengajar -->
+<section id="tim-pengajar" class="py-20 bg-white relative" aria-labelledby="tim-heading">
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
         <header class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Tim Pengajar</span>
@@ -121,7 +187,7 @@
                         <div class="w-full h-full bg-cover bg-center bg-gray-200 profile-image" 
                             role="img" aria-label="Foto {{ guru_staff.nama }}"
                             style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=0A192F&color=fff{% endif %}');"></div>
-                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover/img:opacity-100 transition-opacity"></div>
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover/img:opacity-100 transition-opacity" aria-hidden="true"></div>
                     </figure>
                     <h3 class="text-lg font-black text-[#0A192F] mb-1">{{ guru_staff.nama }}</h3>
                     <p class="text-xs font-bold text-primary uppercase tracking-widest mb-3">{{ guru_staff.jabatan }}</p>
@@ -142,7 +208,7 @@
         <nav class="flex justify-center mt-16 animate-fade-in-up" style="animation-delay: 0.3s" aria-label="Navigasi Halaman">
             <div class="flex items-center gap-2 bg-white p-2 rounded-2xl shadow-lg border border-gray-100">
                 {% if guru_staff_list.has_previous %}
-                <a href="?page={{ guru_staff_list.previous_page_number }}" class="size-10 flex items-center justify-center rounded-xl border border-gray-100 text-gray-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 group" aria-label="Halaman Sebelumnya">
+                <a href="?page={{ guru_staff_list.previous_page_number }}#tim-pengajar" class="size-10 flex items-center justify-center rounded-xl border border-gray-100 text-gray-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 group" aria-label="Halaman Sebelumnya">
                     <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">chevron_left</span>
                 </a>
                 {% endif %}
@@ -153,14 +219,14 @@
                         {{ i }}
                     </span>
                     {% elif i > guru_staff_list.number|add:'-3' and i < guru_staff_list.number|add:'3' %}
-                    <a href="?page={{ i }}" class="size-10 flex items-center justify-center rounded-xl border border-transparent text-gray-500 hover:bg-gray-50 hover:text-primary font-bold transition-all duration-300">
+                    <a href="?page={{ i }}#tim-pengajar" class="size-10 flex items-center justify-center rounded-xl border border-transparent text-gray-500 hover:bg-gray-50 hover:text-primary font-bold transition-all duration-300">
                         {{ i }}
                     </a>
                     {% endif %}
                 {% endfor %}
 
                 {% if guru_staff_list.has_next %}
-                <a href="?page={{ guru_staff_list.next_page_number }}" class="size-10 flex items-center justify-center rounded-xl border border-gray-100 text-gray-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 group" aria-label="Halaman Berikutnya">
+                <a href="?page={{ guru_staff_list.next_page_number }}#tim-pengajar" class="size-10 flex items-center justify-center rounded-xl border border-gray-100 text-gray-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 group" aria-label="Halaman Berikutnya">
                     <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span>
                 </a>
                 {% endif %}
@@ -180,367 +246,3 @@
     <span class="material-symbols-outlined text-2xl" aria-hidden="true">phone</span>
 </a>
 {% endblock %}
-=======
-<!DOCTYPE html>
-<html class="light" lang="id">
-
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>SMK NURUL JADID - Guru & Staff</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#0047AB", "primary-dark": "#003380",
-                        "accent": "#00B4D8", "background-light": "#F0F4F8",
-                        "background-dark": "#0A192F", "surface": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
-                    backgroundImage: {
-                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #0047AB;
-            border-radius: 4px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .staff-card {
-            transition: all 0.3s ease;
-        }
-        
-        .staff-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .profile-image {
-            transition: transform 0.5s ease;
-        }
-        
-        .staff-card:hover .profile-image {
-            transform: scale(1.05);
-        }
-    </style>
-</head>
-
-<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
-    <!-- Navigation -->
-    
-    {% include 'layouts/navbar.html' %}
-
-    <!-- Hero Section Guru & Staff -->
-    <header class="relative w-full overflow-hidden bg-white py-16 lg:py-24">
-        <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-to-bl from-primary/10 to-accent/10 rounded-bl-full blur-3xl"></div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="flex flex-col gap-6 animate-fade-in-up">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
-                        <span class="block size-2 rounded-full bg-primary animate-pulse"></span>
-                        <span class="text-xs font-bold text-primary uppercase tracking-wide">Tim Pengajar Profesional</span>
-                    </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
-                        Guru & <span class="text-primary relative inline-block">
-                            Tenaga Kependidikan
-                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
-                                preserveAspectRatio="none" viewBox="0 0 100 10">
-                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
-                            </svg>
-                        </span>
-                    </h1>
-                    <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
-                        Didukung oleh tim pengajar yang kompeten, berpengalaman, dan berdedikasi tinggi dalam mencetak generasi muda yang siap bersaing di era digital.
-                    </p>
-                    <div class="flex flex-wrap gap-4 mt-2">
-                        <a href="#tim-pengajar"
-                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <span>Lihat Tim Pengajar</span>
-                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="relative lg:h-[500px] w-full group">
-                    <div
-                        class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] z-20 border-8 border-white">
-                        <div class="w-full h-full bg-cover bg-center"
-                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2WwkiG1c5Kl5tfPvcGJAWEV9K-J3APH9K7zRxzEEz7F9lp8HYR7zS-Zxd4vmQIbBHYdNWm3efcLddTyl0U5iqCDSDIuXDreh7oflpRTmDkXgmOZK1JyUVmDXOX16Fh8liS9Z-DER15_hDV5WLrI4WaEXfwhcjYyF6vmGJG18kuZSCQG9ueMmHAEYLhRGWdz4bMj-uxRne8kXlwSfsrabCRS37hfrc3yVW_afYwm7k2IpVVHVtqTta-mliIcvTdlUEDXoW59beWgs');">
-                        </div>
-                    </div>
-                    <div
-                        class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-primary/20 rounded-3xl -z-10 blur-xl opacity-60">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Statistik Guru & Staff -->
-    <section class="py-12 bg-white">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ leaders_list.count }}</div>
-                    <p class="font-bold text-[#0A192F]">Guru & Instruktur</p>
-                    <p class="text-sm text-gray-500 mt-1">Profesional</p>
-                </div>
-                <div class="bg-gradient-to-br from-accent/5 to-white p-6 rounded-2xl border border-accent/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">85%</div>
-                    <p class="font-bold text-[#0A192F]">Bersertifikasi</p>
-                    <p class="text-sm text-gray-500 mt-1">Kompetensi Keahlian</p>
-                </div>
-                <div class="bg-gradient-to-br from-blue-500/5 to-white p-6 rounded-2xl border border-blue-500/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">15+</div>
-                    <p class="font-bold text-[#0A192F]">Tahun Pengalaman</p>
-                    <p class="text-sm text-gray-500 mt-1">Rata-rata</p>
-                </div>
-                <div class="bg-gradient-to-br from-green-500/5 to-white p-6 rounded-2xl border border-green-500/20 text-center group hover:shadow-lg transition-all duration-300">
-                    <div class="text-3xl font-black text-green-600 mb-2 group-hover:scale-110 transition-transform">10+</div>
-                    <p class="font-bold text-[#0A192F]">Pelatihan & Workshop</p>
-                    <p class="text-sm text-gray-500 mt-1">Per Tahun</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kepemimpinan Sekolah -->
-    <section class="py-20 bg-background-light relative">
-        <div class="absolute inset-0 bg-triangle-pattern opacity-5 pointer-events-none"></div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kepemimpinan</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Struktur Kepemimpinan Sekolah</h2>
-                <p class="text-gray-600">
-                    Tim kepemimpinan yang solid dan visioner dalam memajukan pendidikan vokasi di Indonesia.
-                </p>
-            </div>
-
-            <div class="flex flex-col items-center">
-                <!-- Kepala Sekolah -->
-                 {% for guru_staff in leaders_list %}
-                 {% if guru_staff.jabatan == 'Kepala Sekolah' %}
-                <div class="mb-16 text-center">
-                    <div class="relative mb-6">
-                        <div class="size-48 rounded-full border-4 border-white shadow-2xl overflow-hidden mx-auto">
-                            <div class="w-full h-full bg-cover bg-center profile-image"
-                                style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');">
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-2 -right-2 size-14 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg">
-                            <span class="material-symbols-outlined text-2xl">verified</span>
-                        </div>
-                    </div>
-                    <h3 class="text-3xl font-bold text-[#0A192F] mb-2">{{ guru_staff.nama }}</h3>
-                    <p class="text-primary font-bold text-lg mb-4">{{ guru_staff.jabatan }}</p>
-                    <p class="text-gray-600 max-w-2xl mx-auto">
-                        {{ guru_staff.deskripsi }}
-                    </p>
-                    <div class="flex flex-wrap gap-3 justify-center mt-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.pendidikan }}</span>
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
-        
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-                    <!-- Wakil Kepala Sekolah bidang administrasi dan support-->
-                    {% for guru_staff in leaders_list %}
-                    {% if guru_staff.jabatan == 'Waka bidang Kurikulum' %}
-                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
-                            </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
-                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
-                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
-                            <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                    <!-- Wakil Kepala Sekolah bidang sarana dan prasarana-->
-                     {% if guru_staff.jabatan == 'Waka bidang Sarana dan Prasarana' %}
-                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
-                            </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
-                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
-                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
-                            <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    {% if guru_staff.jabatan == 'Waka bidang Hubungan Masyarakat' %}
-                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
-                            </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
-                            <p class="text-primary font-semibold mb-2">{{ guru_staff.kategori.nama }}</p>
-                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
-                            <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% if guru_staff.jabatan == 'Waka bidang Kesiswaan' %}
-                    <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                                <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
-                            </div>
-                            <h4 class="text-xl font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
-                            <p class="text-primary font-semibold mb-2">{{ guru_staff.jabatan }}</p>
-                            <p class="text-sm text-gray-500 mb-3">{{ guru_staff.deskripsi }}</p>
-                            <div class="flex gap-2">
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tim Pengajar -->
-    <section id="tim-pengajar" class="py-20 bg-white relative">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Tim Pengajar</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Guru Produktif & Instruktur</h2>
-                <p class="text-gray-600">
-                    Para pengajar yang berkompeten di bidangnya masing-masing, siap membimbing siswa mencapai prestasi terbaik.
-                </p>
-            </div>
-
-            <!-- Daftar Guru -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {% for guru_staff in guru_staff_list %}
-                <div class="staff-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="size-28 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
-                            <div class="w-full h-full bg-cover bg-center bg-gray-200" style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
-                        </div>
-                        <h4 class="text-lg font-bold text-[#0A192F] mb-1">{{ guru_staff.nama }}</h4>
-                        <p class="text-sm text-primary font-semibold mb-2">{{ guru_staff.jabatan }}</p>
-                        <p class="text-xs text-gray-500 mb-4">{{ guru_staff.deskripsi }}</p>
-                        <div class="flex flex-wrap gap-2 justify-center mb-4">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.pendidikan }}</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <!-- Pagination -->
-            {% if guru_staff_list.has_other_pages %}
-            <div class="flex justify-center mt-12 animate-fade-in-up" style="animation-delay: 0.3s">
-                <nav class="flex items-center gap-2" aria-label="Pagination">
-                    {% if guru_staff_list.has_previous %}
-                    <a href="?page={{ guru_staff_list.previous_page_number }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
-                        <span class="material-symbols-outlined text-sm">chevron_left</span>
-                    </a>
-                    {% endif %}
-
-                    {% for i in guru_staff_list.paginator.page_range %}
-                        {% if guru_staff_list.number == i %}
-                        <span class="size-10 flex items-center justify-center rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/30 pointer-events-none">
-                            {{ i }}
-                        </span>
-                        {% else %}
-                        <a href="?page={{ i }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
-                            {{ i }}
-                        </a>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if guru_staff_list.has_next %}
-                    <a href="?page={{ guru_staff_list.next_page_number }}" class="size-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
-                        <span class="material-symbols-outlined text-sm">chevron_right</span>
-                    </a>
-                    {% endif %}
-                </nav>
-            </div>
-            {% endif %}
-            
-        </div>
-    </section>
-
-    <!-- Footer -->
-    
-    {% include 'layouts/footer.html' %}
-
-    <a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
-        href="#">
-        <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Hubungi
-            Kami</span>
-        <span class="material-symbols-outlined text-2xl">phone</span>
-    </a>
-
-</body>
-
-</html>
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac

@@ -7,12 +7,7 @@ from django.http import Http404, FileResponse
 from django.core.cache import cache
 from .models import *
 from django.views.generic import ListView, DetailView
-<<<<<<< HEAD
 from django.db.models import Q, Sum, F
-=======
-from django.db.models import Q, Sum
-from django.shortcuts import render
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 from django.utils import timezone
 
 
@@ -26,32 +21,18 @@ def beranda(request):
     if cached_data:
         context = cached_data
     else:
-<<<<<<< HEAD
         jurusan_list = Jurusan.objects.all()
         pengumuman_list = Pengumuman.objects.select_related('category').all().order_by('-created_at')[:5]
         pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').first()
         guru_staff_list = StaffDanGuru.objects.prefetch_related('mata_pelajaran').all()
         # Queryset Berita (tanpa pagination)
         berita_list = news.objects.select_related('category').all().order_by('-created_at')[:3]
-=======
-        guru_staff_list = StaffDanGuru.objects.all()
-        pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')[:2]
-        pengumuman_list = Pengumuman.objects.all().order_by('-created_at')[:3]
-        jurusan_list = Jurusan.objects.all()
-
-        # Queryset Berita (tanpa pagination)
-        berita_list = news.objects.all().order_by('-created_at')[:1]
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         
         # Ambil statistik sekolah yang aktif
         school_stats = SchoolStatistics.objects.filter(is_active=True).first()
 
-<<<<<<< HEAD
         # Ambil data kepala sekolah secara spesifik
         kepala_sekolah = StaffDanGuru.objects.filter(jabatan__icontains='Kepala Sekolah').first()
-
-=======
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         context = {
             'jurusan_list': jurusan_list,
             'berita_list': berita_list,
@@ -59,19 +40,11 @@ def beranda(request):
             'pengumuman_penting': pengumuman_penting,
             'school_stats': school_stats,
             'guru_staff_list': guru_staff_list,
-<<<<<<< HEAD
             'kepala_sekolah': kepala_sekolah,
         }
         
         # Cache the data for a shorter time or clear it
-        cache.set(cache_key, context, 60) # Reduced to 60s for easier testing
-
-=======
-        }
-        
-        # Cache the data for 15 minutes (900 seconds)
-        cache.set(cache_key, context, 900)
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
+        cache.set(cache_key, context, 300) # Balanced cache time
 
     return render(request, 'index.html', context)
 
@@ -128,17 +101,10 @@ def guru_staff(request):
         context = cached_data
     else:
         # Ambil semua data staff untuk bagian pimpinan (filter di template)
-<<<<<<< HEAD
         all_staff = StaffDanGuru.objects.filter(jabatan__in=leader_titles).prefetch_related('mata_pelajaran').order_by('created_at')
         
         # Filter untuk paginasi (hanya guru reguler, exclude pimpinan)
         regular_staff = StaffDanGuru.objects.exclude(jabatan__in=leader_titles).prefetch_related('mata_pelajaran').order_by('created_at')
-=======
-        all_staff = StaffDanGuru.objects.filter(jabatan__in=leader_titles).order_by('created_at')
-        
-        # Filter untuk paginasi (hanya guru reguler, exclude pimpinan)
-        regular_staff = StaffDanGuru.objects.exclude(jabatan__in=leader_titles).order_by('created_at')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         
         # Pagination (6 guru per halaman)
         paginator = Paginator(regular_staff, 6)
@@ -156,7 +122,6 @@ def guru_staff(request):
     return render(request, 'profil/guru-staff.html', context)
 
 def berita(request):
-<<<<<<< HEAD
     # Ambil parameter query
     search_query = request.GET.get('search', '')
     kategori_filter = request.GET.get('kategori', '')
@@ -164,32 +129,21 @@ def berita(request):
 
     # Buat cache key yang dinamis berdasarkan parameter agar pencarian tidak salah cache
     cache_key = f'berita_v2_{search_query}_{kategori_filter}_{page_number}'
-=======
-    # Check if data is already cached
-    cache_key = 'berita_data'
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     cached_data = cache.get(cache_key)
     
     if cached_data:
         context = cached_data
     else:
         # Mengambil semua berita dari database, diurutkan dari yang terbaru
-<<<<<<< HEAD
         berita_list = news.objects.select_related('category').all().order_by('-created_at')
         
         # Mengambil berita utama (berita terbaru) - Simpan sebelum difilter untuk hero section
-=======
-        berita_list = news.objects.all().order_by('-created_at')
-        
-        # Mengambil berita utama (berita terbaru)
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         berita_utama = berita_list.first() if berita_list.exists() else None
         
         # Mengambil kategori untuk filter
         kategori_list = newsCategory.objects.all()
         
         # Filter berdasarkan kategori jika ada parameter
-<<<<<<< HEAD
         if kategori_filter:
             berita_list = berita_list.filter(category__slug=kategori_filter)
         
@@ -203,20 +157,7 @@ def berita(request):
         
         # Pagination (6 berita per halaman)
         paginator = Paginator(berita_list, 6)
-=======
-        kategori_filter = request.GET.get('kategori')
-        if kategori_filter:
-            berita_list = berita_list.filter(category__slug=kategori_filter)
-        
-        # Pencarian
-        search_query = request.GET.get('search')
-        if search_query:
-            berita_list = berita_list.filter(title__icontains=search_query)
-        
-        # Pagination (6 berita per halaman)
-        paginator = Paginator(berita_list, 6)
-        page_number = request.GET.get('page')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
+        page_number = request.GET.get('page', '1')
         page_obj = paginator.get_page(page_number)
         
         context = {
@@ -225,40 +166,26 @@ def berita(request):
             'kategori_list': kategori_list,
         }
         
-<<<<<<< HEAD
         # Cache the data for shorter time for dynamic results
         cache.set(cache_key, context, 300)
-=======
-        # Cache the data for 15 minutes (900 seconds)
-        cache.set(cache_key, context, 900)
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     return render(request, 'berita/berita.html', context)
 
 def detail_berita(request, slug):
     # Mengambil berita berdasarkan slug
     berita_detail = get_object_or_404(news, slug=slug)
     
-<<<<<<< HEAD
     # Increment view count efficiently without modifying updated_at
     news.objects.filter(slug=slug).update(view_count=F('view_count') + 1)
-=======
-    # Increment view count
-    berita_detail.view_count += 1
-    berita_detail.save()
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     
     # Mengambil berita terkait (dari kategori yang sama)
     berita_terkait = news.objects.filter(category=berita_detail.category).exclude(slug=slug).order_by('-created_at')[:3]
     
-<<<<<<< HEAD
     # Mengambil berita terbaru
     berita_terbaru = news.objects.exclude(slug=slug).order_by('-created_at')[:5]
     
     # Mengambil berita trending (berdasarkan view_count)
     berita_trending = news.objects.exclude(slug=slug).order_by('-view_count')[:5]
     
-=======
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     # Mengambil berita sebelumnya dan selanjutnya
     berita_sebelumnya = news.objects.filter(created_at__lt=berita_detail.created_at).order_by('-created_at').first()
     berita_selanjutnya = news.objects.filter(created_at__gt=berita_detail.created_at).order_by('created_at').first()
@@ -266,11 +193,8 @@ def detail_berita(request, slug):
     context = {
         'berita': berita_detail,
         'berita_terkait': berita_terkait,
-<<<<<<< HEAD
         'berita_terbaru': berita_terbaru,
         'berita_trending': berita_trending,
-=======
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         'berita_sebelumnya': berita_sebelumnya,
         'berita_selanjutnya': berita_selanjutnya,
     }
@@ -300,7 +224,6 @@ def download_pengumuman_file(request, file_id):
         raise Http404(f"Error saat download file: {str(e)}")
 
 def pengumuman_view(request):
-<<<<<<< HEAD
     # Ambil parameter query
     search_query = request.GET.get('search', '')
     category_name = request.GET.get('category', '')
@@ -309,28 +232,16 @@ def pengumuman_view(request):
     # Buat cache key yang unik berdasarkan parameter (search, category, page)
     # Gunakan string sederhana untuk key
     cache_key = f'pengumuman_v2_{search_query}_{category_name}_{page_number}'
-=======
-    # Check if data is already cached
-    cache_key = 'pengumuman_data'
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     cached_data = cache.get(cache_key)
     
     if cached_data:
         context = cached_data
     else:
-<<<<<<< HEAD
         pengumuman_list = Pengumuman.objects.select_related('category').all().order_by('-created_at')
         # Gunakan iexact agar tidak case-sensitive
         pengumuman_penting = Pengumuman.objects.select_related('category').filter(category__nama__iexact='Penting').order_by('-created_at')
         
         # Pencarian
-=======
-        pengumuman_list = Pengumuman.objects.all().order_by('-created_at')
-        pengumuman_penting = Pengumuman.objects.filter(category__nama='Penting').order_by('-created_at')
-        
-        # Pencarian
-        search_query = request.GET.get('search')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         if search_query:
             pengumuman_list = pengumuman_list.filter(
                 Q(judul__icontains=search_query) | 
@@ -342,7 +253,6 @@ def pengumuman_view(request):
         pengumuman_category = categoryPengumuman.objects.all().order_by('nama')
         
         # Filter by category if present
-<<<<<<< HEAD
         selected_category = None
         if category_name:
             selected_category = categoryPengumuman.objects.filter(nama__iexact=category_name).first()
@@ -353,48 +263,21 @@ def pengumuman_view(request):
                 # Di sini kita filter dengan nama asli yang diberikan jika tidak found di selected_category
                 pengumuman_list = pengumuman_list.filter(category__nama__iexact=category_name)
         
-=======
-        category_name = request.GET.get('category')
-        selected_category = categoryPengumuman.objects.filter(nama=category_name).first() if category_name else None
-        
-        if category_name:
-            try:
-                pengumuman_list = pengumuman_list.filter(category__nama=category_name)
-            except (ValueError, categoryPengumuman.DoesNotExist):
-                pass
-
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         # For files section - filter based on filtered announcements
         pengumuman_file = pengumuman_list.filter(files__isnull=False).distinct().order_by('-created_at')
 
         # ===== HITUNG STATISTIK DOWNLOAD =====
-<<<<<<< HEAD
         total_files = FilePengumuman.objects.filter(pengumuman__in=pengumuman_list).count()
-=======
-        # Total file yang ada
-        total_files = FilePengumuman.objects.filter(pengumuman__in=pengumuman_list).count()
-        
-        # Total download dari semua file
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         total_downloads = FilePengumuman.objects.filter(
             pengumuman__in=pengumuman_list
         ).aggregate(total=Sum('download_count'))['total'] or 0
         
-<<<<<<< HEAD
-=======
-        # File paling banyak di-download
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         most_downloaded_file = FilePengumuman.objects.filter(
             pengumuman__in=pengumuman_list
         ).order_by('-download_count').first()
 
-<<<<<<< HEAD
         # Increase pagination size from 2 to 6 for better UX
         paginator = Paginator(pengumuman_list, 6)
-=======
-        paginator = Paginator(pengumuman_list, 2)
-        page_number = request.GET.get('page')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         page_obj = paginator.get_page(page_number)
 
         context = {
@@ -404,22 +287,13 @@ def pengumuman_view(request):
             'pengumuman_category': pengumuman_category,
             'pengumuman_file': pengumuman_file,
             'selected_category': selected_category,
-<<<<<<< HEAD
-=======
-            # ===== TAMBAHKAN STATISTIK KE CONTEXT =====
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
             'total_files': total_files,
             'total_downloads': total_downloads,
             'most_downloaded_file': most_downloaded_file,
         }
         
-<<<<<<< HEAD
         # Cache the data for a shorter time (e.g., 5 minutes instead of 15)
         cache.set(cache_key, context, 300)
-=======
-        # Cache the data for 15 minutes (900 seconds)
-        cache.set(cache_key, context, 900)
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     return render(request, 'pengumuman/pengumuman.html', context)
 
 def detail_pengumuman(request, slug):
@@ -427,12 +301,7 @@ def detail_pengumuman(request, slug):
     pengumuman_detail = get_object_or_404(Pengumuman, slug=slug)
     
     # Increment view count
-<<<<<<< HEAD
     Pengumuman.objects.filter(slug=slug).update(view_count=F('view_count') + 1)
-=======
-    pengumuman_detail.view_count += 1
-    pengumuman_detail.save()
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     
     # Mengambil pengumuman terkait (dari kategori yang sama)
     pengumuman_terkait = Pengumuman.objects.filter(category=pengumuman_detail.category).exclude(slug=slug).order_by('-created_at')[:3]
@@ -457,11 +326,7 @@ def ektrakurikuler(request):
     if cached_data:
         context = cached_data
     else:
-<<<<<<< HEAD
         ektra_list = ektra.objects.select_related('category').all().order_by('-created_at')
-=======
-        ektra_list = ektra.objects.all().order_by('-created_at')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         
         # Mengambil ektra utama (ektra terbaru)
         ektra_utama = ektra_list.first() if ektra_list.exists() else None
@@ -497,12 +362,7 @@ def detail_ektrakurikuler(request, slug):
     # Mengambil data tambahan
     
     # Increment view count
-<<<<<<< HEAD
     ektra.objects.filter(slug=slug).update(view_count=F('view_count') + 1)
-=======
-    ektra_detail.view_count += 1
-    ektra_detail.save()
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
     
     # Mengambil ektra terkait (dari kategori yang sama)
     ektra_terkait = ektra.objects.filter(category=ektra_detail.category).exclude(slug=slug).order_by('-created_at')[:3]
@@ -599,7 +459,6 @@ Pesan:
         except Exception as e:
             messages.error(request, f'Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti. ({str(e)})')
             
-<<<<<<< HEAD
     return render(request, 'kontak/kontak.html')
 
 def global_search(request):
@@ -673,6 +532,3 @@ def global_search(request):
     }
     
     return render(request, 'search_results.html', context)
-=======
-    return render(request, 'kontak/kontak.html')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac

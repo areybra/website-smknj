@@ -1,610 +1,470 @@
+{% extends 'layouts/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html class="light" lang="id">
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>SMK Nurul Jadid - Program Jurusan</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#0047AB", "primary-dark": "#003380",
-                        "accent": "#00B4D8", "background-light": "#F0F4F8",
-                        "background-dark": "#0A192F", "surface": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
-                    backgroundImage: {
-                        'geo-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047AB' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-                        'triangle-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 40H0L20 0Z' fill='%230047AB' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.6s ease-out',
-                        'scale-in': 'scaleIn 0.4s ease-out',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        scaleIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.9)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' },
-                        }
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
+{% block title %}SMK Nurul Jadid - Program Jurusan{% endblock %}
 
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #0047AB;
-            border-radius: 4px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .program-card:hover .program-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #F0F4F8 0%, #E3EBF5 50%, #F0F4F8 100%);
-        }
-        
+{% block extra_head %}
+<style>
+    .program-card:hover .program-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    .gradient-bg {
+        background: linear-gradient(135deg, #F0F4F8 0%, #E3EBF5 50%, #F0F4F8 100%);
+    }
+    
+    .sticky-nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    @media (max-width: 768px) {
         .sticky-nav {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9);
+            position: static;
         }
-        
-        @media (max-width: 768px) {
-            .sticky-nav {
-                position: static;
-            }
-        }
-    </style>
-</head>
+    }
+</style>
+{% endblock %}
 
-<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
-
-    {% include 'layouts/navbar.html' %}
-
-    <!-- Header - LAYOUT BERUBAH: Konten dan kartu ditukar posisi -->
-    <header class="relative w-full overflow-hidden gradient-bg">
-        <div class="absolute inset-0 bg-triangle-pattern opacity-30 pointer-events-none"></div>
-        <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
-        
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Kartu jurusan dipindah ke kiri -->
-                <div class="relative lg:h-[400px] w-full order-2 lg:order-1">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="space-y-4">
-                            {% for jurusan in jurusan_utama %}
-                            {% if forloop.counter == 1 %}
-                            <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                                <div class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                    {% if jurusan.logo %}
-                                        <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
-                                    {% else %}
-                                        <span class="material-symbols-outlined">router</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
+{% block content %}
+<!-- Header -->
+<header class="relative w-full overflow-hidden gradient-bg">
+    <div class="absolute inset-0 bg-triangle-pattern opacity-30 pointer-events-none"></div>
+    <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
+    
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Kartu jurusan -->
+            <div class="relative lg:h-[400px] w-full order-2 lg:order-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        {% for jurusan in jurusan_utama %}
+                        {% if forloop.counter == 1 %}
+                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                {% if jurusan.logo %}
+                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                {% else %}
+                                    <span class="material-symbols-outlined">router</span>
+                                {% endif %}
                             </div>
-                            {% elif forloop.counter == 2 %}
-                            <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                                <div class="size-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                    {% if jurusan.logo %}
-                                        <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
-                                    {% else %}
-                                        <span class="material-symbols-outlined">palette</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
-                            </div>
+                            <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
                         </div>
-                        <div class="space-y-4 pt-8">
-                            {% elif forloop.counter == 3 %}
-                            <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                                <div class="size-12 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                    {% if jurusan.logo %}
-                                        <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
-                                    {% else %}
-                                        <span class="material-symbols-outlined">precision_manufacturing</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
+                        {% elif forloop.counter == 2 %}
+                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div class="size-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                {% if jurusan.logo %}
+                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                {% else %}
+                                    <span class="material-symbols-outlined">palette</span>
+                                {% endif %}
                             </div>
-                            {% elif forloop.counter == 4 %}
-                            <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                                <div class="size-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                    {% if jurusan.logo %}
-                                        <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
-                                    {% else %}
-                                        <span class="material-symbols-outlined">code</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
+                            <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
                         </div>
                     </div>
-                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
-                    <div class="absolute -top-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-xl"></div>
+                    <div class="space-y-4 pt-8">
+                        {% elif forloop.counter == 3 %}
+                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div class="size-12 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                {% if jurusan.logo %}
+                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                {% else %}
+                                    <span class="material-symbols-outlined">precision_manufacturing</span>
+                                {% endif %}
+                            </div>
+                            <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
+                        </div>
+                        {% elif forloop.counter == 4 %}
+                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div class="size-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                {% if jurusan.logo %}
+                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                {% else %}
+                                    <span class="material-symbols-outlined">code</span>
+                                {% endif %}
+                            </div>
+                            <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-                
-                <!-- Teks dipindah ke kanan -->
-                <div class="flex flex-col gap-6 animate-fade-in-up order-1 lg:order-2">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 w-fit shadow-sm">
-                        <span class="block size-2 rounded-full bg-primary"></span>
-                        <span class="text-sm font-bold text-primary uppercase tracking-wide">Program Keahlian</span>
+                <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
+                <div class="absolute -top-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-xl"></div>
+            </div>
+            
+            <!-- Teks -->
+            <div class="flex flex-col gap-6 animate-fade-in-up order-1 lg:order-2">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 w-fit shadow-sm">
+                    <span class="block size-2 rounded-full bg-primary"></span>
+                    <span class="text-sm font-bold text-primary uppercase tracking-wide">Program Keahlian</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
+                    Rancang Masa Depan,
+                    <span class="text-primary relative inline-block">
+                        Pilih Jurusan
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                            preserveAspectRatio="none" viewBox="0 0 100 10">
+                            <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                    Setiap program dirancang dengan kurikulum berbasis industri untuk memastikan kesiapan karir di era digital. Temukan jurusan yang sesuai dengan passion dan bakat Anda.
+                </p>
+                <div class="flex flex-wrap gap-3 mt-2">
+                    <a href="#detail-jurusan"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <span>Jelajahi Jurusan</span>
+                        <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                    </a>
+                    <a href="#program-unggulan"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
+                        <span class="material-symbols-outlined text-primary group-hover:text-accent transition-colors">local_library</span>
+                        <span>Program Unggulan</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Section Detail Jurusan -->
+<section id="detail-jurusan" class="py-20 bg-background-light relative">
+    <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Pilihan Karir</span>
+            <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Detail Program Jurusan</h2>
+            <p class="text-gray-600">
+                Setiap jurusan dirancang dengan kurikulum spesifik yang mengintegrasikan teori dan praktik berbasis kebutuhan industri.
+            </p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Tab vertikal -->
+            <div class="lg:w-1/4">
+                <div class="sticky top-24 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-lg mb-4">Pilih Jurusan:</h3>
+                    <div class="space-y-2">
+                        {% for j in jurusan_list %}
+                        <button class="jurusan-tab w-full text-left {% if forloop.first %}active bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50{% endif %} px-4 py-3 rounded-lg font-medium text-sm transition-all" data-jurusan="{{ j.slug }}">
+                            {{ j.nama }}
+                        </button>
+                        {% endfor %}
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
-                        Rancang Masa Depan,
-                        <span class="text-primary relative inline-block">
-                            Pilih Jurusan
-                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
-                                preserveAspectRatio="none" viewBox="0 0 100 10">
-                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
-                            </svg>
-                        </span>
-                    </h1>
-                    <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
-                        Setiap program dirancang dengan kurikulum berbasis industri untuk memastikan kesiapan karir di era digital. Temukan jurusan yang sesuai dengan passion dan bakat Anda.
+                </div>
+            </div>
+            
+            <!-- Konten Jurusan -->
+            <div class="lg:w-3/4">
+                <div id="jurusan-content" class="animate-scale-in">
+                    {% for j in jurusan_list %}
+                    <div class="jurusan-content-item {% if not forloop.first %}hidden{% endif %}" id="content-{{ j.slug }}">
+                        <div class="space-y-8">
+                            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                                <div class="flex flex-col md:flex-row md:items-start gap-6 mb-8">
+                                    <div class="flex items-center justify-center size-20 rounded-xl bg-white text-gray-700 shrink-0">
+                                        {% if j.logo %}
+                                            <img src="{{ j.logo.url }}" alt="{{ j.nama }}" class="w-8 h-8">
+                                        {% else %}
+                                            <span class="material-symbols-outlined text-3xl">{{ j.icon|default:"terminal" }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-[#0A192F] mb-4">{{ j.nama }}</h3>
+                                        <p class="text-gray-600">
+                                            {{ j.deskripsi_singkat }}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 gap-8">
+                                    <div>
+                                        <h4 class="font-bold text-lg mb-3">Informasi Program:</h4>
+                                        <div class="space-y-4">
+                                            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                                                <span class="text-gray-600">Durasi Pendidikan</span>
+                                                <span class="font-bold">{{ j.durasi }}</span>
+                                            </div>
+                                            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                                                <span class="text-gray-600">Kuota Siswa/Tahun</span>
+                                                <span class="font-bold">{{ j.kuota }}</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-gray-600">Tingkat Kelas</span>
+                                                <span class="font-bold">X, XI, XII</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-bold text-lg mb-3">Kompetensi Utama:</h4>
+                                        <ul class="space-y-2">
+                                            {% for k in j.kompetensi.all|slice:":6" %}
+                                            <li class="flex items-start gap-2">
+                                                <span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+                                                <span>{{ k.nama }}</span>
+                                            </li>
+                                            {% empty %}
+                                            <li class="text-gray-400 italic text-sm">Belum ada kompetensi terdaftar</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-8 pt-6 border-t border-gray-100">
+                                    <a href="{% url 'program_studi_detail' j.slug %}" class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                                        Lihat Detail Selengkapnya
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-lg mb-4">Galeri Kegiatan</h4>
+                                    <div class="grid grid-cols-2 gap-3 mb-6">
+                                        <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
+                                            <img src="{% if j.gambar_utama %}{{ j.gambar_utama.url }}{% else %}https://via.placeholder.com/400x300{% endif %}" alt="{{ j.nama }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
+                                            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                                <span class="material-symbols-outlined text-gray-400">image</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 class="font-bold text-lg mb-3">Mitra Industri:</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        {% for m in j.mitra_industri.all|slice:":4" %}
+                                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">{{ m.nama }}</span>
+                                        {% empty %}
+                                        <span class="text-gray-400 text-xs italic">Belum ada mitra terdaftar</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
+                                    <h4 class="font-bold text-lg mb-4">Peluang Karir:</h4>
+                                    <div class="space-y-3">
+                                        {% for p in j.prospek_karir.all|slice:":4" %}
+                                        <div class="flex items-center justify-between">
+                                            <span>{{ p.posisi }}</span>
+                                            <span class="text-sm bg-white/20 px-2 py-1 rounded">{{ p.rata_gaji|default:"Sesuai UMK" }}</span>
+                                        </div>
+                                        {% empty %}
+                                        <p class="text-white/70 text-sm italic">Belum ada prospek karir terdaftar</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Program Unggulan -->
+<section id="program-unggulan" class="py-20 bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Keunggulan Kami</span>
+            <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Program Unggulan Berbasis Industri</h2>
+            <p class="text-gray-600">
+                Setiap jurusan dilengkapi dengan program unggulan yang dikembangkan bersama mitra industri untuk memastikan relevansi dengan kebutuhan pasar kerja.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="flex flex-col h-full">
+                    <div class="program-icon size-14 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-2xl">cloud</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0A192F] mb-3">Kelas Cloud Computing</h3>
+                    <p class="text-gray-600 mb-4 flex-grow text-sm">
+                        Program khusus untuk menguasai teknologi cloud dengan sertifikasi dari AWS dan Google Cloud Platform.
                     </p>
-                    <div class="flex flex-wrap gap-3 mt-2">
-                        <a href="#detail-jurusan"
-                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <span>Jelajahi Jurusan</span>
-                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
-                        </a>
-                        <a href="#program-unggulan"
-                            class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
-                            <span class="material-symbols-outlined text-primary group-hover:text-accent transition-colors">local_library</span>
-                            <span>Program Unggulan</span>
-                        </a>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">TKJ</span>
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">RPL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="flex flex-col h-full">
+                    <div class="program-icon size-14 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-2xl">palette</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0A192F] mb-3">Digital Creative Studio</h3>
+                    <p class="text-gray-600 mb-4 flex-grow text-sm">
+                        Studio produksi lengkap untuk desain grafis, animasi 3D, dan produksi konten digital dengan perangkat profesional.
+                    </p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded">Multimedia</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="flex flex-col h-full">
+                    <div class="program-icon size-14 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-2xl">apartment</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0A192F] mb-3">Asrama IT</h3>
+                    <p class="text-gray-600 mb-4 flex-grow text-sm">
+                        Pembelajaran malam intensif bagi siswa jurusan IT untuk mendukung pembelajaran intensif dan kolaboratif.
+                    </p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Semua Jurusan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="flex flex-col h-full">
+                    <div class="program-icon size-14 rounded-xl bg-green-100 text-green-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-2xl">code</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0A192F] mb-3">Startup Incubation</h3>
+                    <p class="text-gray-600 mb-4 flex-grow text-sm">
+                        Program inkubasi startup teknologi untuk siswa dengan ide bisnis inovatif dan mentor industri.
+                    </p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded">RPL</span>
+                        <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded">Semua</span>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- Section Detail Jurusan - LAYOUT BERUBAH: Dipindah lebih dulu -->
-    <section id="detail-jurusan" class="py-20 bg-background-light relative">
-        <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none"></div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Pilihan Karir</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Detail Program Jurusan</h2>
-                <p class="text-gray-600">
-                    Setiap jurusan dirancang dengan kurikulum spesifik yang mengintegrasikan teori dan praktik berbasis kebutuhan industri.
-                </p>
-            </div>
-            
-            <!-- LAYOUT BERUBAH: Tab dipindah ke vertikal di kiri, konten di kanan -->
-            <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Tab vertikal -->
-                <div class="lg:w-1/4">
-                    <div class="sticky top-24 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-lg mb-4">Pilih Jurusan:</h3>
-                        <div class="space-y-2">
-                            {% for j in jurusan_list %}
-                            <button class="jurusan-tab w-full text-left {% if forloop.first %}active bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50{% endif %} px-4 py-3 rounded-lg font-medium text-sm transition-all" data-jurusan="{{ j.slug }}">
-                                {{ j.nama }}
-                            </button>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Konten Jurusan -->
-                <div class="lg:w-3/4">
-                    <div id="jurusan-content" class="animate-scale-in">
-                        {% for j in jurusan_list %}
-                        <div class="jurusan-content-item {% if not forloop.first %}hidden{% endif %}" id="content-{{ j.slug }}">
-                            <!-- LAYOUT BERUBAH: Konten dalam grid 1 kolom -->
-                            <div class="space-y-8">
-                                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                                    <div class="flex flex-col md:flex-row md:items-start gap-6 mb-8">
-                                        <div class="flex items-center justify-center size-20 rounded-xl bg-white text-gray-700 shrink-0">
-                                            {% if j.logo %}
-                                                <img src="{{ j.logo.url }}" alt="{{ j.nama }}" class="w-8 h-8">
-                                            {% else %}
-                                                <span class="material-symbols-outlined text-3xl">{{ j.icon|default:"terminal" }}</span>
-                                            {% endif %}
-                                        </div>
-                                        <div>
-                                            <h3 class="text-2xl font-bold text-[#0A192F] mb-4">{{ j.nama }}</h3>
-                                            <p class="text-gray-600">
-                                                {{ j.deskripsi_singkat }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="grid md:grid-cols-2 gap-8">
-                                        <div>
-                                            <h4 class="font-bold text-lg mb-3">Informasi Program:</h4>
-                                            <div class="space-y-4">
-                                                <div class="flex justify-between items-center pb-3 border-b border-gray-100">
-                                                    <span class="text-gray-600">Durasi Pendidikan</span>
-                                                    <span class="font-bold">{{ j.durasi }}</span>
-                                                </div>
-                                                <div class="flex justify-between items-center pb-3 border-b border-gray-100">
-                                                    <span class="text-gray-600">Kuota Siswa/Tahun</span>
-                                                    <span class="font-bold">{{ j.kuota }}</span>
-                                                </div>
-                                                <div class="flex justify-between items-center">
-                                                    <span class="text-gray-600">Tingkat Kelas</span>
-                                                    <span class="font-bold">X, XI, XII</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div>
-                                            <h4 class="font-bold text-lg mb-3">Kompetensi Utama:</h4>
-                                            <ul class="space-y-2">
-                                                {% for k in j.kompetensi.all|slice:":4" %}
-                                                <li class="flex items-start gap-2">
-                                                    <span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
-                                                    <span>{{ k.nama }}</span>
-                                                </li>
-                                                {% empty %}
-                                                <li class="text-gray-400 italic text-sm">Belum ada kompetensi terdaftar</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mt-8 pt-6 border-t border-gray-100">
-                                        <a href="{% url 'program_studi_detail' j.slug %}" class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
-                                            Lihat Detail Selengkapnya
-                                            <span class="material-symbols-outlined">arrow_forward</span>
-                                        </a>
-                                    </div>
+<!-- Section Prospek Karir -->
+<section id="prospek-karir" class="py-20 bg-background-light relative">
+    <div class="absolute inset-0 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Masa Depan Cerah</span>
+            <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Prospek Karir & Penyaluran Kerja</h2>
+            <p class="text-gray-600">
+                Lebih dari 96% lulusan SMK Nurul Jadid terserap di dunia kerja atau melanjutkan pendidikan tinggi dalam waktu 6 bulan setelah kelulusan.
+            </p>
+        </div>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <h3 class="text-2xl font-bold text-[#0A192F] mb-6">Mitra Penyaluran Kerja</h3>
+                    <div class="space-y-4">
+                        {% for mitra in mitra_industri_list %}
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded-lg {% cycle 'bg-blue-100' 'bg-orange-100' 'bg-purple-100' 'bg-green-100' %} flex items-center justify-center overflow-hidden">
+                                    {% if mitra.logo %}
+                                        <img src="{{ mitra.logo.url }}" alt="{{ mitra.nama }}" class="w-full h-full object-contain p-1">
+                                    {% else %}
+                                        <span class="material-symbols-outlined {% cycle 'text-blue-600' 'text-orange-600' 'text-purple-600' 'text-green-600' %}">
+                                            {% cycle 'apartment' 'factory' 'tv' 'code' %}
+                                        </span>
+                                    {% endif %}
                                 </div>
-                                
-                                <!-- LAYOUT BERUBAH: Galeri dan prospek karir sejajar -->
-                                <div class="grid md:grid-cols-2 gap-6">
-                                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                                        <h4 class="font-bold text-lg mb-4">Galeri Kegiatan</h4>
-                                        <div class="grid grid-cols-2 gap-3 mb-6">
-                                            <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
-                                                <img src="{% if j.gambar_utama %}{{ j.gambar_utama.url }}{% else %}https://via.placeholder.com/400x300{% endif %}" alt="{{ j.nama }}" class="w-full h-full object-cover">
-                                            </div>
-                                            <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
-                                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                                    <span class="material-symbols-outlined text-gray-400">image</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <h4 class="font-bold text-lg mb-3">Mitra Industri:</h4>
-                                        <div class="flex flex-wrap gap-2">
-                                            {% for m in j.mitra_industri.all|slice:":4" %}
-                                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">{{ m.nama }}</span>
-                                            {% empty %}
-                                            <span class="text-gray-400 text-xs italic">Belum ada mitra terdaftar</span>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
-                                        <h4 class="font-bold text-lg mb-4">Peluang Karir:</h4>
-                                        <div class="space-y-3">
-                                            {% for p in j.prospek_karir.all|slice:":4" %}
-                                            <div class="flex items-center justify-between">
-                                                <span>{{ p.posisi }}</span>
-                                                <span class="text-sm bg-white/20 px-2 py-1 rounded">{{ p.rata_gaji|default:"Sesuai UMK" }}</span>
-                                            </div>
-                                            {% empty %}
-                                            <p class="text-white/70 text-sm italic">Belum ada prospek karir terdaftar</p>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
+                                <div>
+                                    <p class="font-bold">{{ mitra.nama }}</p>
+                                    <p class="text-sm text-gray-500">
+                                        {% for prospek in mitra.jurusan.prospek_karir.all|slice:":2" %}
+                                            {{ prospek.posisi }}{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            Career Ready
+                                        {% endfor %}
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-8">
+                            <p class="text-gray-500 italic">Belum ada data mitra industri.</p>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Section Program Unggulan - LAYOUT BERUBAH: Dipindah setelah Detail Jurusan -->
-    <section id="program-unggulan" class="py-20 bg-white">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Keunggulan Kami</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Program Unggulan Berbasis Industri</h2>
-                <p class="text-gray-600">
-                    Setiap jurusan dilengkapi dengan program unggulan yang dikembangkan bersama mitra industri untuk memastikan relevansi dengan kebutuhan pasar kerja.
-                </p>
-            </div>
             
-            <!-- LAYOUT BERUBAH: Grid 4 kolom di desktop -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
-                    <div class="flex flex-col h-full">
-                        <div class="program-icon size-14 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-5 transition-transform duration-300">
-                            <span class="material-symbols-outlined text-2xl">cloud</span>
+            <div class="space-y-6">
+                <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="font-bold text-xl mb-4">Program Pendukung</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-sm">work</span>
+                            </div>
+                            <div>
+                                <p class="font-medium">Teaching Factory</p>
+                                <p class="text-sm opacity-80">Belajar dari proyek industri nyata</p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-[#0A192F] mb-3">Kelas Cloud Computing</h3>
-                        <p class="text-gray-600 mb-4 flex-grow text-sm">
-                            Program khusus untuk menguasai teknologi cloud dengan sertifikasi dari AWS dan Google Cloud Platform.
-                        </p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">TKJ</span>
-                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">RPL</span>
+                        <div class="flex items-start gap-3">
+                            <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-sm">handshake</span>
+                            </div>
+                            <div>
+                                <p class="font-medium">Job Matching</p>
+                                <p class="text-sm opacity-80">Sesuaikan skill dengan kebutuhan</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
-                    <div class="flex flex-col h-full">
-                        <div class="program-icon size-14 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-5 transition-transform duration-300">
-                            <span class="material-symbols-outlined text-2xl">palette</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#0A192F] mb-3">Digital Creative Studio</h3>
-                        <p class="text-gray-600 mb-4 flex-grow text-sm">
-                            Studio produksi lengkap untuk desain grafis, animasi 3D, dan produksi konten digital dengan perangkat profesional.
-                        </p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded">Multimedia</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
-                    <div class="flex flex-col h-full">
-                        <div class="program-icon size-14 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center mb-5 transition-transform duration-300">
-                            <span class="material-symbols-outlined text-2xl">smart_toy</span>
-                        </div>
-<<<<<<< HEAD
-                        <h3 class="text-xl font-bold text-[#0A192F] mb-3">Asrama IT</h3>
-                        <p class="text-gray-600 mb-4 flex-grow text-sm">
-                            Pembelajaran malam intensif bagi siswa jurusan IT untuk mendukung pembelajaran intensif dan kolaboratif.
-                        </p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Semua Jurusan</span>
-=======
-                        <h3 class="text-xl font-bold text-[#0A192F] mb-3">IoT & Robotics Lab</h3>
-                        <p class="text-gray-600 mb-4 flex-grow text-sm">
-                            Laboratorium otomasi industri dengan perangkat IoT dan robotika untuk pembelajaran berbasis proyek nyata.
-                        </p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Mekatronika</span>
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Kartu tambahan -->
-                <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
-                    <div class="flex flex-col h-full">
-                        <div class="program-icon size-14 rounded-xl bg-green-100 text-green-700 flex items-center justify-center mb-5 transition-transform duration-300">
-                            <span class="material-symbols-outlined text-2xl">code</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#0A192F] mb-3">Startup Incubation</h3>
-                        <p class="text-gray-600 mb-4 flex-grow text-sm">
-                            Program inkubasi startup teknologi untuk siswa dengan ide bisnis inovatif dan mentor industri.
-                        </p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded">RPL</span>
-                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded">Semua</span>
+                        <div class="flex items-start gap-3">
+                            <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-sm">trending_up</span>
+                            </div>
+                            <div>
+                                <p class="font-medium">Kewirausahaan</p>
+                                <p class="text-sm opacity-80">Inkubasi bisnis untuk siswa</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+{% endblock %}
 
-    <!-- Section Prospek Karir - LAYOUT BERUBAH: Dipindah sebelum Fasilitas -->
-    <section id="prospek-karir" class="py-20 bg-background-light relative">
-        <div class="absolute inset-0 bg-triangle-pattern opacity-10 pointer-events-none"></div>
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Masa Depan Cerah</span>
-                <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Prospek Karir & Penyaluran Kerja</h2>
-                <p class="text-gray-600">
-                    Lebih dari 96% lulusan SMK Nurul Jadid terserap di dunia kerja atau melanjutkan pendidikan tinggi dalam waktu 6 bulan setelah kelulusan.
-                </p>
-            </div>
+{% block extra_body %}
+<script>
+    // Tab Jurusan Interactivity
+    document.querySelectorAll('.jurusan-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            document.querySelectorAll('.jurusan-tab').forEach(t => {
+                t.classList.remove('active', 'bg-primary', 'text-white');
+                t.classList.add('text-gray-600', 'hover:bg-gray-50');
+            });
             
-            <!-- LAYOUT BERUBAH: Grid dengan konten utama di kiri, kartu di kanan -->
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-8">
-                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                        <h3 class="text-2xl font-bold text-[#0A192F] mb-6">Mitra Penyaluran Kerja</h3>
-                        <div class="space-y-4">
-                            {% for mitra in mitra_industri_list %}
-                            <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="size-10 rounded-lg {% cycle 'bg-blue-100' 'bg-orange-100' 'bg-purple-100' 'bg-green-100' %} flex items-center justify-center overflow-hidden">
-                                        {% if mitra.logo %}
-                                            <img src="{{ mitra.logo.url }}" alt="{{ mitra.nama }}" class="w-full h-full object-contain p-1">
-                                        {% else %}
-                                            <span class="material-symbols-outlined {% cycle 'text-blue-600' 'text-orange-600' 'text-purple-600' 'text-green-600' %}">
-                                                {% cycle 'apartment' 'factory' 'tv' 'code' %}
-                                            </span>
-                                        {% endif %}
-                                    </div>
-                                    <div>
-                                        <p class="font-bold">{{ mitra.nama }}</p>
-                                        <p class="text-sm text-gray-500">
-                                            {% for prospek in mitra.jurusan.prospek_karir.all|slice:":2" %}
-                                                {{ prospek.posisi }}{% if not forloop.last %}, {% endif %}
-                                            {% empty %}
-                                                Career Ready
-                                            {% endfor %}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            {% empty %}
-                            <div class="text-center py-8">
-                                <p class="text-gray-500 italic">Belum ada data mitra industri.</p>
-                            </div>
-                            {% endfor %}
-                        </div>
-
-                    </div>
-                </div>
-                
-                <div class="space-y-6">
-                    
-                    <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
-                        <h3 class="font-bold text-xl mb-4">Program Pendukung</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-sm">work</span>
-                                </div>
-                                <div>
-                                    <p class="font-medium">Teaching Factory</p>
-                                    <p class="text-sm opacity-80">Belajar dari proyek industri nyata</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-sm">handshake</span>
-                                </div>
-                                <div>
-                                    <p class="font-medium">Job Matching</p>
-                                    <p class="text-sm opacity-80">Sesuaikan skill dengan kebutuhan</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="size-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-sm">trending_up</span>
-                                </div>
-                                <div>
-                                    <p class="font-medium">Kewirausahaan</p>
-                                    <p class="text-sm opacity-80">Inkubasi bisnis untuk siswa</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Footer - LAYOUT BERUBAH: Grid 5 kolom -->
-    {% include 'layouts/footer.html' %}
-
-    <!-- Floating CTA -->
-    <a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
-        href="#">
-        <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Konsultasi</span>
-        <span class="material-symbols-outlined text-2xl">forum</span>
-    </a>
-
-    <script>
-        // Tab Jurusan Interactivity
-        document.querySelectorAll('.jurusan-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                document.querySelectorAll('.jurusan-tab').forEach(t => {
-                    t.classList.remove('active', 'bg-primary', 'text-white');
-                    t.classList.add('text-gray-600', 'hover:bg-gray-50');
-                });
-                
-                // Add active class to clicked tab
-                this.classList.remove('text-gray-600', 'hover:bg-gray-50');
-                this.classList.add('active', 'bg-primary', 'text-white');
-                
-                // Here you would typically load the content for the selected jurusan
-                // For this example, we'll just show an alert
-                const jurusan = this.getAttribute('data-jurusan');
-                
-                // Hide all content items
-                document.querySelectorAll('.jurusan-content-item').forEach(item => {
-                    item.classList.add('hidden');
-                });
-                
-                // Show selected content item
-                const selectedContent = document.getElementById(`content-${jurusan}`);
-                if (selectedContent) {
-                    selectedContent.classList.remove('hidden');
-                }
+            // Add active class to clicked tab
+            this.classList.remove('text-gray-600', 'hover:bg-gray-50');
+            this.classList.add('active', 'bg-primary', 'text-white');
+            
+            const jurusan = this.getAttribute('data-jurusan');
+            
+            // Hide all content items
+            document.querySelectorAll('.jurusan-content-item').forEach(item => {
+                item.classList.add('hidden');
             });
+            
+            // Show selected content item
+            const selectedContent = document.getElementById(`content-${jurusan}`);
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
+            }
         });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-up');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements you want to animate
-        document.querySelectorAll('.program-card, .jurusan-tab').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
-
-</body>
-
-</html>
+    });
+</script>
+{% endblock %}

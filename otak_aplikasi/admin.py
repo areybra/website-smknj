@@ -46,11 +46,7 @@ class pengumumanAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         if not request.user.is_superuser:
-<<<<<<< HEAD
             queryset = queryset.filter(category__nama__iexact='PPDB')
-=======
-            queryset = queryset.filter(category__nama='PPDB')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
         return queryset
 
 admin.site.register(categoryPengumuman)

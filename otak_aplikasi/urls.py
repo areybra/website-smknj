@@ -15,10 +15,6 @@ urlpatterns = [
    path('program-studi/', views.program_studi, name='program_studi'),
    path('program-studi/<slug:slug>/', views.program_studi_detail, name='program_studi_detail'),
    path('kontak/', views.kontak, name='kontak'),
-<<<<<<< HEAD
    path('pengumuman/download/<int:file_id>/', views.download_pengumuman_file, name='download_pengumuman_file'),
    path('search/', views.global_search, name='global_search'),
-=======
-   path('pengumuman/download/<int:file_id>/', views.download_pengumuman_file, name='download_pengumuman_file')
->>>>>>> 3db7cf5201c76b23d92a1c155734c992bf8dc8ac
 ]
