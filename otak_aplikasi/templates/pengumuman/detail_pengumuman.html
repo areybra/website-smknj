@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{{ pengumuman.judul }} - Detail Pengumuman - SMK Nurul Jadid</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0047AB", "primary-dark": "#003380",
+                        "accent": "#00B4D8", "background-light": "#F0F4F8",
+                        "background-dark": "#0A192F", "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 4px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-[#0A192F] font-display antialiased overflow-x-hidden selection:bg-primary/30">
+    <!-- Navigation -->
+    {% include 'layouts/navbar.html' %}
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-100 py-4">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <nav class="flex items-center gap-2 text-sm">
+                <a href="{% url 'home' %}" class="text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">home</span>
+                    Beranda
+                </a>
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <a href="{% url 'announcements' %}" class="text-gray-500 hover:text-primary transition-colors">Pengumuman</a>
+                <span class="material-symbols-outlined text-gray-300 text-sm">chevron_right</span>
+                <span class="text-primary font-medium">Detail Pengumuman</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left Content -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <div class="flex flex-wrap items-center gap-4 mb-6">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                                {{ pengumuman.category.nama }}
+                            </span>
+                            <span class="text-gray-500 text-sm flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                {{ pengumuman.created_at|date:"d F Y" }}
+                            </span>
+                            <span class="text-gray-500 text-sm flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">visibility</span>
+                                {{ pengumuman.view_count }} kali dilihat
+                            </span>
+                        </div>
+
+                        <h1 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-8 leading-tight">
+                            {{ pengumuman.judul }}
+                        </h1>
+
+                        <div class="article-content mb-12">
+                            {{ pengumuman.deskripsi|safe }}
+                        </div>
+
+                        <!-- Lampiran File -->
+                        {% if pengumuman.files.exists %}
+                        <div class="border-t border-gray-100 pt-8">
+                            <h3 class="text-xl font-bold text-[#0A192F] mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">attach_file</span>
+                                Lampiran Dokumen
+                            </h3>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                {% for file_obj in pengumuman.files.all %}
+                                <div class="p-4 rounded-xl border border-gray-100 bg-gray-50 flex items-center justify-between group hover:border-primary transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <div class="size-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm">
+                                            <span class="material-symbols-outlined">description</span>
+                                        </div>
+                                        <div class="max-w-[200px]">
+                                            <p class="text-sm font-bold text-[#0A192F] truncate" title="{{ file_obj.file_name }}">{{ file_obj.file_name }}</p>
+                                            <p class="text-xs text-gray-500">{{ file_obj.file_size }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ file_obj.file.url }}" target="_blank" class="size-8 rounded-full bg-blue-50 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm" title="Preview File">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </a>
+                                        <a href="{{ file_obj.file.url }}" download class="size-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-all shadow-lg shadow-primary/20" title="Download File">
+                                            <span class="material-symbols-outlined text-sm">download</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Navigation -->
+                        <div class="border-t border-gray-100 pt-8 mt-12 flex flex-wrap gap-4 justify-between">
+                            {% if pengumuman_sebelumnya %}
+                            <a href="{% url 'announcements_detail' pengumuman_sebelumnya.slug %}" class="flex items-center gap-3 group">
+                                <span class="size-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-primary group-hover:text-primary transition-all">
+                                    <span class="material-symbols-outlined">arrow_back</span>
+                                </span>
+                                <div>
+                                    <p class="text-xs text-gray-500">Sebelumnya</p>
+                                    <p class="text-sm font-bold text-[#0A192F] group-hover:text-primary transition-colors">{{ pengumuman_sebelumnya.judul|truncatechars:30 }}</p>
+                                </div>
+                            </a>
+                            {% endif %}
+                            
+                            {% if pengumuman_selanjutnya %}
+                            <a href="{% url 'announcements_detail' pengumuman_selanjutnya.slug %}" class="flex items-center gap-3 group text-right">
+                                <div>
+                                    <p class="text-xs text-gray-500">Selanjutnya</p>
+                                    <p class="text-sm font-bold text-[#0A192F] group-hover:text-primary transition-colors">{{ pengumuman_selanjutnya.judul|truncatechars:30 }}</p>
+                                </div>
+                                <span class="size-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-primary group-hover:text-primary transition-all">
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-8">
+                    <!-- Pengumuman Terkait -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-[#0A192F] mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-xl">campaign</span>
+                            Terkait
+                        </h3>
+                        <div class="space-y-6">
+                            {% for related in pengumuman_terkait %}
+                            <a href="{% url 'announcements_detail' related.slug %}" class="group block">
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-bold rounded uppercase mb-2 inline-block">
+                                    {{ related.category.nama }}
+                                </span>
+                                <h4 class="text-sm font-bold text-[#0A192F] group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                                    {{ related.judul }}
+                                </h4>
+                                <p class="text-[10px] text-gray-500 mt-1">{{ related.created_at|date:"d M Y" }}</p>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Hubungi Kami -->
+                    <div class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white shadow-lg shadow-primary/20">
+                        <h3 class="text-lg font-bold mb-3">Ada Pertanyaan?</h3>
+                        <p class="text-sm opacity-90 mb-6">Hubungi layanan administrasi sekolah untuk informasi lebih lanjut.</p>
+                        <a href="{% url 'kontak' %}" class="w-full py-3 bg-white text-primary font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+                            <span class="material-symbols-outlined text-sm">mail</span>
+                            Kontak Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'layouts/footer.html' %}
+</body>
+</html>

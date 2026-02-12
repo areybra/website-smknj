@@ -1,0 +1,276 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}{{ berita.title }} - SMK Nurul Jadid{% endblock %}
+
+{% block extra_head %}
+{# Dynamic Meta Tags for SEO #}
+<meta name="description" content="{{ berita.content|striptags|truncatewords:30 }}">
+<meta name="keywords" content="{{ berita.category.name }}, Berita SMK Nurul Jadid, {{ berita.title }}">
+<meta property="og:title" content="{{ berita.title }} - SMK Nurul Jadid">
+<meta property="og:description" content="{{ berita.content|striptags|truncatewords:20 }}">
+{% if berita.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ berita.image.url }}">{% endif %}
+<meta property="og:type" content="article">
+
+<style>
+    .article-content h2 {
+        font-size: 1.875rem;
+        font-weight: 800;
+        color: #0A192F;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .article-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0A192F;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .article-content p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: #374151;
+        text-align: justify;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="bg-white border-b border-gray-100 py-4" aria-label="Breadcrumb">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+        <ol class="flex items-center gap-2 text-sm">
+            <li>
+                <a href="{% url 'home' %}" class="text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">home</span>
+                    Beranda
+                </a>
+            </li>
+            <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-gray-300 text-sm" aria-hidden="true">chevron_right</span>
+                <a href="{% url 'berita' %}" class="text-gray-500 hover:text-primary transition-colors">Berita</a>
+            </li>
+            <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-gray-300 text-sm" aria-hidden="true">chevron_right</span>
+                <span class="text-primary font-bold line-clamp-1" aria-current="page">{{ berita.slug }}</span>
+            </li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Layout Structure -->
+<div class="bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12">
+        <div class="grid lg:grid-cols-12 gap-12">
+            <!-- Left Side: Main Article Content (8 columns) -->
+            <main class="lg:col-span-8">
+                <article>
+                    <header>
+                        <!-- Kategori & Tanggal -->
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-4">
+                                <span class="px-4 py-1.5 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-full">
+                                    {{ berita.category.name }}
+                                </span>
+                                <div class="flex items-center gap-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                    <time datetime="{{ berita.created_at|date:'Y-m-d' }}" class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                        {{ berita.created_at|date:"d M Y" }}
+                                    </time>
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">visibility</span>
+                                        {{ berita.view_count }} Views
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Bagikan:</p>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="shareArticle('{{ berita.title|escapejs }}', '{{ request.build_absolute_uri|escapejs }}')"
+                                       class="size-8 rounded-lg bg-gray-50 text-gray-400 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300" title="Salin Link">
+                                        <span class="material-symbols-outlined text-sm">link</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Judul Berita -->
+                        <h1 class="text-3xl md:text-3xl lg:text-4xl font-black text-[#0A192F] mb-8 leading-tight">
+                            {{ berita.title }}
+                        </h1>
+
+                        <!-- Penulis -->
+                        <div class="flex items-center gap-4 mb-10 pb-10 border-b border-gray-100">
+                            <div class="size-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                
+                                <img src="{% static 'images/logo/logo.png' %}" alt="" class="w-full h-auto object-cover">
+                            </div>
+                            <div>
+                                <p class="text-sm font-black text-[#0A192F] uppercase tracking-wider">Tim Humas SMK NJ</p>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Official Press Release</p>
+                            </div>
+                        </div>
+
+                        <!-- Featured Image -->
+                        {% if berita.image %}
+                        <figure class="relative rounded-3xl overflow-hidden mb-12 shadow-2xl">
+                            <img src="{{ berita.image.url }}" alt="{{ berita.title }}" class="w-full h-auto object-cover max-h-[500px]">
+                            {% if berita.caption %}
+                            <figcaption class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md text-white px-4 py-2 text-xs italic">
+                                {{ berita.caption }}
+                            </figcaption>
+                            {% endif %}
+                        </figure>
+                        {% endif %}
+                    </header>
+
+                    <!-- Konten Artikel -->
+                    <div class="article-content text-lg">
+                        {{ berita.content|safe }}
+                    </div>
+
+                    <!-- Navigasi Berita -->
+                    <footer class="border-t border-gray-100 pt-12 mt-12">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            {% if berita_sebelumnya %}
+                            <a href="{% url 'news_detail' berita_sebelumnya.slug %}" class="group p-6 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-primary transition-all duration-300">
+                                <div class="flex items-center gap-4">
+                                    <div class="size-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                                        <span class="material-symbols-outlined">arrow_back</span>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Sebelumnya</p>
+                                        <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors line-clamp-1 text-sm">{{ berita_sebelumnya.title }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
+                            {% if berita_selanjutnya %}
+                            <a href="{% url 'news_detail' berita_selanjutnya.slug %}" class="group p-6 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-primary transition-all duration-300 text-right">
+                                <div class="flex items-center gap-4 justify-end">
+                                    <div class="min-w-0">
+                                        <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Selanjutnya</p>
+                                        <p class="font-bold text-[#0A192F] group-hover:text-primary transition-colors line-clamp-1 text-sm">{{ berita_selanjutnya.title }}</p>
+                                    </div>
+                                    <div class="size-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </footer>
+                </article>
+            </main>
+
+            <!-- Right Side: Sidebar (4 columns) -->
+            <aside class="lg:col-span-4 space-y-12">
+                <!-- Search Widget -->
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                    <h3 class="text-xl font-black text-[#0A192F] mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">search</span>
+                        Cari Berita
+                    </h3>
+                    <form action="{% url 'berita' %}" method="GET" class="relative">
+                        <input type="text" name="search" placeholder="Cari topik..." 
+                               class="w-full pl-6 pr-14 py-4 rounded-2xl border-none ring-1 ring-gray-200 focus:ring-2 focus:ring-primary transition-all text-sm font-medium">
+                        <button type="submit" class="absolute right-2 top-2 size-10 bg-primary text-white rounded-xl flex items-center justify-center hover:bg-primary-dark transition-all">
+                            <span class="material-symbols-outlined text-xl">search</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Trending Berita -->
+                <div>
+                    <h3 class="text-xl font-black text-[#0A192F] mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-accent">trending_up</span>
+                        Trending
+                    </h3>
+                    <div class="space-y-6">
+                        {% for trending in berita_trending %}
+                        <a href="{% url 'news_detail' trending.slug %}" class="flex gap-4 group">
+                            <div class="size-20 rounded-2xl overflow-hidden shrink-0 border-2 border-white shadow-sm">
+                                <img src="{% if trending.image %}{{ trending.image.url }}{% else %}https://via.placeholder.com/150{% endif %}" alt="{{ trending.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <span class="text-[9px] font-black text-primary uppercase tracking-widest mb-1">{{ trending.category.name }}</span>
+                                <h4 class="text-sm font-bold text-[#0A192F] line-clamp-2 leading-snug group-hover:text-primary transition-colors">{{ trending.title }}</h4>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Berita Terbaru -->
+                <div class="bg-[#0A192F] rounded-3xl p-8 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-black mb-8 flex items-center justify-between">
+                            <span>Berita Terbaru</span>
+                            <span class="material-symbols-outlined text-accent animate-pulse">new_releases</span>
+                        </h3>
+                        <div class="space-y-6">
+                            {% for terbaru in berita_terbaru %}
+                            <a href="{% url 'news_detail' terbaru.slug %}" class="group block border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                                <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-2">{{ terbaru.created_at|date:"d M Y" }}</p>
+                                <h4 class="text-sm font-bold group-hover:text-accent transition-colors line-clamp-2 leading-snug">{{ terbaru.title }}</h4>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'berita' %}" class="mt-8 flex items-center justify-center gap-2 w-full py-4 bg-white/5 border border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white hover:text-[#0A192F] transition-all">
+                            Lihat Semua
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Berita Terkait -->
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                    <h3 class="text-xl font-black text-[#0A192F] mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">auto_awesome</span>
+                        Mungkin Anda Suka
+                    </h3>
+                    <div class="space-y-6">
+                        {% for terkait in berita_terkait %}
+                        <a href="{% url 'news_detail' terkait.slug %}" class="group block">
+                            <h4 class="text-sm font-bold text-[#0A192F] group-hover:text-primary transition-colors line-clamp-2 leading-snug mb-2">{{ terkait.title }}</h4>
+                            <div class="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                {{ terkait.created_at|timesince }} yang lalu
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    function shareArticle(title, url) {
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: 'Baca berita terbaru dari SMK Nurul Jadid: ' + title,
+                url: url
+            }).catch(err => {
+                console.error('Error sharing:', err);
+            });
+        } else {
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = url;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Link berita telah disalin ke clipboard!');
+        }
+    }
+</script>
+{% endblock %}

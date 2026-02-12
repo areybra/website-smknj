@@ -1,0 +1,296 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}SMK Nurul Jadid - Fasilitas & Sarana Prasarana{% endblock %}
+
+{% block extra_head %}
+<meta name="description" content="Eksplorasi fasilitas modern SMK Nurul Jadid, mulai dari laboratorium standar industri hingga sarana penunjang kegiatan siswa lainnya.">
+<meta name="keywords" content="Fasilitas SMK Nurul Jadid, Laboratorium SMK NJ, Sarana Prasarana Sekolah, Teaching Factory">
+<style>
+    .facility-card {
+        transition: all 0.3s ease;
+    }
+    
+    .facility-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .image-zoom {
+        transition: transform 0.7s ease;
+    }
+    
+    .facility-card:hover .image-zoom {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section Fasilitas -->
+<header class="relative w-full overflow-hidden bg-white py-16 lg:py-24" aria-labelledby="fasilitas-title">
+    <div class="absolute inset-0 bg-geo-pattern opacity-10 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-0 left-0 w-1/3 h-1/2 bg-gradient-to-br from-primary/10 to-accent/10 rounded-br-full blur-3xl" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <section class="flex flex-col gap-6 animate-fade-in-up">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
+                    <span class="block size-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">Infrastruktur Modern</span>
+                </div>
+                <h1 id="fasilitas-title" class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
+                    Fasilitas & <span class="text-primary relative inline-block">
+                        Sarana Prasarana
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                            preserveAspectRatio="none" viewBox="0 0 100 10" aria-hidden="true">
+                            <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+                    Didukung oleh fasilitas pembelajaran yang lengkap dan berstandar industri untuk menunjang kompetensi siswa dalam menghadapi tantangan global.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="#laboratorium"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <span>Telusuri Laboratorium</span>
+                        <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_downward</span>
+                    </a>
+                </div>
+            </section>
+            <div class="relative lg:h-[500px] w-full group">
+                <figure class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] z-20 border-8 border-white">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo" 
+                        alt="Gedung SMK Nurul Jadid" class="w-full h-full object-cover image-zoom">
+                </figure>
+                <div
+                    class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-accent/20 rounded-3xl -z-10 blur-xl opacity-60" aria-hidden="true">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Statistik Fasilitas -->
+<section class="py-12 bg-white" aria-label="Statistik Fasilitas">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+        <dl class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-gradient-to-br from-primary/5 to-white p-6 rounded-2xl border border-primary/20 text-center group hover:shadow-lg transition-all duration-300">
+                <dt class="text-3xl font-black text-primary mb-2 group-hover:scale-110 transition-transform">{{ laboratorium_list.count|default:"10" }}+</dt>
+                <dd class="font-bold text-[#0A192F]">Laboratorium</dd>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Standar Industri</p>
+            </div>
+            <div class="bg-gradient-to-br from-accent/5 to-white p-6 rounded-2xl border border-accent/20 text-center group hover:shadow-lg transition-all duration-300">
+                <dt class="text-3xl font-black text-accent mb-2 group-hover:scale-110 transition-transform">{{ peralatanlab_list.count|default:"200" }}+</dt>
+                <dd class="font-bold text-[#0A192F]">Unit Perangkat</dd>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Teknologi Terbaru</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500/5 to-white p-6 rounded-2xl border border-blue-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                <dt class="text-3xl font-black text-blue-600 mb-2 group-hover:scale-110 transition-transform">2</dt>
+                <dd class="font-bold text-[#0A192F]">Studio Khusus</dd>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Produksi Digital</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-500/5 to-white p-6 rounded-2xl border border-green-500/20 text-center group hover:shadow-lg transition-all duration-300">
+                <dt class="text-3xl font-black text-green-600 mb-2 group-hover:scale-110 transition-transform">24/7</dt>
+                <dd class="font-bold text-[#0A192F]">Akses Wi-Fi</dd>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Konektivitas Penuh</p>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<!-- Laboratorium Unggulan -->
+<section id="laboratorium" class="py-20 bg-background-light relative" aria-labelledby="lab-heading">
+    <div class="absolute inset-0 bg-triangle-pattern opacity-5 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Laboratorium</span>
+            <h2 id="lab-heading" class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Fasilitas Laboratorium Unggulan</h2>
+            <p class="text-gray-600">
+                Setiap program keahlian didukung oleh laboratorium khusus dengan perangkat standar industri.
+            </p>
+        </header>
+
+        <div class="space-y-12">
+            {% for lab in laboratorium_list %}
+            <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+                <div class="flex flex-col md:flex-row {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %}">
+                    <figure class="md:w-2/5 h-64 md:h-auto relative overflow-hidden shrink-0">
+                        <img src="{% if lab.gambar %}{{ lab.gambar.url }}{% else %}https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5LvD6HTW2NjORtODhjXiRjX_PleUx8dZAFPlL6YWU5EH5pzmuP7sJvQjB3xnCo27VbRZ-JJ5DZHp8ZfCR1b8qmhwHIZMuZJMaK64MP3-HP3doQFufA1-G1uWHXVe-H8PXQ55s1C6S2_dt5uMOyDL85v6Ct_Zb_AJzr5KwMZm4xqf2B0eMc-QA6d29pEGwplrOSKWlytMQ2q533iScCAHpfHMc6p3h_8Jx2Xvkjjp7vv6DLIawYdlzoCOsUVnpsHiNTGv4EygCwo{% endif %}" 
+                            alt="Laboratorium {{ lab.nama_lab }}" class="w-full h-full object-cover image-zoom">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="inline-block px-3 py-1 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">{{ lab.jurusan.nama }}</span>
+                        </div>
+                    </figure>
+                    <div class="md:w-3/5 p-8 lg:p-12">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="size-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+                                <span class="material-symbols-outlined text-2xl" aria-hidden="true">{{ lab.icon|default:"science" }}</span>
+                            </div>
+                            <h3 class="text-2xl lg:text-3xl font-black text-[#0A192F]">{{ lab.nama_lab }}</h3>
+                        </div>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            {{ lab.deskripsi }}
+                        </p>
+                        <dl class="grid md:grid-cols-2 gap-8">
+                            {% regroup lab.peralatan.all by kategori as peralatan_by_kategori %}
+                            {% for kategori_group in peralatan_by_kategori %}
+                            <div>
+                                <dt class="font-black text-[#0A192F] text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-sm" aria-hidden="true">verified</span>
+                                    {{ kategori_group.grouper }}
+                                </dt>
+                                <dd>
+                                    <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                                        {% for peralatan in kategori_group.list %}
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-primary mt-1" aria-hidden="true">•</span>
+                                            {{ peralatan.nama_peralatan }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </dd>
+                            </div>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="text-center py-24 bg-white rounded-3xl shadow-sm border border-gray-100">
+                <span class="material-symbols-outlined text-6xl text-gray-200 mb-4" aria-hidden="true">science</span>
+                <p class="text-gray-400 font-bold uppercase tracking-widest">Data laboratorium belum tersedia</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Fasilitas Penunjang -->
+<section class="py-20 bg-white relative" aria-labelledby="penunjang-heading">
+    <div class="absolute right-0 top-0 w-64 h-64 bg-triangle-pattern opacity-10 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Fasilitas Penunjang</span>
+            <h2 id="penunjang-heading" class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Sarana Prasarana Lainnya</h2>
+            <p class="text-gray-600">
+                Fasilitas lengkap untuk menunjang kegiatan belajar mengajar dan pengembangan diri siswa.
+            </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">library_books</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Perpustakaan Digital</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Smart Library</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Koleksi 10.000+ buku fisik dan e-book dengan akses digital melalui aplikasi mobile khusus siswa.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• Ruang Baca Nyaman</span>
+                    <span class="text-gray-400">200 SEAT</span>
+                </div>
+            </article>
+
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">fitness_center</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Lapangan Olahraga</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Sport Center</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Lapangan futsal, basket, voli, dan badminton dengan standar nasional untuk menunjang prestasi non-akademik.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• Tribun Penonton</span>
+                    <span class="text-gray-400">500 SEAT</span>
+                </div>
+            </article>
+
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">restaurant</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Kantin Sehat</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Food Court</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Penyediaan menu sehat dan bergizi dengan lingkungan yang higienis, dilengkapi sistem pembayaran digital.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• Free Wi-Fi Area</span>
+                    <span class="text-gray-400">24/7 ACCESS</span>
+                </div>
+            </article>
+
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">wifi</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Koneksi Internet</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Giga Speed</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Jaringan internet super cepat di seluruh area sekolah untuk mendukung riset dan pembelajaran digital.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• Dedicated Fiber</span>
+                    <span class="text-gray-400">1 GBPS</span>
+                </div>
+            </article>
+
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">medical_services</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Klinik Sekolah</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">UKS Center</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Layanan kesehatan pertama bagi warga sekolah dengan tenaga medis profesional dan obat-obatan lengkap.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• 24/7 Emergency</span>
+                    <span class="text-gray-400">MEDICAL STAND-BY</span>
+                </div>
+            </article>
+
+            <article class="facility-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-16 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl" aria-hidden="true">theater_comedy</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-[#0A192F]">Auditorium</h3>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Convention Hall</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Ruang pertemuan megah dengan sistem audio-visual modern untuk pelaksanaan wisuda dan even besar.</p>
+                <div class="flex items-center justify-between text-xs font-bold uppercase tracking-widest border-t border-gray-50 pt-4">
+                    <span class="text-primary">• Full Multimedia</span>
+                    <span class="text-gray-400">500 SEAT</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_body %}
+<a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
+    href="#" aria-label="Lihat Virtual Tour">
+    <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Virtual
+        Tour</span>
+    <span class="material-symbols-outlined text-2xl" aria-hidden="true">visibility</span>
+</a>
+{% endblock %}
