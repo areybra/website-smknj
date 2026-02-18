@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fu*ct8a+b@1h&!0a5rx%5xsunc9e^g!hnc5g0tmdcb)%a_4fw0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['192.168.1.19', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -144,6 +144,15 @@ CACHES = {
 # Additional cache for sessions if needed
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
+# Leader titles configuration
+LEADER_TITLES = [
+    'Kepala Sekolah',
+    'Waka bidang Sarana dan Prasarana',
+    'Waka bidang Kurikulum',
+    'Waka bidang Hubungan Masyarakat',
+    'Waka bidang Kesiswaan'
+]
+
 # CKEditor Configuration
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
@@ -163,11 +172,41 @@ JAZZMIN_SETTINGS = {
   "copyright": "SMK Nurul Jadid",
   "topmenu_links": [
     {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
-    {"model": "auth.User"},     
     {"app": "otak_aplikasi"},
   ],
   "show_ui_builder": True,
   "custom_css": "static/css/jazzmin-custom.css",
+  "custom_js": "js/admin-hash-tabs.js",
+  "hide_apps": ["auth"],
+  "icons": {
+    "otak_aplikasi.news": "fas fa-newspaper",
+    "otak_aplikasi.newsCategory": "fas fa-tags",
+    "otak_aplikasi.Pengumuman": "fas fa-bullhorn",
+    "otak_aplikasi.categoryPengumuman": "fas fa-folder",
+    "otak_aplikasi.FilePengumuman": "fas fa-file-download",
+    "otak_aplikasi.Jurusan": "fas fa-graduation-cap",
+    "otak_aplikasi.StaffDanGuru": "fas fa-users-cog",
+    "otak_aplikasi.MataPelajaran": "fas fa-book",
+    "otak_aplikasi.ektra": "fas fa-running",
+    "otak_aplikasi.ektraCategory": "fas fa-list",
+    "otak_aplikasi.FasilitasLab": "fas fa-flask",
+    "otak_aplikasi.PeralatanLab": "fas fa-tools",
+    "otak_aplikasi.SchoolStatistics": "fas fa-chart-line",
+    "otak_aplikasi.MitraIndustri": "fas fa-handshake",
+  },
+  "order_with_respect_to": [
+    "otak_aplikasi.SchoolStatistics",
+    "otak_aplikasi.news",
+    "otak_aplikasi.newsCategory",
+    "otak_aplikasi.Pengumuman",
+    "otak_aplikasi.categoryPengumuman",
+    "otak_aplikasi.Jurusan",
+    "otak_aplikasi.StaffDanGuru",
+    "otak_aplikasi.MataPelajaran",
+    "otak_aplikasi.ektra",
+    "otak_aplikasi.ektraCategory",
+    "otak_aplikasi.FasilitasLab",
+  ],
 }
 
 

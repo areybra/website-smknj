@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import *
+from .models import (
+    newsCategory, news, ektraCategory, ektra, Jurusan, Kompetensi,
+    MitraIndustri, ProspekKarir, FasilitasJurusan, TestimoniAlumni,
+    Sertifikasi, categoryPengumuman, Pengumuman, FilePengumuman,
+    StaffDanGuru, MataPelajaran, FasilitasLab, PeralatanLab, SchoolStatistics
+)
 
 admin.site.register(newsCategory)
 admin.site.register(news)
@@ -38,15 +43,15 @@ class FilePengumumanInline(admin.TabularInline):
 
 class pengumumanAdmin(admin.ModelAdmin):
     inlines = [FilePengumumanInline]    
-    list_display = ('judul', 'category', 'created_at', 'updated_at')
-    list_filter = ('category', 'created_at', 'updated_at')
+    list_display = ('judul', 'category', 'penting', 'created_at', 'updated_at')
+    list_filter = ('category', 'penting', 'created_at', 'updated_at')
     search_fields = ('judul', 'deskripsi')
     ordering = ('-created_at',)
     
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         if not request.user.is_superuser:
-            queryset = queryset.filter(category__nama__iexact='PPDB')
+            queryset = queryset.filter(penting=True)
         return queryset
 
 admin.site.register(categoryPengumuman)
@@ -78,20 +83,22 @@ admin.site.register(FasilitasLab, FasilitasLabAdmin)
 class SchoolStatisticsAdmin(admin.ModelAdmin):
     list_display = ('total_siswa', 'total_instruktur', 'total_mitra', 'is_active', 'updated_at')
     list_filter = ('is_active', 'updated_at')
-    readonly_fields = ('total_mitra',)
+    readonly_fields = ('total_siswa', 'total_instruktur', 'total_mitra')
     fieldsets = (
         ('Data Siswa', {
-            'fields': ('total_siswa', 'persentase_pertumbuhan_siswa', 'progress_siswa')
+            'fields': ('total_siswa', 'persentase_pertumbuhan_siswa', 'progress_siswa'),
+            'description': 'Total siswa dihitung otomatis dari jumlah siswa di semua jurusan.'
         }),
         ('Data Instruktur', {
-            'fields': ('total_instruktur', 'status_instruktur', 'progress_instruktur')
+            'fields': ('total_instruktur', 'status_instruktur', 'progress_instruktur'),
+            'description': 'Total instruktur dihitung otomatis dari jumlah guru di semua jurusan.'
         }),
         ('Data Mitra Industri', {
             'fields': ('total_mitra', 'label_mitra'),
             'description': 'Jumlah mitra dihitung otomatis dari data Mitra Industri.'
         }),
         ('Status', {
-            'fields': ('is_active',)
+            'fields': ('is_active', 'video_url')
         }),
     )
 

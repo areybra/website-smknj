@@ -33,8 +33,7 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit"
                     role="alert">
                     <span class="block size-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
-                    <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman_penting.judul
-                        }}</span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman_penting.judul }}</span>
                 </div>
                 {% endif %}
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0A192F] leading-[1.1] tracking-tight">
@@ -57,12 +56,6 @@
                         <span>Jelajahi Jurusan</span>
                         <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
                     </a>
-                    <button
-                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
-                        <span class="material-symbols-outlined text-primary group-hover:text-accent transition-colors"
-                            aria-hidden="true">play_circle</span>
-                        <span>Virtual Tour</span>
-                    </button>
                 </div>
                 <div class="flex items-center gap-6 mt-6 text-sm font-medium text-gray-500">
                     <div class="flex items-center gap-2">
@@ -79,15 +72,13 @@
                 {% for news in berita_list %}
                 <article
                     class="absolute inset-0 bg-gray-200 rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-1 group-hover:scale-[1.01] z-20 border-4 border-white">
-                    <div class="w-full h-full bg-cover bg-center" aria-label="{{ news.title }}" role="img"
-                        style="background-image: url('{{ news.image.url }}');">
+                    <div class="w-full h-full bg-cover bg-center" aria-label="{{ news.title }}" role="img" {% if news.image %} style="background-image: url('{{ news.image.url }}');" {% endif %}>
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 to-transparent flex items-end p-8">
                             <div class="text-white">
                                 <div class="flex items-center gap-2 mb-1">
                                     <span
-                                        class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">{{{
-                                        news.category.n}ame }}</span>
+                                        class="px-2 py-0.5 rounded bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider border border-accent/30">{{news.category.name}}</span>
                                 </div>
                                 <h3 class="font-bold text-lg">{{ news.title|safe }}</h3>
                                 <p class="text-sm opacity-90 text-gray-200">{{ news.content|safe|truncatewords:10 }}</p>
@@ -177,15 +168,6 @@
                         <img src="https://ui-avatars.com/api/?name=Kepala+Sekolah&background=0A192F&color=fff"
                             alt="Foto Kepala Sekolah" class="w-full h-full object-cover">
                         {% endif %}
-
-                        <!-- Floating Badge -->
-                        <figcaption
-                            class="absolute bottom-6 right-6 p-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 transform hover:scale-105 transition-transform hidden md:block z-20">
-                            <span class="material-symbols-outlined text-primary text-3xl mb-1"
-                                aria-hidden="true">verified_user</span>
-                            <p class="text-[10px] font-bold text-[#0A192F] uppercase tracking-tighter">Leader &
-                                Visionary</p>
-                        </figcaption>
                     </div>
 
                     <!-- Dot Decoration -->
@@ -253,8 +235,9 @@
                                 <dd class="flex items-baseline gap-2 mb-4">
                                     <span
                                         class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors"
-                                        aria-label="{{ school_stats.total_siswa }} Siswa">{{school_stats.total_siswa|default:"0" }}</span>
-                                    <span class="text-xs text-accent font-bold bg-accent/10 px-2 py-0.5 rounded-full">{{school_stats.persentase_pertumbuhan_siswa|default:"+0%" }}</span>
+                                        aria-label="{{ school_stats.total_siswa }} Siswa">{{school_stats.total_siswa|default:"0"}}</span>
+                                    <span
+                                        class="text-xs text-accent font-bold bg-accent/10 px-2 py-0.5 rounded-full">{{school_stats.persentase_pertumbuhan_siswa|default:"+0%"}}</span>
                                 </dd>
                                 <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                                     <div class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000"
@@ -273,9 +256,9 @@
                                     Pendidik</dt>
                                 <dd class="flex items-baseline gap-2 mb-4">
                                     <span
-                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{school_stats.total_instruktur|default:"0" }}</span>
+                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{school_stats.total_instruktur|default:"0"}}</span>
                                     <span
-                                        class="text-[9px] text-green-400 font-bold px-2 py-0.5 rounded bg-green-400/10 whitespace-nowrap">{{school_stats.status_instruktur|default:"Certified" }}</span>
+                                        class="text-[9px] text-green-400 font-bold px-2 py-0.5 rounded bg-green-400/10 whitespace-nowrap">{{school_stats.status_instruktur|default:"Certified"}}</span>
                                 </dd>
                                 <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                                     <div class="bg-gradient-to-r from-accent to-green-400 h-full rounded-full transition-all duration-1000"
@@ -294,7 +277,7 @@
                                     Industri</dt>
                                 <dd class="flex items-baseline gap-2 mb-6">
                                     <span
-                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{school_stats.total_mitra|default:"0" }}</span>
+                                        class="text-4xl md:text-5xl font-black group-hover/stat:text-accent transition-colors">{{school_stats.total_mitra|default:"0"}}</span>
                                     <span class="text-xs text-gray-400 font-medium whitespace-nowrap">Instansi</span>
                                 </dd>
                                 <div
@@ -365,7 +348,7 @@
                             class="group/item p-4 rounded-2xl bg-gray-50/50 hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer border border-transparent hover:border-primary-light">
                             <div class="flex items-center gap-3 mb-2">
                                 <span
-                                    class="text-[9px] font-black px-2 py-0.5 rounded bg-primary/10 text-primary group-hover/item:bg-white/20 group-hover/item:text-white uppercase tracking-tighter">{{ pengumuman.tanggal|date:"D" }}</span>
+                                    class="text-[9px] font-black px-2 py-0.5 rounded bg-primary/10 text-primary group-hover/item:bg-white/20 group-hover/item:text-white uppercase tracking-tighter">{{pengumuman.tanggal|date:"D"}}</span>
                                 <span class="text-[10px] font-bold opacity-50">{{ pengumuman.tanggal|date:"d M Y"}}</span>
                             </div>
                             <h3 class="text-sm font-bold leading-snug line-clamp-2">
@@ -456,7 +439,8 @@
                                 {% endif %}
                             </figure>
                             <div>
-                                <dt class="text-lg font-bold text-[#0A192F] group-hover:text-blue-700 mb-1">{{jurusan.nama }}</dt>
+                                <dt class="text-lg font-bold text-[#0A192F] group-hover:text-blue-700 mb-1">
+                                    {{jurusan.nama }}</dt>
                                 <dd class="text-sm text-gray-500">{{ jurusan.deskripsi_singkat }}</dd>
                             </div>
                         </div>
@@ -670,114 +654,62 @@
             </div>
         </div>
         <div class="lg:w-1/2 lg:sticky lg:top-28 self-start">
-            <div class="rounded-2xl overflow-hidden shadow-2xl relative border-4 border-white">
-                <div id="videoWrapper" class="w-full aspect-video bg-black relative">
-                    <!-- Thumbnail + Play Button (accessible) -->
-                    <button id="playVideoBtn" aria-label="Putar video"
-                        class="absolute inset-0 flex items-center justify-center bg-cover bg-center"
-                        style="background-image: url('https://img.youtube.com/vi/NCMuVN4fFgo/maxresdefault.jpg');">
-                        <span
-                            class="size-24 rounded-full bg-white/20 backdrop-blur-md border-4 border-white flex items-center justify-center animate-pulse p-6">
-                            <span class="material-symbols-outlined text-6xl text-white">play_arrow</span>
-                        </span>
-                    </button>
-
-                    <!-- Unmute/Mute toggle (hidden until player exists) -->
-                    <button id="unmuteBtn" aria-label="Unmute video"
-                        class="hidden absolute bottom-4 right-4 z-20 bg-white/90 text-black px-3 py-2 rounded-full shadow-md text-sm font-semibold">Unmute</button>
+            <!-- Video Container with Responsive Aspect Ratio -->
+            <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-black">
+                <!-- Responsive iframe wrapper -->
+                <div class="static w-full" style="padding-bottom: 56.25%; /* 16:9 Aspect Ratio */">
+                    {% if school_stats.video_url %}
+                    <iframe class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/{{ school_stats.video_url|slice:'32:' }}?si={{ school_stats.video_url|slice:'37:' }}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    {% else %}
+                    <!-- Fallback jika tidak ada video -->
+                    <div
+                        class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-8 text-center">
+                        <span class="material-symbols-outlined text-6xl text-gray-600 mb-4">video_library</span>
+                        <p class="text-gray-400 text-sm">Belum ada video yang ditambahkan</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-
-            <script>
-                (function () {
-                    const VIDEO_ID = 'NCMuVN4fFgo';
-                    const playBtn = document.getElementById('playVideoBtn');
-                    const unmuteBtn = document.getElementById('unmuteBtn');
-                    const wrapper = document.getElementById('videoWrapper');
-                    let player = null;
-
-                    function loadYouTubeAPI() {
-                        if (window.YT && window.YT.Player) return Promise.resolve();
-                        return new Promise((resolve) => {
-                            const tag = document.createElement('script');
-                            tag.src = 'https://www.youtube.com/iframe_api';
-                            const firstScript = document.getElementsByTagName('script')[0];
-                            firstScript.parentNode.insertBefore(tag, firstScript);
-                            window.onYouTubeIframeAPIReady = function () { resolve(); };
-                        });
-                    }
-
-                    function createPlayer() {
-                        if (!window.YT || !window.YT.Player) return;
-                        player = new YT.Player('playerIframe', {
-                            events: {
-                                onReady: function (e) {
-                                    // show unmute option (video starts muted)
-                                    unmuteBtn.classList.remove('hidden');
-                                    updateUnmuteText();
-                                }
-                            }
-                        });
-                    }
-
-                    function updateUnmuteText() {
-                        if (!player) return;
-                        const isMuted = player.isMuted();
-                        unmuteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
-                        unmuteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
-                    }
-
-                    playBtn && playBtn.addEventListener('click', async function () {
-                        // Create iframe muted initially to ensure consistent autoplay across browsers
-                        const iframe = document.createElement('iframe');
-                        iframe.id = 'playerIframe';
-                        iframe.className = 'w-full h-full';
-                        iframe.src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=1`;
-                        iframe.title = 'Video Tentang Kami';
-                        iframe.frameBorder = '0';
-                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                        iframe.allowFullscreen = true;
-
-                        wrapper.innerHTML = '';
-                        wrapper.appendChild(iframe);
-
-                        // Load API and init player
-                        await loadYouTubeAPI();
-                        createPlayer();
-                    });
-
-                    unmuteBtn && unmuteBtn.addEventListener('click', function () {
-                        if (!player) return;
-                        if (player.isMuted()) {
-                            player.unMute();
-                            player.playVideo();
-                        } else {
-                            player.mute();
-                        }
-                        updateUnmuteText();
-                    });
-
-                })();
-            </script>
-
-            <style>
-                /* Accessibility focus for the play button */
-                #playVideoBtn:focus {
-                    outline: 3px solid rgba(0, 71, 171, 0.35);
-                    outline-offset: 2px;
-                }
-
-                #playVideoBtn {
-                    background-size: cover;
-                    background-position: center;
-                }
-
-                #unmuteBtn:focus {
-                    outline: 3px solid rgba(0, 71, 171, 0.35);
-                    outline-offset: 2px;
-                }
-            </style>
         </div>
+
+        <script>
+            // Ekstrak YouTube ID dari URL database
+            (function () {
+                const videoUrl = "{{ school_stats.video_url|default:'' }}";
+
+                if (!videoUrl) return;
+
+                // Fungsi untuk ekstrak YouTube ID
+                function getYouTubeID(url) {
+                    const patterns = [
+                        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\?\/]+)/,
+                        /youtube\.com\/embed\/([^&\?\/]+)/,
+                        /youtube\.com\/v\/([^&\?\/]+)/
+                    ];
+
+                    for (let pattern of patterns) {
+                        const match = url.match(pattern);
+                        if (match && match[1]) return match[1];
+                    }
+                    return null;
+                }
+
+                const videoId = getYouTubeID(videoUrl);
+
+                if (videoId) {
+                    // Update iframe src dengan video ID yang benar
+                    const iframe = document.querySelector('iframe[title="YouTube video player"]');
+                    if (iframe) {
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+                    }
+                }
+            })();
+        </script>
     </div>
 </section>
 <section class="py-20 bg-white">
@@ -823,15 +755,10 @@
         </div>
     </div>
 </section>
+
 {% endblock %}
 
 {% block extra_body %}
-<a class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-105 transition-all duration-300 group"
-    href="#">
-    <span class="font-bold text-sm hidden group-hover:block transition-all animate-fade-in">Konsultasi
-        Jurusan</span>
-    <span class="material-symbols-outlined text-2xl">forum</span>
-</a>
 
 <script>
     // Pagination (non-scrolling): show/hide cards per page with fade transitions

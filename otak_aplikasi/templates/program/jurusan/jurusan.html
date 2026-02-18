@@ -8,11 +8,11 @@
     .program-card:hover .program-icon {
         transform: scale(1.1) rotate(5deg);
     }
-    
+
     .gradient-bg {
         background: linear-gradient(135deg, #F0F4F8 0%, #E3EBF5 50%, #F0F4F8 100%);
     }
-    
+
     .sticky-nav {
         position: sticky;
         top: 0;
@@ -20,7 +20,7 @@
         backdrop-filter: blur(10px);
         background-color: rgba(255, 255, 255, 0.9);
     }
-    
+
     @media (max-width: 768px) {
         .sticky-nav {
             position: static;
@@ -33,8 +33,9 @@
 <!-- Header -->
 <header class="relative w-full overflow-hidden gradient-bg">
     <div class="absolute inset-0 bg-triangle-pattern opacity-30 pointer-events-none"></div>
-    <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
-    
+    <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none">
+    </div>
+
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
             <!-- Kartu jurusan -->
@@ -43,23 +44,27 @@
                     <div class="space-y-4">
                         {% for jurusan in jurusan_utama %}
                         {% if forloop.counter == 1 %}
-                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                            <div class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div
+                            class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div
+                                class="size-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 {% if jurusan.logo %}
-                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
                                 {% else %}
-                                    <span class="material-symbols-outlined">router</span>
+                                <span class="material-symbols-outlined">router</span>
                                 {% endif %}
                             </div>
                             <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
                         </div>
                         {% elif forloop.counter == 2 %}
-                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                            <div class="size-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div
+                            class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div
+                                class="size-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 {% if jurusan.logo %}
-                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
                                 {% else %}
-                                    <span class="material-symbols-outlined">palette</span>
+                                <span class="material-symbols-outlined">palette</span>
                                 {% endif %}
                             </div>
                             <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
@@ -67,23 +72,27 @@
                     </div>
                     <div class="space-y-4 pt-8">
                         {% elif forloop.counter == 3 %}
-                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                            <div class="size-12 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div
+                            class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div
+                                class="size-12 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 {% if jurusan.logo %}
-                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
                                 {% else %}
-                                    <span class="material-symbols-outlined">precision_manufacturing</span>
+                                <span class="material-symbols-outlined">precision_manufacturing</span>
                                 {% endif %}
                             </div>
                             <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
                         </div>
                         {% elif forloop.counter == 4 %}
-                        <div class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                            <div class="size-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <div
+                            class="h-40 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-center border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                            <div
+                                class="size-12 rounded-lg bg-green-100 text-green-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 {% if jurusan.logo %}
-                                    <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
+                                <img src="{{ jurusan.logo.url }}" alt="{{ jurusan.nama }}" class="w-8 h-8">
                                 {% else %}
-                                    <span class="material-symbols-outlined">code</span>
+                                <span class="material-symbols-outlined">code</span>
                                 {% endif %}
                             </div>
                             <h3 class="font-bold text-lg">{{ jurusan.nama }}</h3>
@@ -95,10 +104,11 @@
                 <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
                 <div class="absolute -top-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-xl"></div>
             </div>
-            
+
             <!-- Teks -->
             <div class="flex flex-col gap-6 animate-fade-in-up order-1 lg:order-2">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 w-fit shadow-sm">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 w-fit shadow-sm">
                     <span class="block size-2 rounded-full bg-primary"></span>
                     <span class="text-sm font-bold text-primary uppercase tracking-wide">Program Keahlian</span>
                 </div>
@@ -113,7 +123,8 @@
                     </span>
                 </h1>
                 <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
-                    Setiap program dirancang dengan kurikulum berbasis industri untuk memastikan kesiapan karir di era digital. Temukan jurusan yang sesuai dengan passion dan bakat Anda.
+                    Setiap program dirancang dengan kurikulum berbasis industri untuk memastikan kesiapan karir di era
+                    digital. Temukan jurusan yang sesuai dengan passion dan bakat Anda.
                 </p>
                 <div class="flex flex-wrap gap-3 mt-2">
                     <a href="#detail-jurusan"
@@ -123,7 +134,8 @@
                     </a>
                     <a href="#program-unggulan"
                         class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-white border border-gray-200 text-[#0A192F] text-base font-bold hover:bg-gray-50 hover:border-primary/50 transition-all duration-300 group">
-                        <span class="material-symbols-outlined text-primary group-hover:text-accent transition-colors">local_library</span>
+                        <span
+                            class="material-symbols-outlined text-primary group-hover:text-accent transition-colors">local_library</span>
                         <span>Program Unggulan</span>
                     </a>
                 </div>
@@ -140,10 +152,11 @@
             <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Pilihan Karir</span>
             <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Detail Program Jurusan</h2>
             <p class="text-gray-600">
-                Setiap jurusan dirancang dengan kurikulum spesifik yang mengintegrasikan teori dan praktik berbasis kebutuhan industri.
+                Setiap jurusan dirancang dengan kurikulum spesifik yang mengintegrasikan teori dan praktik berbasis
+                kebutuhan industri.
             </p>
         </div>
-        
+
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Tab vertikal -->
             <div class="lg:w-1/4">
@@ -151,27 +164,31 @@
                     <h3 class="font-bold text-lg mb-4">Pilih Jurusan:</h3>
                     <div class="space-y-2">
                         {% for j in jurusan_list %}
-                        <button class="jurusan-tab w-full text-left {% if forloop.first %}active bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50{% endif %} px-4 py-3 rounded-lg font-medium text-sm transition-all" data-jurusan="{{ j.slug }}">
+                        <button
+                            class="jurusan-tab w-full text-left {% if forloop.first %}active bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50{% endif %} px-4 py-3 rounded-lg font-medium text-sm transition-all"
+                            data-jurusan="{{ j.slug }}">
                             {{ j.nama }}
                         </button>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-            
+
             <!-- Konten Jurusan -->
             <div class="lg:w-3/4">
                 <div id="jurusan-content" class="animate-scale-in">
                     {% for j in jurusan_list %}
-                    <div class="jurusan-content-item {% if not forloop.first %}hidden{% endif %}" id="content-{{ j.slug }}">
+                    <div class="jurusan-content-item {% if not forloop.first %}hidden{% endif %}"
+                        id="content-{{ j.slug }}">
                         <div class="space-y-8">
                             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
                                 <div class="flex flex-col md:flex-row md:items-start gap-6 mb-8">
-                                    <div class="flex items-center justify-center size-20 rounded-xl bg-white text-gray-700 shrink-0">
+                                    <div
+                                        class="flex items-center justify-center size-20 rounded-xl bg-white text-gray-700 shrink-0">
                                         {% if j.logo %}
-                                            <img src="{{ j.logo.url }}" alt="{{ j.nama }}" class="w-8 h-8">
+                                        <img src="{{ j.logo.url }}" alt="{{ j.nama }}" class="w-8 h-8">
                                         {% else %}
-                                            <span class="material-symbols-outlined text-3xl">{{ j.icon|default:"terminal" }}</span>
+                                        <span class="material-symbols-outlined text-3xl">{{ j.icon|default:"terminal"}}</span>
                                         {% endif %}
                                     </div>
                                     <div>
@@ -181,16 +198,18 @@
                                         </p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="grid grid-cols-1 gap-8">
                                     <div>
                                         <h4 class="font-bold text-lg mb-3">Informasi Program:</h4>
                                         <div class="space-y-4">
-                                            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                                            <div
+                                                class="flex justify-between items-center pb-3 border-b border-gray-100">
                                                 <span class="text-gray-600">Durasi Pendidikan</span>
                                                 <span class="font-bold">{{ j.durasi }}</span>
                                             </div>
-                                            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                                            <div
+                                                class="flex justify-between items-center pb-3 border-b border-gray-100">
                                                 <span class="text-gray-600">Kuota Siswa/Tahun</span>
                                                 <span class="font-bold">{{ j.kuota }}</span>
                                             </div>
@@ -200,13 +219,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div>
                                         <h4 class="font-bold text-lg mb-3">Kompetensi Utama:</h4>
                                         <ul class="space-y-2">
                                             {% for k in j.kompetensi.all|slice:":6" %}
                                             <li class="flex items-start gap-2">
-                                                <span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+                                                <span
+                                                    class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
                                                 <span>{{ k.nama }}</span>
                                             </li>
                                             {% empty %}
@@ -215,21 +235,23 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mt-8 pt-6 border-t border-gray-100">
-                                    <a href="{% url 'program_studi_detail' j.slug %}" class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                                    <a href="{% url 'program_studi_detail' j.slug %}"
+                                        class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
                                         Lihat Detail Selengkapnya
                                         <span class="material-symbols-outlined">arrow_forward</span>
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                                     <h4 class="font-bold text-lg mb-4">Galeri Kegiatan</h4>
                                     <div class="grid grid-cols-2 gap-3 mb-6">
                                         <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
-                                            <img src="{% if j.gambar_utama %}{{ j.gambar_utama.url }}{% else %}https://via.placeholder.com/400x300{% endif %}" alt="{{ j.nama }}" class="w-full h-full object-cover">
+                                            <img src="{% if j.gambar_utama %}{{ j.gambar_utama.url }}{% else %}https://via.placeholder.com/400x300{% endif %}"
+                                                alt="{{ j.nama }}" class="w-full h-full object-cover">
                                         </div>
                                         <div class="h-32 rounded-lg bg-gray-100 overflow-hidden">
                                             <div class="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -237,17 +259,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <h4 class="font-bold text-lg mb-3">Mitra Industri:</h4>
                                     <div class="flex flex-wrap gap-2">
                                         {% for m in j.mitra_industri.all|slice:":4" %}
-                                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">{{ m.nama }}</span>
+                                        <span
+                                            class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">{{m.nama}}</span>
                                         {% empty %}
                                         <span class="text-gray-400 text-xs italic">Belum ada mitra terdaftar</span>
                                         {% endfor %}
                                     </div>
                                 </div>
-                                
+
                                 <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
                                     <h4 class="font-bold text-lg mb-4">Peluang Karir:</h4>
                                     <div class="space-y-3">
@@ -260,6 +283,33 @@
                                         <p class="text-white/70 text-sm italic">Belum ada prospek karir terdaftar</p>
                                         {% endfor %}
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Alumni Section -->
+                            <div class="mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-orange-500">stars</span>
+                                    Alumni Sukses
+                                </h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {% for alumni in j.testimoni_alumni.all|slice:":2" %}
+                                    <div
+                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all">
+                                        <div
+                                            class="size-12 rounded-full overflow-hidden shrink-0 border border-primary/20">
+                                            <img src="{% if alumni.image %}{{ alumni.image.url }}{% else %}https://ui-avatars.com/api/?name={{ alumni.nama }}&background=0047AB&color=fff{% endif %}"
+                                                alt="{{ alumni.nama }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="font-bold text-sm truncate tracking-tight">{{ alumni.nama }}</p>
+                                            <p class="text-[10px] text-gray-500 truncate">{{ alumni.jabatan }} @ {{ alumni.perusahaan }}</p>
+                                            <p class="text-[9px] font-bold text-primary mt-0.5">Lulus {{ alumni.tahun_lulus }}</p>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <p class="text-gray-400 text-xs italic py-2">Belum ada data testimoni alumni.</p>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -278,19 +328,23 @@
             <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Keunggulan Kami</span>
             <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Program Unggulan Berbasis Industri</h2>
             <p class="text-gray-600">
-                Setiap jurusan dilengkapi dengan program unggulan yang dikembangkan bersama mitra industri untuk memastikan relevansi dengan kebutuhan pasar kerja.
+                Setiap jurusan dilengkapi dengan program unggulan yang dikembangkan bersama mitra industri untuk
+                memastikan relevansi dengan kebutuhan pasar kerja.
             </p>
         </div>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <div
+                class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                 <div class="flex flex-col h-full">
-                    <div class="program-icon size-14 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                    <div
+                        class="program-icon size-14 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-5 transition-transform duration-300">
                         <span class="material-symbols-outlined text-2xl">cloud</span>
                     </div>
                     <h3 class="text-xl font-bold text-[#0A192F] mb-3">Kelas Cloud Computing</h3>
                     <p class="text-gray-600 mb-4 flex-grow text-sm">
-                        Program khusus untuk menguasai teknologi cloud dengan sertifikasi dari AWS dan Google Cloud Platform.
+                        Program khusus untuk menguasai teknologi cloud dengan sertifikasi dari AWS dan Google Cloud
+                        Platform.
                     </p>
                     <div class="flex items-center gap-2 mt-2">
                         <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">TKJ</span>
@@ -298,40 +352,49 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+
+            <div
+                class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                 <div class="flex flex-col h-full">
-                    <div class="program-icon size-14 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                    <div
+                        class="program-icon size-14 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-5 transition-transform duration-300">
                         <span class="material-symbols-outlined text-2xl">palette</span>
                     </div>
                     <h3 class="text-xl font-bold text-[#0A192F] mb-3">Digital Creative Studio</h3>
                     <p class="text-gray-600 mb-4 flex-grow text-sm">
-                        Studio produksi lengkap untuk desain grafis, animasi 3D, dan produksi konten digital dengan perangkat profesional.
+                        Studio produksi lengkap untuk desain grafis, animasi 3D, dan produksi konten digital dengan
+                        perangkat profesional.
                     </p>
                     <div class="flex items-center gap-2 mt-2">
                         <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded">Multimedia</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+
+            <div
+                class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                 <div class="flex flex-col h-full">
-                    <div class="program-icon size-14 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                    <div
+                        class="program-icon size-14 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center mb-5 transition-transform duration-300">
                         <span class="material-symbols-outlined text-2xl">apartment</span>
                     </div>
                     <h3 class="text-xl font-bold text-[#0A192F] mb-3">Asrama IT</h3>
                     <p class="text-gray-600 mb-4 flex-grow text-sm">
-                        Pembelajaran malam intensif bagi siswa jurusan IT untuk mendukung pembelajaran intensif dan kolaboratif.
+                        Pembelajaran malam intensif bagi siswa jurusan IT untuk mendukung pembelajaran intensif dan
+                        kolaboratif.
                     </p>
                     <div class="flex items-center gap-2 mt-2">
-                        <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Semua Jurusan</span>
+                        <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Semua
+                            Jurusan</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+
+            <div
+                class="program-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                 <div class="flex flex-col h-full">
-                    <div class="program-icon size-14 rounded-xl bg-green-100 text-green-700 flex items-center justify-center mb-5 transition-transform duration-300">
+                    <div
+                        class="program-icon size-14 rounded-xl bg-green-100 text-green-700 flex items-center justify-center mb-5 transition-transform duration-300">
                         <span class="material-symbols-outlined text-2xl">code</span>
                     </div>
                     <h3 class="text-xl font-bold text-[#0A192F] mb-3">Startup Incubation</h3>
@@ -356,34 +419,39 @@
             <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Masa Depan Cerah</span>
             <h2 class="text-3xl md:text-4xl font-black text-[#0A192F] mb-4">Prospek Karir & Penyaluran Kerja</h2>
             <p class="text-gray-600">
-                Lebih dari 96% lulusan SMK Nurul Jadid terserap di dunia kerja atau melanjutkan pendidikan tinggi dalam waktu 6 bulan setelah kelulusan.
+                Lebih dari 96% lulusan SMK Nurul Jadid terserap di dunia kerja atau melanjutkan pendidikan tinggi dalam
+                waktu 6 bulan setelah kelulusan.
             </p>
         </div>
-        
+
         <div class="grid lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-8">
                 <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
                     <h3 class="text-2xl font-bold text-[#0A192F] mb-6">Mitra Penyaluran Kerja</h3>
                     <div class="space-y-4">
                         {% for mitra in mitra_industri_list %}
-                        <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                        <div
+                            class="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
                             <div class="flex items-center gap-3">
-                                <div class="size-10 rounded-lg {% cycle 'bg-blue-100' 'bg-orange-100' 'bg-purple-100' 'bg-green-100' %} flex items-center justify-center overflow-hidden">
+                                <div
+                                    class="size-10 rounded-lg {% cycle 'bg-blue-100' 'bg-orange-100' 'bg-purple-100' 'bg-green-100' %} flex items-center justify-center overflow-hidden">
                                     {% if mitra.logo %}
-                                        <img src="{{ mitra.logo.url }}" alt="{{ mitra.nama }}" class="w-full h-full object-contain p-1">
+                                    <img src="{{ mitra.logo.url }}" alt="{{ mitra.nama }}"
+                                        class="w-full h-full object-contain p-1">
                                     {% else %}
-                                        <span class="material-symbols-outlined {% cycle 'text-blue-600' 'text-orange-600' 'text-purple-600' 'text-green-600' %}">
-                                            {% cycle 'apartment' 'factory' 'tv' 'code' %}
-                                        </span>
+                                    <span
+                                        class="material-symbols-outlined {% cycle 'text-blue-600' 'text-orange-600' 'text-purple-600' 'text-green-600' %}">
+                                        {% cycle 'apartment' 'factory' 'tv' 'code' %}
+                                    </span>
                                     {% endif %}
                                 </div>
                                 <div>
                                     <p class="font-bold">{{ mitra.nama }}</p>
                                     <p class="text-sm text-gray-500">
                                         {% for prospek in mitra.jurusan.prospek_karir.all|slice:":2" %}
-                                            {{ prospek.posisi }}{% if not forloop.last %}, {% endif %}
+                                        {{ prospek.posisi }}{% if not forloop.last %}, {% endif %}
                                         {% empty %}
-                                            Career Ready
+                                        Career Ready
                                         {% endfor %}
                                     </p>
                                 </div>
@@ -397,7 +465,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="space-y-6">
                 <div class="bg-primary text-white rounded-2xl p-6 shadow-lg">
                     <h3 class="font-bold text-xl mb-4">Program Pendukung</h3>
@@ -441,24 +509,24 @@
 <script>
     // Tab Jurusan Interactivity
     document.querySelectorAll('.jurusan-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             // Remove active class from all tabs
             document.querySelectorAll('.jurusan-tab').forEach(t => {
                 t.classList.remove('active', 'bg-primary', 'text-white');
                 t.classList.add('text-gray-600', 'hover:bg-gray-50');
             });
-            
+
             // Add active class to clicked tab
             this.classList.remove('text-gray-600', 'hover:bg-gray-50');
             this.classList.add('active', 'bg-primary', 'text-white');
-            
+
             const jurusan = this.getAttribute('data-jurusan');
-            
+
             // Hide all content items
             document.querySelectorAll('.jurusan-content-item').forEach(item => {
                 item.classList.add('hidden');
             });
-            
+
             // Show selected content item
             const selectedContent = document.getElementById(`content-${jurusan}`);
             if (selectedContent) {

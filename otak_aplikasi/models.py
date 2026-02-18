@@ -5,8 +5,31 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .utils import compress_image, generate_unique_slug
+from django.db.models import Sum
 
-# Buat model Anda di sini.
+
+class ImageCompressedModel(models.Model):
+    """Base model untuk auto-compress image saat save"""
+    class Meta:
+        abstract = True
+    
+    def save(self, *args, **kwargs):
+        # Cari semua ImageField di model
+        for field in self._meta.fields:
+            if isinstance(field, models.ImageField):
+                image = getattr(self, field.name)
+                if image:
+                    try:
+                        is_new = not self.pk or getattr(self.__class__.objects.get(pk=self.pk), field.name) != image
+                        if is_new:
+                            setattr(self, field.name, compress_image(image))
+                    except self.__class__.DoesNotExist:
+                        setattr(self, field.name, compress_image(image))
+                    except Exception:
+                        pass
+        super().save(*args, **kwargs)
+
+
 # Helper functions for upload paths
 def news_upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -48,7 +71,11 @@ class newsCategory(models.Model):
     def __str__(self):
         return self.name
 
-class news(models.Model):
+    class Meta:
+        verbose_name = "Kategori Berita"
+        verbose_name_plural = "Kategori Berita"
+
+class news(ImageCompressedModel):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
 
@@ -63,25 +90,14 @@ class news(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(news, self.title)
-        
-        # Compress image if it's new or changed
-        if self.image:
-            try:
-                # Check if it's a new file by checking if it has a file object without a name in storage
-                # Or simply check if it's being updated. For simplicity, we compress if it's not already compressed.
-                # A better way is to compare with the version in DB, but this works for basic optimization.
-                this_is_new = not self.pk or news.objects.get(pk=self.pk).image != self.image
-                if this_is_new:
-                    self.image = compress_image(self.image)
-            except news.DoesNotExist:
-                self.image = compress_image(self.image)
-            except Exception:
-                pass
-
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Berita"
+        verbose_name_plural = "Berita"
 
 class ektraCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -98,7 +114,11 @@ class ektraCategory(models.Model):
     def __str__(self):
         return self.name
 
-class ektra(models.Model):
+    class Meta:
+        verbose_name = "Kategori Ekskul"
+        verbose_name_plural = "Kategori Ekskul"
+
+class ektra(ImageCompressedModel):
     jam = [
         ('07.00 - 09.00', '07.00 - 09.00'),
         ('09.00 - 11.00', '09.00 - 11.00'),
@@ -137,27 +157,19 @@ class ektra(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(ektra, self.title)
-            
-        if self.image:
-            try:
-                this_is_new = not self.pk or ektra.objects.get(pk=self.pk).image != self.image
-                if this_is_new:
-                    self.image = compress_image(self.image)
-            except ektra.DoesNotExist:
-                self.image = compress_image(self.image)
-            except Exception:
-                pass
-
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
 
-class Jurusan(models.Model):
+    class Meta:
+        verbose_name = "Ekstrakurikuler"
+        verbose_name_plural = "Ekstrakurikuler"
+
+class Jurusan(ImageCompressedModel):
     nama = models.CharField(max_length=200)
     kode_jurusan = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
@@ -188,17 +200,6 @@ class Jurusan(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(Jurusan, self.nama)
-
-        if self.gambar_utama:
-            try:
-                this_is_new = not self.pk or Jurusan.objects.get(pk=self.pk).gambar_utama != self.gambar_utama
-                if this_is_new:
-                    self.gambar_utama = compress_image(self.gambar_utama)
-            except Jurusan.DoesNotExist:
-                self.gambar_utama = compress_image(self.gambar_utama)
-            except Exception:
-                pass
-
         super().save(*args, **kwargs)
 
     @property
@@ -211,6 +212,10 @@ class Jurusan(models.Model):
 
     def __str__(self):
         return self.nama
+
+    class Meta:
+        verbose_name = "Jurusan"
+        verbose_name_plural = "Jurusan"
 
 class Kompetensi(models.Model):
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='kompetensi')
@@ -255,7 +260,7 @@ class MitraIndustri(models.Model):
     def __str__(self):
         return f"{self.nama} ({self.jurusan.nama})"
 
-class TestimoniAlumni(models.Model):
+class TestimoniAlumni(ImageCompressedModel):
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='testimoni_alumni')
     nama = models.CharField(max_length=200)
     jabatan = models.CharField(max_length=200)
@@ -263,19 +268,6 @@ class TestimoniAlumni(models.Model):
     tahun_lulus = models.IntegerField()
     testimoni = models.TextField()
     image = models.ImageField(upload_to=testimoni_upload_path, blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if self.image:
-            try:
-                this_is_new = not self.pk or TestimoniAlumni.objects.get(pk=self.pk).image != self.image
-                if this_is_new:
-                    self.image = compress_image(self.image)
-            except TestimoniAlumni.DoesNotExist:
-                self.image = compress_image(self.image)
-            except Exception:
-                pass
-
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.nama} ({self.jurusan.nama})"
@@ -286,6 +278,10 @@ class categoryPengumuman(models.Model):
     def __str__(self):
         return self.nama
 
+    class Meta:
+        verbose_name = "Kategori Pengumuman"
+        verbose_name_plural = "Kategori Pengumuman"
+
 
 def upload_pengumuman_file(instance, filename):
     return f'pengumuman/files/{filename}'
@@ -295,6 +291,7 @@ class Pengumuman(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     deskripsi = RichTextField(blank=True, null=True)
     category = models.ForeignKey(categoryPengumuman, on_delete=models.CASCADE, related_name='pengumuman')
+    penting = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(default=0)
@@ -307,6 +304,10 @@ class Pengumuman(models.Model):
 
     def __str__(self):
         return self.judul
+
+    class Meta:
+        verbose_name = "Pengumuman"
+        verbose_name_plural = "Pengumuman"
 
 class FilePengumuman(models.Model):
     pengumuman = models.ForeignKey('Pengumuman', on_delete=models.CASCADE, related_name='files')
@@ -340,6 +341,10 @@ class FilePengumuman(models.Model):
 
     def __str__(self):
         return self.file_name()
+
+    class Meta:
+        verbose_name = "File Lampiran"
+        verbose_name_plural = "File Lampiran"
 class MataPelajaran(models.Model):
     nama = models.CharField(max_length=200)
 
@@ -347,7 +352,11 @@ class MataPelajaran(models.Model):
     def __str__(self):
         return self.nama
 
-class StaffDanGuru(models.Model):
+    class Meta:
+        verbose_name = "Mata Pelajaran"
+        verbose_name_plural = "Mata Pelajaran"
+
+class StaffDanGuru(ImageCompressedModel):
     nama = models.CharField(max_length=200)
     jabatan = models.CharField(max_length=200)
     deskripsi = models.TextField()
@@ -357,23 +366,14 @@ class StaffDanGuru(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if self.image:
-            try:
-                this_is_new = not self.pk or StaffDanGuru.objects.get(pk=self.pk).image != self.image
-                if this_is_new:
-                    self.image = compress_image(self.image)
-            except StaffDanGuru.DoesNotExist:
-                self.image = compress_image(self.image)
-            except Exception:
-                pass
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.nama
 
-class FasilitasLab(models.Model):
+    class Meta:
+        verbose_name = "Guru & Staff"
+        verbose_name_plural = "Guru & Staff"
+
+class FasilitasLab(ImageCompressedModel):
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='laboratorium')
     nama_lab = models.CharField(max_length=200, help_text='Nama Laboratorium')
     deskripsi = models.TextField(help_text='Deskripsi singkat tentang laboratorium')
@@ -383,21 +383,12 @@ class FasilitasLab(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if self.gambar:
-            try:
-                this_is_new = not self.pk or FasilitasLab.objects.get(pk=self.pk).gambar != self.gambar
-                if this_is_new:
-                    self.gambar = compress_image(self.gambar)
-            except FasilitasLab.DoesNotExist:
-                self.gambar = compress_image(self.gambar)
-            except Exception:
-                pass
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.nama_lab} - {self.jurusan.nama}"
+
+    class Meta:
+        verbose_name = "Laboratorium"
+        verbose_name_plural = "Laboratorium"
 
 class PeralatanLab(models.Model):
     KATEGORI_CHOICES = [
@@ -416,17 +407,37 @@ class PeralatanLab(models.Model):
     def __str__(self):
         return f"{self.nama_peralatan} - {self.fasilitas_lab.nama_lab}"
 
+    class Meta:
+        verbose_name = "Peralatan Lab"
+        verbose_name_plural = "Peralatan Lab"
+
 class SchoolStatistics(models.Model):
     """
     Model untuk menyimpan statistik sekolah yang ditampilkan di halaman beranda
+
     """
+    video_url = models.URLField(
+        max_length=500, 
+        blank=True, 
+        null=True, 
+        help_text='Masukkan link YouTube (contoh: https://www.youtube.com/watch?v=...)',
+        default='https://www.youtube.com/watch?v=NCMuVN4fFgo'
+    )
     # Data Siswa
-    total_siswa = models.IntegerField(default=0, help_text='Total siswa aktif')
+    @property
+    def total_siswa(self):
+        """Menghitung total siswa dari semua jurusan"""
+        return Jurusan.objects.aggregate(total=Sum('jumlah_siswa'))['total'] or 0
+    
     persentase_pertumbuhan_siswa = models.CharField(max_length=10, default='+0%', help_text='Contoh: +12%')
     progress_siswa = models.IntegerField(default=85, help_text='Progress bar (0-100)')
     
     # Data Instruktur/Guru
-    total_instruktur = models.IntegerField(default=0, help_text='Total instruktur profesional')
+    @property
+    def total_instruktur(self):
+        """Menghitung total instruktur/guru dari semua jurusan"""
+        return Jurusan.objects.aggregate(total=Sum('guru_count'))['total'] or 0
+    
     status_instruktur = models.CharField(max_length=50, default='Sertifikasi', help_text='Status instruktur')
     progress_instruktur = models.IntegerField(default=95, help_text='Progress bar (0-100)')
     
