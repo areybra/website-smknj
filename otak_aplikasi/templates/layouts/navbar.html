@@ -102,15 +102,17 @@
     </div>
 
     <!-- Desktop Search Overlay -->
-    <div id="desktop-search-overlay" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md z-[60] animate-fade-in flex items-center px-4 md:px-8">
+    <div id="desktop-search-overlay"
+        class="hidden absolute inset-0 bg-white/95 backdrop-blur-md z-[60] animate-fade-in flex items-center px-4 md:px-8">
         <div class="max-w-[1400px] mx-auto w-full flex items-center gap-6">
             <form action="{% url 'global_search' %}" method="GET" class="flex-grow flex items-center gap-4">
                 <span class="material-symbols-outlined text-primary text-3xl font-black">search</span>
-                <input type="text" name="q" id="desktop-search-input" placeholder="Apa yang ingin Anda cari hari ini?" 
+                <input type="text" name="q" id="desktop-search-input" placeholder="Apa yang ingin Anda cari hari ini?"
                     class="w-full bg-transparent border-none text-xl md:text-2xl font-bold text-[#0A192F] placeholder:text-gray-300 focus:ring-0 focus:outline-none py-4">
                 <button type="submit" class="hidden"></button>
             </form>
-            <button id="close-search" class="size-12 rounded-full bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all flex items-center justify-center">
+            <button id="close-search"
+                class="size-12 rounded-full bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all flex items-center justify-center">
                 <span class="material-symbols-outlined font-bold">close</span>
             </button>
         </div>
@@ -123,8 +125,9 @@
             <div class="relative">
                 <form action="{% url 'global_search' %}" method="GET">
                     <input type="text" name="q" placeholder="Cari jurusan, berita, dll..."
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl font-bold">search</span>
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl font-bold">search</span>
                 </form>
             </div>
 
@@ -134,16 +137,21 @@
                     Beranda
                     <span class="material-symbols-outlined text-gray-400">chevron_right</span>
                 </a>
-                
+
                 <div class="space-y-1">
-                    <button id="mobile-about-toggle" class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
+                    <button id="mobile-about-toggle"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
                         Tentang Kami
-                        <span class="material-symbols-outlined text-gray-400 transition-transform" id="about-icon">expand_more</span>
+                        <span class="material-symbols-outlined text-gray-400 transition-transform"
+                            id="about-icon">expand_more</span>
                     </button>
                     <div id="mobile-about-menu" class="hidden pl-4 space-y-1 animate-fade-in">
-                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary" href="{% url 'profile' %}">Profil Sekolah</a>
-                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary" href="{% url 'facilities' %}">Fasilitas & Sarpras</a>
-                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary" href="{% url 'teachers_staff' %}">Guru & Staff</a>
+                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'profile' %}">Profil Sekolah</a>
+                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'facilities' %}">Fasilitas & Sarpras</a>
+                        <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'teachers_staff' %}">Guru & Staff</a>
                     </div>
                 </div>
 
@@ -177,7 +185,7 @@
                     <span class="material-symbols-outlined text-gray-400">chevron_right</span>
                 </a>
             </div>
-            
+
             <div class="pt-4 border-t border-gray-100 flex flex-col gap-6">
                 <div class="flex items-center justify-center gap-6">
                     <a href="#" class="text-gray-400 hover:text-primary transition-colors">
@@ -190,7 +198,8 @@
                         <span class="material-symbols-outlined">smart_display</span>
                     </a>
                 </div>
-                <p class="text-center text-[10px] text-gray-400 font-medium uppercase tracking-[0.2em]">SMK Nurul Jadid &copy; 2026</p>
+                <p class="text-center text-[10px] text-gray-400 font-medium uppercase tracking-[0.2em]">SMK Nurul Jadid
+                    &copy; 2026</p>
             </div>
         </div>
     </div>
@@ -198,23 +207,38 @@
 
 <style>
     @keyframes slide-down {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
+
     @keyframes fade-in {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
+
     .animate-slide-down {
         animation: slide-down 0.3s ease-out forwards;
     }
+
     .animate-fade-in {
         animation: fade-in 0.2s ease-out forwards;
     }
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Desktop Search Overlay Logic
         const searchToggle = document.getElementById('search-toggle');
         const searchOverlay = document.getElementById('desktop-search-overlay');
@@ -282,7 +306,7 @@
 
     function updateNavbar() {
         const currentScrollY = window.scrollY;
-        
+
         if (currentScrollY > 20) {
             if (!navbar.classList.contains('shadow-lg')) {
                 navbar.classList.add('shadow-lg', 'bg-white');
@@ -300,6 +324,6 @@
 
     // Initialize state on load
     updateNavbar();
-    
+
     window.addEventListener('scroll', updateNavbar, { passive: true });
 </script>
