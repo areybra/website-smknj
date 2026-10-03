@@ -28,6 +28,8 @@
                     <span
                         class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></span>
                 </a>
+
+                <!-- Dropdown: Tentang Kami -->
                 <div class="relative group" id="about-us-dropdown">
                     <button
                         class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors">
@@ -45,30 +47,60 @@
                             href="{% url 'teachers_staff' %}">Guru &amp; Staff</a>
                     </div>
                 </div>
-                <a class="px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors relative group"
-                    href="{% url 'program_studi' %}">
-                    Program Studi
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></span>
-                </a>
-                <a class="px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors relative group"
-                    href="{% url 'extracurricular' %}">
-                    Ekstrakurikuler
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></span>
-                </a>
-                <a class="px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors relative group"
-                    href="{% url 'berita' %}">
-                    Berita
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></span>
-                </a>
-                <a class="px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors relative group"
-                    href="{% url 'announcements' %}">
-                    Pengumuman
-                    <span
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></span>
-                </a>
+
+                <!-- Dropdown: Program -->
+                <div class="relative group" id="program-dropdown">
+                    <button
+                        class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors">
+                        Program
+                        <span
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border-t-4 border-primary ring-1 ring-black/5 z-50 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                        <a class="block px-4 py-2.5 text-sm font-semibold text-[#0A192F] hover:bg-blue-50 hover:text-primary rounded-lg transition-colors"
+                            href="{% url 'program_studi' %}">Semua Program Studi</a>
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <p class="px-4 pt-1 pb-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-primary">Kompetensi
+                            Keahlian</p>
+                        {% for jurusan in nav_jurusan_list %}
+                        <a class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-primary rounded-lg transition-colors truncate"
+                            href="{% url 'program_studi_detail' jurusan.slug %}">{{ jurusan.nama }}</a>
+                        {% empty %}
+                        <p class="px-4 py-2 text-sm text-gray-400">Belum ada jurusan</p>
+                        {% endfor %}
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <a class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-primary rounded-lg transition-colors"
+                            href="{% url 'extracurricular' %}">
+                            <span class="material-symbols-outlined text-[18px]">sports</span>
+                            Ekstrakurikuler
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dropdown: Informasi -->
+                <div class="relative group" id="informasi-dropdown">
+                    <button
+                        class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors">
+                        Informasi
+                        <span
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-56 bg-white shadow-xl rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border-t-4 border-primary ring-1 ring-black/5 z-50">
+                        <a class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-primary rounded-lg transition-colors"
+                            href="{% url 'berita' %}">
+                            <span class="material-symbols-outlined text-[18px]">newspaper</span>
+                            Berita
+                        </a>
+                        <a class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-blue-50 hover:text-primary rounded-lg transition-colors"
+                            href="{% url 'announcements' %}">
+                            <span class="material-symbols-outlined text-[18px]">campaign</span>
+                            Pengumuman
+                        </a>
+                    </div>
+                </div>
+
                 <a class="px-3 py-2 text-sm font-bold text-[#0A192F] hover:text-primary transition-colors relative group"
                     href="{% url 'kontak' %}">
                     Kontak
@@ -120,7 +152,7 @@
 
     <!-- Mobile Menu Layer -->
     <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-gray-100 animate-slide-down">
-        <div class="p-4 space-y-4">
+        <div class="p-4 space-y-4 max-h-[calc(100vh-84px)] overflow-y-auto custom-scrollbar">
             <!-- Search Bar inside Mobile Menu -->
             <div class="relative">
                 <form action="{% url 'global_search' %}" method="GET">
@@ -138,14 +170,13 @@
                     <span class="material-symbols-outlined text-gray-400">chevron_right</span>
                 </a>
 
+                <!-- Mobile Dropdown: Tentang Kami -->
                 <div class="space-y-1">
-                    <button id="mobile-about-toggle"
-                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
+                    <button class="mobile-dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
                         Tentang Kami
-                        <span class="material-symbols-outlined text-gray-400 transition-transform"
-                            id="about-icon">expand_more</span>
+                        <span class="material-symbols-outlined text-gray-400 transition-transform mobile-dropdown-icon">expand_more</span>
                     </button>
-                    <div id="mobile-about-menu" class="hidden pl-4 space-y-1 animate-fade-in">
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-1 animate-fade-in">
                         <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
                             href="{% url 'profile' %}">Profil Sekolah</a>
                         <a class="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
@@ -155,29 +186,51 @@
                     </div>
                 </div>
 
-                <a class="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all"
-                    href="{% url 'program_studi' %}">
-                    Program Studi
-                    <span class="material-symbols-outlined text-gray-400">chevron_right</span>
-                </a>
+                <!-- Mobile Dropdown: Program -->
+                <div class="space-y-1">
+                    <button class="mobile-dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
+                        Program
+                        <span class="material-symbols-outlined text-gray-400 transition-transform mobile-dropdown-icon">expand_more</span>
+                    </button>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-1 animate-fade-in">
+                        <a class="block px-4 py-3 text-sm font-semibold text-[#0A192F] hover:text-primary"
+                            href="{% url 'program_studi' %}">Semua Program Studi</a>
+                        <p class="px-4 pt-2 text-[10px] font-black uppercase tracking-[0.15em] text-primary">Kompetensi
+                            Keahlian</p>
+                        {% for jurusan in nav_jurusan_list %}
+                        <a class="block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-primary truncate"
+                            href="{% url 'program_studi_detail' jurusan.slug %}">{{ jurusan.nama }}</a>
+                        {% empty %}
+                        <p class="px-4 py-2 text-sm text-gray-400">Belum ada jurusan</p>
+                        {% endfor %}
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a class="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'extracurricular' %}">
+                            <span class="material-symbols-outlined text-[18px]">sports</span>
+                            Ekstrakurikuler
+                        </a>
+                    </div>
+                </div>
 
-                <a class="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all"
-                    href="{% url 'extracurricular' %}">
-                    Ekstrakurikuler
-                    <span class="material-symbols-outlined text-gray-400">chevron_right</span>
-                </a>
-
-                <a class="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all"
-                    href="{% url 'berita' %}">
-                    Berita
-                    <span class="material-symbols-outlined text-gray-400">chevron_right</span>
-                </a>
-
-                <a class="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all"
-                    href="{% url 'announcements' %}">
-                    Pengumuman
-                    <span class="material-symbols-outlined text-gray-400">chevron_right</span>
-                </a>
+                <!-- Mobile Dropdown: Informasi -->
+                <div class="space-y-1">
+                    <button class="mobile-dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all">
+                        Informasi
+                        <span class="material-symbols-outlined text-gray-400 transition-transform mobile-dropdown-icon">expand_more</span>
+                    </button>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-1 animate-fade-in">
+                        <a class="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'berita' %}">
+                            <span class="material-symbols-outlined text-[18px]">newspaper</span>
+                            Berita
+                        </a>
+                        <a class="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary"
+                            href="{% url 'announcements' %}">
+                            <span class="material-symbols-outlined text-[18px]">campaign</span>
+                            Pengumuman
+                        </a>
+                    </div>
+                </div>
 
                 <a class="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50/50 hover:bg-blue-50 text-[#0A192F] hover:text-primary font-bold transition-all"
                     href="{% url 'kontak' %}">
@@ -269,9 +322,6 @@
         const menuToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
-        const aboutToggle = document.getElementById('mobile-about-toggle');
-        const aboutMenu = document.getElementById('mobile-about-menu');
-        const aboutIcon = document.getElementById('about-icon');
 
         if (menuToggle && mobileMenu) {
             menuToggle.addEventListener('click', () => {
@@ -286,18 +336,32 @@
             });
         }
 
-        if (aboutToggle && aboutMenu) {
-            aboutToggle.addEventListener('click', () => {
-                const isHidden = aboutMenu.classList.contains('hidden');
+        // Generic mobile dropdown accordions (Tentang Kami, Program, Informasi)
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
+                const menu = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.mobile-dropdown-icon');
+                const isHidden = menu.classList.contains('hidden');
+
+                // Close other open dropdowns
+                document.querySelectorAll('.mobile-dropdown-menu').forEach(function (m) {
+                    if (m !== menu) {
+                        m.classList.add('hidden');
+                        const otherIcon = m.previousElementSibling &&
+                            m.previousElementSibling.querySelector('.mobile-dropdown-icon');
+                        if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+
                 if (isHidden) {
-                    aboutMenu.classList.remove('hidden');
-                    aboutIcon.style.transform = 'rotate(180deg)';
+                    menu.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
                 } else {
-                    aboutMenu.classList.add('hidden');
-                    aboutIcon.style.transform = 'rotate(0deg)';
+                    menu.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
                 }
             });
-        }
+        });
     });
 
     // Handle background navbar on scroll with improved performance

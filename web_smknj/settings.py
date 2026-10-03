@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fu*ct8a+b@1h&!0a5rx%5xsunc9e^g!hnc5g0tmdcb)%a_4fw0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.19', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'web_smknj.context_processors.global_navbar_data',
             ],
         },
     },
@@ -176,7 +177,7 @@ JAZZMIN_SETTINGS = {
   ],
   "show_ui_builder": True,
   "custom_css": "static/css/jazzmin-custom.css",
-  "custom_js": "js/admin-hash-tabs.js",
+  "custom_js": "js/admin-sidebar.js",
   "hide_apps": ["auth"],
   "icons": {
     "otak_aplikasi.news": "fas fa-newspaper",
