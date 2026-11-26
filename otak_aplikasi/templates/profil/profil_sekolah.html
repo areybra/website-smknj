@@ -1,0 +1,490 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}SMK Nurul Jadid - Profil Sekolah{% endblock %}
+
+{% block extra_head %}
+<meta name="description" content="Pelajari lebih dalam tentang SMK Nurul Jadid. Sejarah, visi misi, struktur organisasi, dan komitmen kami dalam dunia pendidikan vokasi.">
+<meta name="keywords" content="Profil SMK Nurul Jadid, Sejarah SMK NJ, Visi Misi SMK NJ, Struktur Organisasi Sekolah">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section Profil -->
+<header class="relative w-full overflow-hidden bg-surface py-16 lg:py-24" aria-labelledby="profil-title">
+    <div class="absolute inset-0 bg-triangle-pattern opacity-60 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-1/2 bg-sand rounded-bl-full blur-3xl opacity-50" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+            <section class="flex flex-col gap-6 animate-fade-in-up lg:col-span-7">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand border border-line w-fit">
+                    <span class="block size-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">Profil Sekolah</span>
+                </div>
+                <h1 id="profil-title" class="text-4xl md:text-5xl lg:text-5xl font-black text-ink leading-[1.1] tracking-tight">
+                    Mengenal Lebih Dekat <span class="text-primary relative inline-block">
+                        {{ data_sekolah.school_name|default:"SMK Nurul Jadid" }}
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                            preserveAspectRatio="none" viewBox="0 0 100 10" aria-hidden="true">
+                            <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                        </svg>
+                    </span> 
+                </h1>
+                <p class="text-lg text-muted max-w-lg leading-relaxed">
+                    Sebagai lembaga pendidikan vokasi terdepan, kami berkomitmen untuk menghasilkan lulusan yang 
+                    kompeten, berkarakter, dan siap menghadapi tantangan industri global.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="#sejarah"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <span>Telusuri Sejarah</span>
+                        <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_downward</span>
+                    </a>
+                </div>
+            </section>
+            <div class="relative lg:h-[500px] w-full group perspective-1000 lg:col-span-5">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-2 group-hover:scale-[1.02] z-20 border-8 border-white">
+                    <img src="{% static 'images/profil/sekolah.jpg' %}" alt="Gedung SMK Nurul Jadid" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/90 via-primary/60 to-transparent flex items-end p-8 pointer-events-none">
+                        <div class="text-white">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 rounded bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider">Lokasi Strategis</span>
+                            </div>
+                            <p class="font-bold text-2xl">Kawasan PP. Nurul Jadid</p>
+                            <p class="text-sm opacity-90">Berada di jantung pusat pesantren dan pendidikan</p>
+                            <a href="https://www.google.com/maps/place/SMK+Nurul+Jadid/@-7.7121754,113.4933046,17z/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white text-sm font-semibold transition-all duration-300 pointer-events-auto backdrop-blur-sm">
+                                <span class="material-symbols-outlined text-sm" aria-hidden="true">location_on</span>
+                                <span>Buka di Google Maps</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-2/3 h-2/3 bg-primary/20 rounded-3xl -z-10 blur-xl opacity-60" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sejarah Singkat -->
+<section id="sejarah" class="py-20 bg-page relative" aria-labelledby="sejarah-heading">
+    <div class="absolute inset-0 bg-geo-pattern opacity-5 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Perjalanan Kami</span>
+            <h2 id="sejarah-heading" class="text-3xl md:text-4xl font-black text-ink mb-4">Sejarah & Perkembangan</h2>
+            <p class="text-muted">
+                Dari awal berdiri hingga menjadi salah satu SMK unggulan di Jawa Timur, berikut perjalanan panjang 
+                yang telah kami lalui bersama.
+            </p>
+        </header>
+        
+        <div class="relative">
+            <!-- Timeline Desktop -->
+            <div class="hidden lg:block">
+                <div class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-accent to-primary" aria-hidden="true"></div>
+                    
+                    <div class="grid grid-cols-2 gap-y-12 mb-8">
+                        <!-- Item 1 -->
+                        <article class="text-right pr-12">
+                            <div class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                                <div class="absolute -right-6 top-1/2 transform -translate-y-1/2 size-12 bg-primary rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform" aria-hidden="true">
+                                    <span class="material-symbols-outlined">flag</span>
+                                </div>
+                                <div class="text-left">
+                                    <time class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3" datetime="2005">2005</time>
+                                    <h3 class="text-xl font-bold text-ink mb-2">Pendirian Sekolah</h3>
+                                    <p class="text-muted">SMK Nurul Jadid didirikan dengan 2 program keahlian: Rekayasa Perangkat Lunak dan Teknik Komputer dan Jaringan.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="pl-12" aria-hidden="true"></div>
+
+                        <!-- Item 2 -->
+                        <div class="pl-12" aria-hidden="true"></div>
+                        <article class="text-left pl-12">
+                            <div class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                                <div class="absolute -left-6 top-1/2 transform -translate-y-1/2 size-12 bg-accent rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform" aria-hidden="true">
+                                    <span class="material-symbols-outlined">school</span>
+                                </div>
+                                <div class="text-left">
+                                    <time class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3" datetime="2010">2010</time>
+                                    <h3 class="text-xl font-bold text-ink mb-2">Akreditasi A</h3>
+                                    <p class="text-muted">Memperoleh akreditasi A dari BAN-SM dan menambah program keahlian Teknik Komputer & Jaringan.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Item 3 -->
+                        <article class="text-right pr-12">
+                            <div class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                                <div class="absolute -right-6 top-1/2 transform -translate-y-1/2 size-12 bg-primary rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform" aria-hidden="true">
+                                    <span class="material-symbols-outlined">apartment</span>
+                                </div>
+                                <div class="text-left">
+                                    <time class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3" datetime="2015">2015</time>
+                                    <h3 class="text-xl font-bold text-ink mb-2">Pindah ke Kampus Baru</h3>
+                                    <p class="text-muted">Relokasi ke kawasan yang lebih strategis dengan fasilitas modern dan laboratorium standar industri.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="pl-12" aria-hidden="true"></div>
+
+                        <!-- Item 4 -->
+                        <div class="pl-12" aria-hidden="true"></div>
+                        <article class="text-left pl-12">
+                            <div class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                                <div class="absolute -left-6 top-1/2 transform -translate-y-1/2 size-12 bg-accent rounded-full flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform" aria-hidden="true">
+                                    <span class="material-symbols-outlined">workspace_premium</span>
+                                </div>
+                                <div class="text-left">
+                                    <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2020 - Sekarang</span>
+                                    <h3 class="text-xl font-bold text-ink mb-2">Era Digital & Internasionalisasi</h3>
+                                    <p class="text-muted">Transformasi digital, penambahan program keahlian berbasis AI, dan kerjasama internasional dengan berbagai institusi.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Mobile -->
+            <div class="lg:hidden space-y-8">
+                <article class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                    <div class="absolute -left-3 top-6 size-6 bg-primary rounded-full flex items-center justify-center text-white z-20" aria-hidden="true"></div>
+                    <time class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3" datetime="2005">2005</time>
+                    <h3 class="text-xl font-bold text-ink mb-2">Pendirian Sekolah</h3>
+                    <p class="text-muted">SMK Nurul Jadid didirikan dengan 2 program keahlian: Teknik Elektro dan Teknik Mesin.</p>
+                </article>
+
+                <article class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                    <div class="absolute -left-3 top-6 size-6 bg-accent rounded-full flex items-center justify-center text-white z-20" aria-hidden="true"></div>
+                    <time class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3" datetime="2010">2010</time>
+                    <h3 class="text-xl font-bold text-ink mb-2">Akreditasi A</h3>
+                    <p class="text-muted">Memperoleh akreditasi A dari BAN-SM dan menambah program keahlian Teknik Komputer & Jaringan.</p>
+                </article>
+
+                <article class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                    <div class="absolute -left-3 top-6 size-6 bg-primary rounded-full flex items-center justify-center text-white z-20" aria-hidden="true"></div>
+                    <time class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3" datetime="2015">2015</time>
+                    <h3 class="text-xl font-bold text-ink mb-2">Pindah ke Kampus Baru</h3>
+                    <p class="text-muted">Relokasi ke Kawasan Teknopark dengan fasilitas modern dan laboratorium standar industri.</p>
+                </article>
+
+                <article class="bg-surface p-6 rounded-2xl shadow-lg border border-line relative group hover:shadow-xl transition-all duration-300">
+                    <div class="absolute -left-3 top-6 size-6 bg-accent rounded-full flex items-center justify-center text-white z-20" aria-hidden="true"></div>
+                    <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full mb-3">2020 - Sekarang</span>
+                    <h3 class="text-xl font-bold text-ink mb-2">Era Digital & Internasionalisasi</h3>
+                    <p class="text-muted">Transformasi digital, penambahan program keahlian berbasis AI, dan kerjasama internasional dengan berbagai institusi.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Struktur Organisasi -->
+<section class="py-20 bg-sand relative" aria-labelledby="kepemimpinan-heading">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Kepemimpinan</span>
+            <h2 id="kepemimpinan-heading" class="text-3xl md:text-4xl font-black text-ink mb-4">Struktur Organisasi</h2>
+            <p class="text-muted">
+                Tim kepemimpinan yang solid dan profesional dalam mengelola pendidikan vokasi berkualitas.
+            </p>
+        </header>
+        
+        {% if struktur_organisasi %}
+        <div class="flex flex-col gap-12">
+            {% for guru_staff in struktur_organisasi %}
+            {% if guru_staff.jabatan == 'Kepala Sekolah' %}
+            <!-- Kepala Sekolah Card -->
+            <article class="mb-16 text-center">
+                <div class="relative mb-6 inline-block">
+                    <figure class="size-48 rounded-full border-4 border-white shadow-2xl overflow-hidden mx-auto">
+                        <div class="w-full h-full bg-cover bg-center profile-image"
+                            role="img" aria-label="Foto {{ guru_staff.nama }}"
+                            style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');">
+                        </div>
+                    </figure>
+                    <div class="absolute -bottom-2 -right-2 size-14 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg" aria-hidden="true">
+                        <span class="material-symbols-outlined text-2xl">verified</span>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-ink mb-2">{{ guru_staff.nama }}</h3>
+                <p class="text-primary font-bold text-lg mb-4">{{ guru_staff.jabatan }}</p>
+                <p class="text-muted max-w-2xl mx-auto">
+                    {{ guru_staff.deskripsi|default:"Pimpinan visioner yang berdedikasi tinggi dalam memajukan kualitas pendidikan vokasi di SMK Nurul Jadid." }}
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center mt-6">
+                    <span class="px-3 py-1 bg-sand text-accent text-sm font-medium rounded-full">{{ guru_staff.pendidikan }}</span>
+                    {% if guru_staff.mata_pelajaran.exists %}
+                    <span class="px-3 py-1 bg-sand text-accent text-sm font-medium rounded-full">{{ guru_staff.mata_pelajaran.all|join:", " }}</span>
+                    {% endif %}
+                </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+
+            <div class="grid grid-cols-12 gap-5 w-full">
+                {% for guru_staff in struktur_organisasi %}
+                {% if guru_staff.jabatan != 'Kepala Sekolah' %}
+                <article class="staff-card bg-surface rounded-2xl p-5 border border-line shadow-sm hover:shadow-lg transition-all duration-300 col-span-12 sm:col-span-6 lg:col-span-3">
+                    <div class="flex flex-col items-center text-center">
+                        <figure class="size-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-4">
+                            <div class="w-full h-full bg-cover bg-center bg-line" 
+                                role="img" aria-label="Foto {{ guru_staff.nama }}"
+                                style="background-image: url('{% if guru_staff.image %}{{ guru_staff.image.url }}{% else %}https://ui-avatars.com/api/?name={{ guru_staff.nama|urlencode }}&background=random{% endif %}');"></div>
+                        </figure>
+                        <h4 class="text-xl font-bold text-ink mb-1">{{ guru_staff.nama }}</h4>
+                        <p class="text-primary font-semibold mb-2 text-sm">{{ guru_staff.jabatan }}</p>
+                        {% if guru_staff.deskripsi %}<p class="text-sm text-muted mb-3 line-clamp-2">{{ guru_staff.deskripsi|default:"" }}</p>{% endif %}
+                        <div class="flex gap-2">
+                            <span class="px-2 py-1 bg-sand text-accent text-[10px] font-bold uppercase rounded">{{ guru_staff.pendidikan }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="flex items-center gap-3 bg-surface border border-line rounded-2xl px-5 py-8 max-w-xl mx-auto">
+            <span class="material-symbols-outlined text-primary" aria-hidden="true">account_tree</span>
+            <p class="text-sm text-muted">Data struktur organisasi belum tersedia.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Visi & Misi -->
+<section id="visi-misi" class="py-20 bg-page relative" aria-labelledby="visi-misi-heading">
+    <div class="absolute left-0 top-0 w-64 h-64 bg-triangle-pattern opacity-10 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+            <div class="space-y-8 lg:col-span-5">
+                <div>
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Visi Sekolah</span>
+                    <div class="bg-gradient-to-br from-primary to-primary-dark p-1 rounded-2xl shadow-xl">
+                        <div class="bg-surface p-8 rounded-xl">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="size-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary" aria-hidden="true">
+                                    <span class="material-symbols-outlined text-3xl">visibility</span>
+                                </div>
+                                <h3 class="text-2xl font-black text-ink">Visi</h3>
+                            </div>
+                            <blockquote class="text-lg italic text-muted leading-relaxed">
+                                "Menjadi SMK Pusat Keunggulan yang mencetak tenaga kerja profesional yang agamis, berkarakter, berwawasan lingkungan, berprestasi, dan berjiwa wirausaha, serta mampu bersaing di pasar kerja global."
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Motto Sekolah</span>
+                    <div class="bg-gradient-to-r from-accent to-primary p-1 rounded-xl shadow-lg">
+                        <div class="bg-surface p-6 rounded-lg">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent text-2xl" aria-hidden="true">format_quote</span>
+                                <p class="text-xl font-bold text-ink">"SMK Bisa & SMK Hebat"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm block">Misi Sekolah</span>
+                    <div class="flex items-center gap-2">
+                        <button id="misi-prev" class="size-8 flex items-center justify-center rounded-lg border border-line text-muted hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_left</span>
+                        </button>
+                        <button id="misi-next" class="size-8 flex items-center justify-center rounded-lg border border-line text-muted hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="misi-list" class="space-y-4">
+                    <!-- Misi Item 1 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">school</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 01</p>
+                                <p class="text-muted leading-relaxed font-medium">Menyelenggarakan pendidikan kejuruan yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja, serta memperhatikan perkembangan ilmu pengetahuan dan teknologi terkini.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 2 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-accent/5 text-accent flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">verified_user</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 02</p>
+                                <p class="text-muted leading-relaxed font-medium">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang mencerminkan nilai-nilai spiritual and etika dalam kehidupan sehari-hari.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 3 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">factory</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 03</p>
+                                <p class="text-muted leading-relaxed font-medium">Mengembangkan pembelajaran berbasis teaching factory sebagai wahana pembentukan keterampilan kerja riil, budaya kerja, serta pengalaman produksi atau layanan jasa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 4 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-accent/5 text-accent flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 04</p>
+                                <p class="text-muted leading-relaxed font-medium">Mendorong pencapaian prestasi peserta didik di bidang akademik, vokasional, keagamaan, dan kepemimpinan, baik di tingkat lokal, nasional, maupun internasional.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 5 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">handshake</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 05</p>
+                                <p class="text-muted leading-relaxed font-medium">Menguatkan kemitraan dengan dunia usaha dan dunia industri (DUDI) melalui pelaksanaan praktik kerja lapangan (PKL) dan program kolaboratif lainnya.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 6 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">handshake</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 06</p>
+                                <p class="text-muted leading-relaxed font-medium">Mengembangkan jejaring kerja sama yang luas dan berkelanjutan untuk mendukung penyerapan lulusan serta peningkatan mutu pembelajaran dan pembinaan karakter peserta didik.</p>
+                            </div>  
+                        </div>
+                    </div>
+                    <!-- Misi Item 7 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-accent/5 text-accent flex items-center justify-center shrink-0 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">verified_user</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 07</p>
+                                <p class="text-muted leading-relaxed font-medium">Membentuk lulusan yang agamis dan berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang mencerminkan nilai-nilai spiritual and etika dalam kehidupan sehari-hari.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Misi Item 8 -->
+                    <div class="misi-card p-6 rounded-2xl bg-surface border border-line shadow-sm hover:border-primary hover:shadow-md transition-all duration-500 group">
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-2xl">school</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-muted uppercase tracking-widest mb-1">Misi 08</p>
+                                <p class="text-muted leading-relaxed font-medium">Membangun kesadaran dan kepedulian terhadap lingkungan hidup melalui program-program ramah lingkungan dan pengelolaan sumber daya yang berkelanjutan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mt-6 flex justify-between items-center bg-sand p-4 rounded-xl border border-line">
+                    <span id="misi-page-indicator" class="text-[10px] text-muted font-bold uppercase tracking-widest">Halaman 1 dari 2</span>
+                    <div id="misi-dots" class="flex gap-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const missionCards = document.querySelectorAll('.misi-card');
+        const prevBtn = document.getElementById('misi-prev');
+        const nextBtn = document.getElementById('misi-next');
+        const pageIndicator = document.getElementById('misi-page-indicator');
+        const dotsContainer = document.getElementById('misi-dots');
+
+        let currentPage = 1;
+        const itemsPerPage = 4;
+        const totalPages = Math.ceil(missionCards.length / itemsPerPage);
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'size-2 rounded-full transition-all';
+                dot.setAttribute('aria-label', `Halaman ${i}`);
+                dot.addEventListener('click', () => { currentPage = i; updateMissions(); });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateMissions() {
+            missionCards.forEach((card, index) => {
+                const cardPage = Math.floor(index / itemsPerPage) + 1;
+                if (cardPage === currentPage) {
+                    card.style.display = 'block';
+                    card.classList.add('animate-fade-in-up');
+                    // Reset animation after it finishes to allow re-triggering if needed
+                    setTimeout(() => card.classList.remove('animate-fade-in-up'), 800);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            pageIndicator.textContent = `Halaman ${currentPage} dari ${totalPages}`;
+            
+            // Update dots
+            Array.from(dotsContainer.children).forEach((dot, index) => {
+                const active = index + 1 === currentPage;
+                dot.classList.toggle('bg-primary', active);
+                dot.classList.toggle('bg-line', !active);
+                dot.classList.toggle('w-4', active);
+                dot.setAttribute('aria-current', active ? 'page' : 'false');
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateMissions();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateMissions();
+            }
+        });
+
+        // Initialize
+        renderDots();
+        updateMissions();
+    });
+</script>
+{% endblock %}

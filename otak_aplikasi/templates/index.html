@@ -1,0 +1,890 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}SMK Nurul Jadid - Beranda{% endblock %}
+
+{% block extra_head %}
+<meta name="description"
+    content="SMK Nurul Jadid adalah institusi pendidikan kejuruan unggulan yang mencetak generasi profesional kompeten di bidang teknologi. Jelajahi program keahlian, prestasi, dan fasilitas kami.">
+<meta name="keywords"
+    content="SMK Nurul Jadid, Sekolah Menengah Kejuruan, Pendidikan Vokasi, Jurusan TI, Sekolah Unggulan">
+{% endblock %}
+
+{% block content %}
+<header class="relative w-full overflow-hidden bg-page" role="banner">
+    <div class="absolute inset-0 bg-triangle-pattern opacity-60 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute -top-[10%] -right-[5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none hidden md:block"
+        aria-hidden="true">
+    </div>
+    <div class="absolute top-[40%] -left-[10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl pointer-events-none hidden md:block"
+        aria-hidden="true">
+    </div>
+    <div class="absolute right-0 bottom-0 w-1/3 h-full overflow-hidden pointer-events-none hidden lg:block"
+        aria-hidden="true">
+        <svg class="absolute bottom-0 right-0 w-full h-full text-primary/5" preserveAspectRatio="none"
+            viewBox="0 0 100 100">
+            <path d="M100 0 L100 100 L0 100 Z" fill="currentColor"></path>
+        </svg>
+    </div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 pt-10 pb-20 lg:pt-20 lg:pb-32 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <section class="lg:col-span-8 flex flex-col gap-6 animate-fade-in-up">
+                {% if pengumuman_penting %}
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand border border-line w-fit">
+                    <span class="block size-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">{{ pengumuman_penting.judul }}</span>
+                </div>
+                {% endif %}
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-ink leading-[1.1] tracking-tight">
+                    Membangun <span class="text-primary relative inline-block">
+                        Masa Depan
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-40"
+                            preserveAspectRatio="none" viewBox="0 0 100 10" aria-hidden="true">
+                            <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" stroke-width="8"></path>
+                        </svg>
+                    </span> <br />
+                    dengan Teknologi.
+                </h1>
+                <p class="text-lg text-muted max-w-lg leading-relaxed">
+                    SMK Nurul Jadid mencetak profesional muda yang kompeten, inovatif, dan siap bersaing di
+                    era industri 4.0 dengan standar global.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="#jurusan"
+                        class="flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-primary text-surface text-base font-bold shadow-lg shadow-primary/30 hover:bg-brand-dark hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-page">
+                        <span>Jelajahi Jurusan</span>
+                        <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-6 mt-6 text-sm font-medium text-muted">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary" aria-hidden="true">verified</span>
+                        <span>Akreditasi Unggul</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary" aria-hidden="true">apartment</span>
+                        <span>{{ school_stats.total_mitra|default:"50" }}+ Mitra Industri</span>
+                    </div>
+                </div>
+            </section>
+            <div class="relative z-10 w-full max-w-[320px] mx-auto lg:col-span-4 lg:mx-0 aspect-[2/3] max-h-[500px] group perspective-1000" aria-label="Berita Utama">
+                {% for news in berita_list|slice:":1" %}
+                <article
+                    class="absolute inset-0 bg-background-dark rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-1 group-hover:scale-[1.01] z-20 border-4 border-surface">
+                    <div class="w-full h-full bg-cover bg-center" aria-label="{{ news.title }}" role="img"
+                        style="background-image: url('{% if news.image %}{{ news.image.url }}{% else %}{% static 'images/placeholder/warm.svg' %}{% endif %}');">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/95 via-background-dark/50 to-background-dark/20 flex items-end p-8">
+                            <div class="text-surface">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 rounded bg-accent/20 text-surface text-[10px] font-bold uppercase tracking-wider border border-white/20">{{news.category.name}}</span>
+                                </div>
+                                <p class="font-bold text-lg">{{ news.title|safe }}</p>
+                                {% if news.content %}<p class="text-sm opacity-90 text-white/80">{{ news.content|default:""|safe|truncatewords:10 }}</p>{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% empty %}
+                <div class="absolute inset-0 bg-background-dark rounded-3xl border-4 border-surface shadow-2xl flex flex-col items-center justify-center gap-4 p-8 text-center">
+                    <span class="material-symbols-outlined text-accent text-6xl" aria-hidden="true">school</span>
+                    <h2 class="text-2xl font-black text-surface">SMK Nurul Jadid</h2>
+                    <p class="text-sm text-white/70 max-w-xs">Pusat keunggulan vokasi yang mencetak generasi profesional dan siap kerja.</p>
+                </div>
+                {% endfor %}
+                <div class="absolute -top-4 -right-4 w-2/3 h-2/3 bg-primary rounded-3xl -z-10 opacity-20"
+                    aria-hidden="true"></div>
+                <div class="absolute -bottom-6 -left-6 w-1/2 h-1/2 bg-accent rounded-3xl -z-10 opacity-20"
+                    aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sambutan Kepala Sekolah Section -->
+<section class="py-24 bg-sand relative overflow-hidden" aria-labelledby="sambutan-heading">
+    <div
+        class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none">
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <!-- Text Content (Left) -->
+            <div class="lg:col-span-8 space-y-8 animate-fade-in-up">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                    <span class="block size-2 rounded-full bg-primary" aria-hidden="true"></span>
+                    <span class="text-xs font-black text-primary uppercase tracking-widest">Sambutan</span>
+                </div>
+
+                <div class="space-y-6">
+                    <h2 id="sambutan-heading" class="text-4xl md:text-5xl font-black text-ink leading-tight">
+                        "Inovasi adalah kunci <br />
+                        <span class="text-primary">kemajuan bangsa.</span>"
+                    </h2>
+                    <p class="text-lg text-muted leading-relaxed">
+                        Di SMK Nurul Jadid, kami tidak hanya mengajarkan cara menggunakan teknologi, tetapi
+                        bagaimana menciptakannya. Kurikulum kami didesain adaptif terhadap perubahan industri global
+                        yang cepat, membekali setiap siswa dengan kompetensi yang relevan dan karakter yang kuat.
+                    </p>
+                    <p class="text-lg text-muted leading-relaxed">
+                        Kami percaya bahwa setiap anak memiliki potensi emas. Dengan bimbingan instruktur profesional
+                        dan fasilitas modern, kami berkomitmen untuk mewujudkan mimpi mereka menjadi kenyataan di dunia
+                        industri.
+                    </p>
+                </div>
+
+                {% if kepala_sekolah %}
+                <div class="flex flex-col gap-1 pt-4 border-t border-line">
+                    <p class="text-2xl font-black text-ink">{{ kepala_sekolah.nama }}</p>
+                    <p class="text-sm font-bold text-accent uppercase tracking-widest">{{ kepala_sekolah.jabatan }}</p>
+                </div>
+                {% else %}
+                <div class="flex flex-col gap-1 pt-4 border-t border-line">
+                    <p class="text-2xl font-black text-ink">Kepala Sekolah</p>
+                    <p class="text-sm font-bold text-accent uppercase tracking-widest">SMK Nurul Jadid</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Photo (Right) with Organic Shapes -->
+            <div class="lg:col-span-4 relative">
+                <figure class="relative w-full aspect-square max-w-[450px] mx-auto">
+                    <!-- Background Shapes -->
+                    <div class="absolute inset-0 bg-primary rounded-3xl rotate-6 animate-pulse opacity-10"
+                        aria-hidden="true"></div>
+                    <div class="absolute inset-0 bg-accent rounded-full -rotate-12 animate-pulse delay-700 opacity-5"
+                        aria-hidden="true"></div>
+
+                    <!-- Main Photo Container -->
+                    <div
+                        class="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-8 border-surface group z-10 bg-sand">
+                        {% if kepala_sekolah %}
+                        <img src="{% if kepala_sekolah.image %}{{ kepala_sekolah.image.url }}{% else %}https://ui-avatars.com/api/?name={{ kepala_sekolah.nama|urlencode }}&background=0A192F&color=fff{% endif %}"
+                            alt="Foto {{ kepala_sekolah.nama }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        {% else %}
+                        <img src="https://ui-avatars.com/api/?name=Kepala+Sekolah&background=0A192F&color=fff"
+                            alt="Foto Kepala Sekolah" class="w-full h-full object-cover">
+                        {% endif %}
+                    </div>
+
+                    <!-- Dot Decoration -->
+                    <div class="absolute -top-10 -left-10 w-24 h-24 bg-geo-pattern opacity-10" aria-hidden="true"></div>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="statistik" class="py-24 bg-page relative overflow-hidden" aria-labelledby="stats-heading">
+    <!-- Background Decorations -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-line to-transparent"></div>
+    <div
+        class="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none">
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Data Sekolah</span>
+            <h2 class="text-3xl md:text-4xl font-black text-ink">Statistik Pendidikan</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+            <!-- Featured dark tile (2x2) -->
+            <article class="sm:col-span-2 lg:col-span-2 lg:row-span-2 bg-background-dark rounded-3xl p-8 lg:p-10 flex flex-col relative overflow-hidden text-surface shadow-2xl">
+                <div class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(0,105,122,0.18),transparent)] pointer-events-none"></div>
+                <div class="absolute -right-20 -top-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] animate-pulse"></div>
+
+                <header class="flex items-center justify-between gap-4 mb-8 relative z-10">
+                    <div>
+                        <h3 id="stats-heading" class="text-2xl font-black mb-2 flex items-center gap-3">
+                            <span class="p-2.5 rounded-2xl bg-primary/20 backdrop-blur-md border border-white/10 shrink-0">
+                                <span class="material-symbols-outlined text-accent-bright text-3xl block" aria-hidden="true">analytics</span>
+                            </span>
+                            <span>Monitoring 2026</span>
+                        </h3>
+                        <p class="text-white/60 text-sm font-medium tracking-wide">Data perkembangan institusi terkini.</p>
+                    </div>
+                    <div class="hidden md:block text-right">
+                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-accent-bright">Live Update</span>
+                    </div>
+                </header>
+
+                {% if school_stats %}
+                <dl class="relative z-10 flex-1 flex flex-col justify-center">
+                    <dt class="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-3">Total Siswa Aktif</dt>
+                    <dd class="flex items-baseline gap-3 mb-5">
+                        <span class="text-5xl lg:text-6xl font-black" aria-label="{{ school_stats.total_siswa }} Siswa">{{school_stats.total_siswa|default:"0"}}</span>
+                        <span class="text-xs text-background-dark font-bold bg-highlight px-2 py-0.5 rounded-full">{{school_stats.persentase_pertumbuhan_siswa|default:"+0%"}}</span>
+                    </dd>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000" style="width: {{ school_stats.progress_siswa|default:85 }}%"></div>
+                    </div>
+                </dl>
+                <footer class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/10 mt-auto relative z-10">
+                    <div class="flex items-center gap-4 text-[10px] font-bold text-white/60 uppercase tracking-widest">
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-highlight opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-highlight"></span>
+                            </span>
+                            System Active
+                        </div>
+                        <div class="w-px h-4 bg-white/10"></div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            Dashboard Updated
+                        </div>
+                    </div>
+                </footer>
+                {% else %}
+                <p class="relative z-10 flex-1 flex items-center justify-center py-6 text-center text-sm text-white/60">
+                    Data statistik belum tersedia.
+                </p>
+                {% endif %}
+            </article>
+
+            <!-- Static KPI: program keahlian -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group/stat">
+                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity" aria-hidden="true">
+                    <span class="material-symbols-outlined text-7xl font-light text-primary">school</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-xl">school</span>
+                    </div>
+                    <p class="text-[10px] font-bold text-muted uppercase tracking-widest mb-2">Program Keahlian</p>
+                    <p class="text-4xl font-black text-ink">{{ jurusan_list|length }}</p>
+                    <p class="text-xs text-muted font-medium mt-1">Jurusan Aktif</p>
+                </div>
+            </article>
+
+            <!-- Static KPI: publikasi -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group/stat">
+                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity" aria-hidden="true">
+                    <span class="material-symbols-outlined text-7xl font-light text-primary">newspaper</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-xl">newspaper</span>
+                    </div>
+                    <p class="text-[10px] font-bold text-muted uppercase tracking-widest mb-2">Publikasi</p>
+                    <p class="text-4xl font-black text-ink">{{ berita_total }}</p>
+                    <p class="text-xs text-muted font-medium mt-1">Berita Terbit</p>
+                </div>
+            </article>
+
+            {% if school_stats %}
+            <!-- Small KPI tile: tenaga pendidik -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group/stat">
+                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity" aria-hidden="true">
+                    <span class="material-symbols-outlined text-7xl font-light text-primary">verified_user</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-xl">verified_user</span>
+                    </div>
+                    <p class="text-[10px] font-bold text-muted uppercase tracking-widest mb-2">Tenaga Pendidik</p>
+                    <p class="text-4xl font-black text-ink">{{school_stats.total_instruktur|default:"0"}}</p>
+                </div>
+                <div class="relative z-10 mt-6">
+                    <span class="text-[9px] font-bold text-accent bg-accent/10 px-2 py-0.5 rounded whitespace-nowrap">{{school_stats.status_instruktur|default:"Certified"}}</span>
+                    <div class="w-full bg-sand h-1.5 rounded-full overflow-hidden mt-3">
+                        <div class="bg-primary h-full rounded-full transition-all duration-1000" style="width: {{ school_stats.progress_instruktur|default:95 }}%"></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Small KPI tile: mitra industri -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group/stat">
+                <div class="absolute -right-4 -top-4 opacity-5 group-hover/stat:opacity-10 transition-opacity" aria-hidden="true">
+                    <span class="material-symbols-outlined text-7xl font-light text-primary">handshake</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-xl">handshake</span>
+                    </div>
+                    <p class="text-[10px] font-bold text-muted uppercase tracking-widest mb-2">Mitra Industri</p>
+                    <p class="text-4xl font-black text-ink">{{school_stats.total_mitra|default:"0"}}</p>
+                    <p class="text-xs text-muted font-medium mt-1">Instansi</p>
+                </div>
+                <div class="flex -space-x-3 items-center mt-6 group-hover/stat:translate-x-2 transition-transform duration-300 relative z-10">
+                    <div class="size-8 rounded-full border-2 border-surface bg-muted flex items-center justify-center text-[10px] font-bold text-surface" title="Industri IT">IT</div>
+                    <div class="size-8 rounded-full border-2 border-surface bg-primary flex items-center justify-center text-[10px] font-bold text-surface" title="Industri Marketing">MK</div>
+                    <div class="size-8 rounded-full border-2 border-surface bg-accent flex items-center justify-center text-[10px] font-black text-surface" title="Lebih Banyak Mitra">+DU</div>
+                </div>
+            </article>
+            {% endif %}
+
+            <!-- Accent CTA tile -->
+            <section class="min-h-48 bg-accent text-surface rounded-2xl p-6 relative overflow-hidden group/news shadow-sm lg:col-span-2">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay group-hover/news:scale-110 transition-transform duration-1000"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-background-dark/30 to-transparent pointer-events-none"></div>
+                <div class="relative z-10 h-full flex flex-col justify-between gap-6">
+                    <header class="flex items-center justify-between gap-2">
+                        <span class="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-black uppercase tracking-widest">Informasi Terkini</span>
+                        <span class="material-symbols-outlined text-highlight animate-pulse">new_releases</span>
+                    </header>
+                    <div>
+                        <h3 class="text-xl font-black mb-1">Berita Terbaru</h3>
+                        <div class="flex items-center gap-2 text-sm font-bold text-white/80">
+                            <span class="border-b border-white/50 pb-0.5">Semua Kabar Sekolah</span>
+                            <a href="{% url 'berita' %}" class="material-symbols-outlined group-hover/news:translate-x-2 transition-transform duration-300 focus:ring-2 focus:ring-primary" aria-label="Lihat berita">trending_flat</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Announcements tile -->
+            <aside class="bg-surface border border-line rounded-2xl p-6 shadow-sm flex flex-col sm:col-span-2 lg:col-span-2 group/aside hover:border-primary/30 transition-all duration-500">
+                <header class="flex items-center justify-between gap-3 mb-5">
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary transition-colors group-hover/aside:bg-primary group-hover/aside:text-surface">
+                            <span class="material-symbols-outlined text-xl">campaign</span>
+                        </div>
+                        <h3 class="text-base font-black text-ink uppercase tracking-tight">Pengumuman</h3>
+                    </div>
+                    <a href="{% url 'announcements' %}"
+                        class="size-9 rounded-full border border-line flex items-center justify-center text-muted hover:bg-accent hover:text-surface transition-all focus:ring-2 focus:ring-primary"
+                        title="Lihat semua pengumuman">
+                        <span class="material-symbols-outlined text-lg">open_in_new</span>
+                    </a>
+                </header>
+                <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 overflow-y-auto custom-scrollbar pr-2 max-h-64">
+                    {% for pengumuman in pengumuman_list %}
+                    <article class="group/item p-3 rounded-xl bg-sand/60 hover:bg-primary hover:text-surface transition-all duration-300 cursor-pointer border border-transparent hover:border-primary">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-[9px] font-black px-2 py-0.5 rounded bg-primary/10 text-primary group-hover/item:bg-white/20 group-hover/item:text-surface uppercase tracking-tighter">{{pengumuman.tanggal|date:"D"}}</span>
+                            <span class="text-[10px] font-bold opacity-60">{{ pengumuman.tanggal|date:"d M Y"}}</span>
+                        </div>
+                        <h4 class="text-sm font-bold leading-snug line-clamp-2">{{ pengumuman.judul }}</h4>
+                    </article>
+                    {% empty %}
+                    <div class="py-6 text-center text-muted">
+                        <span class="material-symbols-outlined text-3xl mb-1">inbox</span>
+                        <p class="text-xs">Belum ada pengumuman</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- Kurikulum Section -->
+<section id="jurusan" class="py-20 bg-sand relative overflow-hidden" aria-labelledby="pusat-keunggulan-heading">
+    <div class="absolute inset-0 bg-gradient-to-b from-sand via-page to-sand pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-accent font-bold tracking-wider uppercase text-sm mb-2 block">Kurikulum Berbasis
+                Industri</span>
+            <h2 id="pusat-keunggulan-heading" class="text-3xl md:text-4xl font-black text-ink mb-4">Pusat
+                Keunggulan</h2>
+            <p class="text-muted">
+                Memadukan hard skills teknis yang mendalam dengan soft skills pengembangan karakter profesional
+                untuk mencetak lulusan siap kerja.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 grid-flow-row-dense items-start">
+            <!-- Wide card: program studi -->
+            <div class="md:col-span-2 bg-surface border border-line rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col">
+                <header class="flex items-center justify-between border-b-2 border-primary pb-4 mb-5">
+                    <h3 class="text-xl font-bold flex items-center gap-3 text-ink">
+                        <span class="flex items-center justify-center size-10 rounded-xl bg-primary/10 text-primary"
+                            aria-hidden="true">
+                            <span class="material-symbols-outlined">computer</span>
+                        </span>
+                        Program Studi
+                    </h3>
+                </header>
+                <dl id="jurusan-track" class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
+                    {% for jurusan in jurusan_list %}
+                    <article class="jurusan-card group p-4 rounded-xl border border-line bg-page hover:shadow-lg hover:border-primary hover:bg-surface transition-all duration-300 cursor-pointer relative overflow-hidden">
+                        <div class="absolute top-0 right-0 size-16 bg-primary/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"
+                            aria-hidden="true"></div>
+                        <div class="flex items-start gap-4 relative z-10">
+                            <figure class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform overflow-hidden">
+                                {% if jurusan.logo %}
+                                <img src="{{ jurusan.logo.url }}" alt="Logo {{ jurusan.nama }}"
+                                    class="w-8 h-8 object-contain">
+                                {% else %}
+                                <span class="material-symbols-outlined" aria-hidden="true">computer</span>
+                                {% endif %}
+                            </figure>
+                            <div>
+                                <dt class="text-base font-bold text-ink group-hover:text-primary mb-1">{{jurusan.nama }}</dt>
+                                {% if jurusan.deskripsi_singkat %}<dd class="text-sm text-muted">{{ jurusan.deskripsi_singkat|default:"" }}</dd>{% endif %}
+                            </div>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <div class="sm:col-span-2 text-center text-muted">Data jurusan belum tersedia.</div>
+                    {% endfor %}
+                </dl>
+
+                <div class="flex justify-center mt-5">
+                    <nav id="jurusan-dots" class="flex gap-2" aria-label="Navigasi Jurusan"></nav>
+                </div>
+
+                <div class="mt-5 flex justify-center">
+                    <button id="btn-lihat-selanjutnya"
+                        class="flex items-center gap-2 px-6 py-3 bg-primary text-surface rounded-xl font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface">
+                        <span id="btn-text">Lihat Selanjutnya</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wide card: unggulan karakter -->
+            <div class="md:col-span-2 bg-surface border border-line rounded-2xl p-6 lg:p-8 shadow-sm group relative overflow-hidden hover:border-primary/30 transition-all duration-300">
+                <div class="absolute top-0 right-0 size-24 bg-accent/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                <header class="flex items-center justify-between gap-3 border-b-2 border-accent pb-4 mb-5 relative z-10">
+                    <h3 class="text-xl font-bold flex items-center gap-3 text-ink">
+                        <span class="flex items-center justify-center size-10 rounded-xl bg-accent text-surface"
+                            aria-hidden="true">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </span>
+                        Pengembangan Karakter
+                    </h3>
+                    <span class="text-sm font-medium text-muted bg-sand px-2 py-1 rounded-xl">Soft Skills</span>
+                </header>
+                <article class="relative z-10">
+                    <div class="flex items-start gap-4">
+                        <div class="size-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined" aria-hidden="true">language</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-ink group-hover:text-accent mb-1">Global Language Program</h4>
+                            <p class="text-sm text-muted">Penguasaan Bahasa Inggris Bisnis dan Bahasa Jepang/Jerman
+                                Teknik.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Small tile: leadership -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm group relative overflow-hidden hover:border-primary/30 transition-all duration-300">
+                <div class="absolute top-0 right-0 size-16 bg-accent/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                <div class="relative z-10">
+                    <div class="size-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined" aria-hidden="true">groups</span>
+                    </div>
+                    <h4 class="text-base font-bold text-ink group-hover:text-accent mb-2">Leadership &amp;
+                        Entrepreneurship</h4>
+                    <p class="text-sm text-muted">Program kepemimpinan dan inkubator bisnis startup siswa
+                        (Teaching Factory).</p>
+                </div>
+            </article>
+
+            <!-- Small tile: sertifikasi -->
+            <article class="bg-surface border border-line rounded-2xl p-6 shadow-sm group relative overflow-hidden hover:border-primary/30 transition-all duration-300">
+                <div class="absolute top-0 right-0 size-16 bg-accent/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" aria-hidden="true"></div>
+                <div class="relative z-10">
+                    <div class="size-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>
+                    </div>
+                    <h4 class="text-base font-bold text-ink group-hover:text-accent mb-2">Sertifikasi Internasional</h4>
+                    <p class="text-sm text-muted">Persiapan dan ujian sertifikasi keahlian dari vendor IT
+                        ternama (Cisco, Mikrotik, Adobe).</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="py-24 bg-background-dark relative" aria-labelledby="filosofi-heading">
+    <div class="absolute left-0 bottom-0 w-64 h-64 bg-triangle-pattern opacity-10 pointer-events-none"></div>
+    <div
+        class="absolute right-0 top-0 w-[500px] h-full bg-gradient-to-l from-primary/10 to-transparent opacity-50 pointer-events-none">
+    </div>
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+            <h2 id="filosofi-heading" class="text-3xl font-black text-surface mb-6">Filosofi Pendidikan</h2>
+            <div class="space-y-4">
+                <details class="group bg-surface rounded-xl shadow-sm open:ring-2 open:ring-primary/30 overflow-hidden"
+                    open="">
+                    <summary
+                        class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-surface hover:bg-sand transition-colors">
+                        <span class="text-ink">Visi Sekolah</span>
+                        <span
+                            class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-5 pb-5 pt-0 text-muted border-t border-transparent group-open:border-line animate-fade-in">
+                        <p class="mt-3">"Menjadi SMK Pusat Keunggulan yang mencetak tenaga kerja profesional yang
+                            agamis, berkarakter, berwawasan lingkungan, berprestasi, dan berjiwa wirausaha, serta mampu
+                            bersaing di pasar kerja global."</p>
+                    </div>
+                </details>
+                <details class="group bg-surface rounded-xl shadow-sm open:ring-2 open:ring-primary/30 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-surface hover:bg-sand transition-colors">
+                        <span class="text-ink">Misi Sekolah</span>
+                        <span
+                            class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-5 pb-6 pt-2 border-t border-transparent group-open:border-line bg-sand/50">
+                        <div class="space-y-4 mt-4">
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Menyelenggarakan pendidikan kejuruan
+                                    yang berbasis kompetensi dan selaras dengan kebutuhan dunia kerja, serta
+                                    memperhatikan perkembangan ilmu pengetahuan dan teknologi terkini.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Membentuk lulusan yang agamis dan
+                                    berakhlakul karimah melalui integrasi pendidikan karakter dalam pembelajaran, yang
+                                    mencerminkan nilai-nilai spiritual and etika dalam kehidupan sehari-hari.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Mengembangkan pembelajaran berbasis
+                                    teaching factory sebagai wahana pembentukan keterampilan kerja riil, budaya kerja,
+                                    serta pengalaman produksi atau layanan jasa.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Mendorong pencapaian prestasi peserta
+                                    didik di bidang akademik, vokasional, keagamaan, dan kepemimpinan, baik di tingkat
+                                    lokal, nasional, maupun internasional.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Menguatkan kemitraan dengan dunia usaha
+                                    dan dunia industri (DUDI) melalui pelaksanaan praktik kerja lapangan (PKL) dan
+                                    program kolaboratif lainnya.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Menumbuhkan budaya sekolah yang
+                                    religius, disiplin, peduli lingkungan, dan adaptif terhadap perubahan zaman, dengan
+                                    tetap mencerminkan nilai-nilai kepesantrenan dalam kehidupan sekolah.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Mengembangkan jejaring kerja sama yang
+                                    luas dan berkelanjutan untuk mendukung penyerapan lulusan serta peningkatan mutu
+                                    pembelajaran dan pembinaan karakter peserta didik.</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div
+                                    class="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                    <span class="material-symbols-outlined text-[14px] font-black">check</span>
+                                </div>
+                                <p class="text-sm text-muted leading-relaxed">Membangun kesadaran dan kepedulian
+                                    terhadap lingkungan hidup melalui program-program ramah lingkungan dan pengelolaan
+                                    sumber daya yang berkelanjutan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                <details class="group bg-surface rounded-xl shadow-sm open:ring-2 open:ring-primary/30 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-5 font-bold text-lg cursor-pointer list-none bg-surface hover:bg-sand transition-colors">
+                        <span class="text-ink">Budaya Kerja 5R</span>
+                        <span
+                            class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0 text-muted border-t border-transparent group-open:border-line">
+                        <p class="mt-3">Kami menerapkan standar industri dengan budaya Ringkas, Rapi, Resik, Rawat,
+                            dan Rajin dalam setiap aktivitas pembelajaran praktik.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+        <div class="lg:w-1/2 lg:sticky lg:top-28 self-start">
+            <!-- Video Container with Responsive Aspect Ratio -->
+            <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-surface bg-background-dark">
+                <!-- Responsive iframe wrapper -->
+                <div class="static w-full" style="padding-bottom: 56.25%; /* 16:9 Aspect Ratio */">
+                    {% if school_stats.video_url %}
+                    <iframe class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/{{ school_stats.video_url|slice:'32:' }}?si={{ school_stats.video_url|slice:'37:' }}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    {% else %}
+                    <!-- Fallback jika tidak ada video -->
+                    <div
+                        class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-8 text-center">
+                        <span class="material-symbols-outlined text-6xl text-white/40 mb-4">video_library</span>
+                        <p class="text-white/60 text-sm">Belum ada video yang ditambahkan</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Ekstrak YouTube ID dari URL database
+            (function () {
+                const videoUrl = "{{ school_stats.video_url|default:'' }}";
+
+                if (!videoUrl) return;
+
+                // Fungsi untuk ekstrak YouTube ID
+                function getYouTubeID(url) {
+                    const patterns = [
+                        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\?\/]+)/,
+                        /youtube\.com\/embed\/([^&\?\/]+)/,
+                        /youtube\.com\/v\/([^&\?\/]+)/
+                    ];
+
+                    for (let pattern of patterns) {
+                        const match = url.match(pattern);
+                        if (match && match[1]) return match[1];
+                    }
+                    return null;
+                }
+
+                const videoId = getYouTubeID(videoUrl);
+
+                if (videoId) {
+                    // Update iframe src dengan video ID yang benar
+                    const iframe = document.querySelector('iframe[title="YouTube video player"]');
+                    if (iframe) {
+                        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+                    }
+                }
+            })();
+        </script>
+    </div>
+</section>
+<section class="py-24 bg-page">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+        <div class="flex items-center justify-between gap-4 mb-12">
+            <h2 class="text-3xl font-black text-ink">Berita &amp; Prestasi</h2>
+            <a class="flex items-center gap-1 text-accent font-bold hover:underline focus:ring-2 focus:ring-primary" href="{% url 'berita' %}">
+                Lihat Semua
+                <span class="material-symbols-outlined">arrow_right_alt</span>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+            {% for berita in berita_list %}
+            {% if forloop.first %}
+            <article class="flex flex-col md:col-span-3 bg-surface rounded-2xl shadow-sm border border-line overflow-hidden group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div class="grid md:grid-cols-[190px_1fr]">
+                    <div class="relative w-full max-w-[200px] mx-auto md:max-w-none aspect-[2/3] overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            aria-label="{{ berita.title }}" role="img"
+                            style="background-image: url('{% if berita.image %}{{ berita.image.url }}{% else %}{% static 'images/placeholder/warm.svg' %}{% endif %}');">
+                        </div>
+                        <div class="absolute top-4 left-4 bg-primary text-surface text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            {{ berita.category.name }}
+                        </div>
+                    </div>
+                    <div class="p-5 md:p-6 flex flex-col justify-center">
+                        <span class="text-muted text-xs font-medium mb-2 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">calendar_today</span>{{ berita.created_at|date:"d F Y" }}
+                        </span>
+                        <h3 class="text-2xl font-bold text-ink mb-3 leading-tight line-clamp-3 group-hover:text-primary transition-colors">
+                            {{ berita.title }}</h3>
+                        {% if berita.content %}<p class="text-muted text-sm line-clamp-3 mb-4">
+                            {{ berita.content|default:""|striptags|truncatewords:20|safe }}
+                        </p>{% endif %}
+                        <a class="text-sm font-bold text-accent hover:text-primary inline-flex items-center gap-1 focus:ring-2 focus:ring-primary"
+                            href="{% url 'news_detail' berita.slug %}">
+                            Baca Selengkapnya
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+
+            {% if berita_list|length > 1 %}
+            <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+                {% for berita in berita_list %}
+                {% if not forloop.first %}
+                <article class="flex flex-col sm:flex-row h-full bg-surface rounded-2xl shadow-sm border border-line overflow-hidden group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="relative w-full max-w-[160px] mx-auto sm:mx-0 sm:w-[140px] shrink-0 aspect-[2/3] overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            aria-label="{{ berita.title }}" role="img"
+                            style="background-image: url('{% if berita.image %}{{ berita.image.url }}{% else %}{% static 'images/placeholder/warm.svg' %}{% endif %}');">
+                        </div>
+                        <div class="absolute top-4 left-4 bg-primary text-surface text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            {{ berita.category.name }}
+                        </div>
+                    </div>
+                    <div class="p-5 md:p-6 flex flex-col flex-1">
+                        <span class="text-muted text-xs font-medium mb-2 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">calendar_today</span>{{ berita.created_at|date:"d F Y" }}
+                        </span>
+                        <h3 class="text-lg font-bold text-ink mb-3 leading-tight line-clamp-3 group-hover:text-primary transition-colors">
+                            {{ berita.title }}</h3>
+                        {% if berita.content %}<p class="text-muted text-sm line-clamp-3 mb-4 flex-1">
+                            {{ berita.content|default:""|striptags|truncatewords:20|safe }}
+                        </p>{% endif %}
+                        <a class="text-sm font-bold text-accent hover:text-primary inline-flex items-center gap-1 focus:ring-2 focus:ring-primary"
+                            href="{% url 'news_detail' berita.slug %}">
+                            Baca Selengkapnya
+                        </a>
+                    </div>
+                </article>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if not berita_list %}
+            <div class="md:col-span-3 bg-sand border border-line rounded-2xl p-12 text-center">
+                <span class="material-symbols-outlined text-4xl text-primary mb-3" aria-hidden="true">newspaper</span>
+                <p class="font-bold text-ink">Belum ada berita untuk ditampilkan</p>
+                <p class="text-sm text-muted mt-2">Kabar terbaru dari sekolah akan muncul di sini.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_body %}
+
+<script>
+    // Pagination (non-scrolling): show/hide cards per page with fade transitions
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = Array.from(document.querySelectorAll('.jurusan-card'));
+        const prevBtn = document.getElementById('jurusan-prev');
+        const nextBtn = document.getElementById('jurusan-next');
+        const prevMobile = document.getElementById('jurusan-prev-mobile');
+        const nextMobile = document.getElementById('jurusan-next-mobile');
+        const dotsContainer = document.getElementById('jurusan-dots');
+        const lihatBtn = document.getElementById('btn-lihat-selanjutnya');
+        const lihatText = document.getElementById('btn-text');
+
+        function getCardsPerPage() {
+            const w = window.innerWidth;
+            if (w < 640) return 1; // mobile
+            if (w < 1024) return 2; // tablet
+            return 4; // desktop
+        }
+
+        let cardsPerPage = getCardsPerPage();
+        let currentPage = 0;
+        let totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+
+        function renderDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'w-2 h-2 rounded-full bg-line transition-all';
+                btn.setAttribute('aria-label', `Halaman ${i + 1}`);
+                btn.addEventListener('click', () => showPage(i));
+                dotsContainer.appendChild(btn);
+            }
+            updateDots();
+        }
+
+        function updateDots() {
+            if (!dotsContainer) return;
+            Array.from(dotsContainer.children).forEach((el, idx) => {
+                el.classList.toggle('bg-primary', idx === currentPage);
+                el.classList.toggle('bg-line', idx !== currentPage);
+                if (idx === currentPage) {
+                    el.classList.add('w-3', 'h-3');
+                } else {
+                    el.classList.remove('w-3', 'h-3');
+                }
+            });
+        }
+
+        function showPage(page) {
+            if (cards.length === 0) return;
+            page = Math.max(0, Math.min(page, totalPages - 1));
+            const start = page * cardsPerPage;
+            const end = Math.min(start + cardsPerPage, cards.length);
+
+            cards.forEach((card, idx) => {
+                if (idx >= start && idx < end) {
+                    // show with fade
+                    card.style.display = 'block';
+                    requestAnimationFrame(() => { card.style.opacity = '1'; });
+                } else {
+                    // hide with fade then display none
+                    card.style.opacity = '0';
+                    setTimeout(() => { if (!(idx >= start && idx < end)) card.style.display = 'none'; }, 240);
+                }
+            });
+
+            currentPage = page;
+            if (lihatText) lihatText.textContent = (page === totalPages - 1) ? 'Kembali ke Awal' : 'Lihat Selanjutnya';
+            updateDots();
+            updateButtons();
+        }
+
+        function updateButtons() {
+            if (prevBtn) prevBtn.disabled = (currentPage === 0);
+            if (nextBtn) nextBtn.disabled = (currentPage === totalPages - 1);
+            if (prevMobile) prevMobile.disabled = (currentPage === 0);
+            if (nextMobile) nextMobile.disabled = (currentPage === totalPages - 1);
+        }
+
+        function nextPage() {
+            if (currentPage === totalPages - 1) showPage(0);
+            else showPage(currentPage + 1);
+        }
+        function prevPage() { showPage(Math.max(0, currentPage - 1)); }
+
+        if (nextBtn) nextBtn.addEventListener('click', nextPage);
+        if (prevBtn) prevBtn.addEventListener('click', prevPage);
+        if (nextMobile) nextMobile.addEventListener('click', nextPage);
+        if (prevMobile) prevMobile.addEventListener('click', prevPage);
+        if (lihatBtn) lihatBtn.addEventListener('click', function () { nextPage(); /* keep focus in place, no scroll */ });
+
+        // debounce helper
+        function debounce(fn, wait) {
+            let t;
+            return function () { clearTimeout(t); t = setTimeout(() => fn.apply(this, arguments), wait); };
+        }
+
+        window.addEventListener('resize', debounce(() => {
+            const newPer = getCardsPerPage();
+            if (newPer !== cardsPerPage) {
+                cardsPerPage = newPer;
+                totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+                currentPage = Math.min(currentPage, totalPages - 1);
+                renderDots();
+                showPage(currentPage);
+            }
+        }, 120));
+
+        // init
+        cards.forEach(card => { card.style.transition = 'opacity 240ms ease'; });
+        totalPages = Math.max(1, Math.ceil(cards.length / cardsPerPage));
+        renderDots();
+        showPage(0);
+    });
+</script>
+{% endblock %}
