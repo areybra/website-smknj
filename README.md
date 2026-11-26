@@ -1,11 +1,37 @@
 # Portal Web SMK Nurul Jadid
 
+[![Django](https://img.shields.io/badge/Django-4.2.11-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Waitress](https://img.shields.io/badge/Waitress-WSGI-2E8B57)](https://docs.pylonsproject.org/projects/waitress/)
+[![Status](https://img.shields.io/badge/status-active-00697A)](#)
+[![Lisensi](https://img.shields.io/badge/lisensi-proprietary-475569)](#lisensi)
+
 Website resmi SMK Nurul Jadid, Paiton, Probolinggo. Dibangun dengan Django 4.2 dan MySQL untuk
 menyajikan profil sekolah, program keahlian, berita, pengumuman, ekstrakurikuler, fasilitas, serta
 data guru dan tenaga kependidikan dalam satu portal.
 
 Antarmuka publik memakai Tailwind CSS melalui CDN dengan palet warna hangat dan tata letak grid
 yang bervariasi antar halaman. Panel admin memakai Django Jazzmin dengan kustomisasi tema.
+
+---
+
+## Pratinjau
+
+**Beranda** — hero, statistik sekolah, sorotan berita, dan pengumuman.
+
+[![Beranda](docs/screenshots/home.jpeg)](docs/screenshots/home.jpeg)
+
+| Berita & Informasi | Program Keahlian |
+| --- | --- |
+| [![Berita](docs/screenshots/berita.jpeg)](docs/screenshots/berita.jpeg) | [![Program Keahlian](docs/screenshots/program-studi.jpeg)](docs/screenshots/program-studi.jpeg) |
+| **Profil Sekolah** | **Guru & Staf** |
+| [![Profil Sekolah](docs/screenshots/profil-sekolah.jpeg)](docs/screenshots/profil-sekolah.jpeg) | [![Guru dan Staf](docs/screenshots/guru-staff.jpeg)](docs/screenshots/guru-staff.jpeg) |
+
+**Tampilan ponsel** — navbar pil, hero, dan kartu berita menyesuaikan lebar layar.
+
+<img src="docs/screenshots/mobile-home.jpeg" alt="Tampilan beranda pada ponsel" width="320">
 
 ---
 
@@ -67,6 +93,7 @@ website-smknj/
 │   ├── context_processors.py
 │   └── urls.py
 ├── static/                     # Aset sumber (CSS, JS, gambar)
+├── docs/screenshots/           # Gambar pratinjau untuk README
 ├── templates/admin/            # Override template admin
 ├── media/                      # Unggahan pengguna
 ├── deploy.bat                  # Skrip server produksi
